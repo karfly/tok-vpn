@@ -1,0 +1,57 @@
+import { getElementId, tryOnBeforeUnmount } from '@tok/ui/functions';
+import { Component, inject } from 'vue';
+
+import { AlertHostParams, ALERTS_HOST_TOKEN } from './alertsConnector';
+
+type Config = {
+  autoCloseOnUnmount: boolean;
+};
+
+export function useAlerts(config?: Config) {
+  const instance = inject(ALERTS_HOST_TOKEN, null);
+
+  if (instance === null) {
+    console.warn('[useAlerts] Необходимо добавить AlertsPlugin в main.ts');
+  }
+
+  const showedIds: string[] = [];
+
+  const show = <T>(
+    content: string | Component,
+    params?: AlertHostParams<T>
+  ) => {
+    const id = getElementId();
+
+    instance?.show(id, content, params);
+
+    if (config?.autoCloseOnUnmount) {
+      showedIds.push(id);
+    }
+
+    return id;
+  };
+
+  const close = (id?: string) => {
+    if (!id) {
+      closeLast();
+
+      return;
+    }
+
+    instance?.close(id);
+  };
+
+  const closeLast = () => {
+    instance?.closeLast();
+  };
+
+  tryOnBeforeUnmount(() => {
+    showedIds.forEach(close);
+  });
+
+  return {
+    show,
+    close,
+    closeLast,
+  };
+}

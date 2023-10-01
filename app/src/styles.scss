@@ -1,0 +1,75 @@
+:root {
+  // --tok-font-heading: 'Inter', -apple-system, 'BlinkMacSystemFont', system-ui,
+  // 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  // --tok-font-h1: bold 2.25rem/2.75rem var(--tok-font-heading);
+  // --tok-font-h2: bold 1.75rem/2.25rem var(--tok-font-heading);
+  // --tok-font-h3: bold 1.5rem/2rem var(--tok-font-heading);
+  // --tok-font-h4: bold 1.25rem/1.75rem var(--tok-font-heading);
+
+  // --tok-font-text: 'Inter', -apple-system, 'BlinkMacSystemFont', system-ui,
+  // 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  // --tok-font-l: 600 1rem/1.5rem var(--tok-font-text);
+  // --tok-font-m: normal 1rem/1.5rem var(--tok-font-text);
+  // --tok-font-s: 600 0.8125rem/1.125rem var(--tok-font-text);
+  // --tok-font-xs: normal 0.8125rem/1.125rem var(--tok-font-text);
+
+  // --tok-radius-l: 1rem;
+  // --tok-radius-m: 0.75rem;
+  // --tok-radius-s: 0.5rem;
+  // --tok-radius-xs: 0.25rem;
+
+  // --tok-height-l: 3.5rem;
+  // --tok-height-m: 2.75rem;
+  // --tok-height-s: 2rem;
+  // --tok-height-xs: 1.5rem;
+
+  // --tok-padding-l: 1rem;
+  // --tok-padding-m: 0.75rem;
+  // --tok-padding-s: 0.5rem;
+  // --tok-padding-xs: 0.25rem;
+
+  // --tok-orlando-base: 0, 0%, 100%;
+
+  // --tok-orlando: hsl(var(--tok-orlando-base));
+  // --tok-orlando-80: hsla(var(--tok-orlando-base), 0.8);
+  // --tok-orlando-64: hsla(var(--tok-orlando-base), 0.64);
+  // --tok-orlando-48: hsla(var(--tok-orlando-base), 0.48);
+  // --tok-orlando-32: hsla(var(--tok-orlando-base), 0.32);
+  // --tok-orlando-24: hsla(var(--tok-orlando-base), 0.24);
+  // --tok-orlando-16: hsla(var(--tok-orlando-base), 0.16);
+  // --tok-orlando-08: hsla(var(--tok-orlando-base), 0.08);
+
+  // --tok-oslo-base: 240, 2%, 11%;
+  // --tok-oslo: hsl(var(--tok-oslo-base));
+  // --tok-oslo-80: hsla(var(--tok-oslo-base), 0.8);
+  // --tok-oslo-64: hsla(var(--tok-oslo-base), 0.64);
+  // --tok-oslo-48: hsla(var(--tok-oslo-base), 0.48);
+  // --tok-oslo-32: hsla(var(--tok-oslo-base), 0.32);
+  // --tok-oslo-24: hsla(var(--tok-oslo-base), 0.24);
+  // --tok-oslo-16: hsla(var(--tok-oslo-base), 0.16);
+  // --tok-oslo-08: hsla(var(--tok-oslo-base), 0.08);
+
+  // --tok-white: #fff;
+  // --tok-dark: #111;
+  // --tok-dark-80: #111111cc;
+
+  // --tok-primary: var(--tg-theme-button-color, #007aff);
+  // --tok-primary-text: var(--tg-theme-button-text-color, var(--tok-white));
+
+  // --tok-stinger: #f6f6f9;
+
+  // --tok-link: var(--tg-theme-link-color, var(--tok-oslo-80));
+
+  // --tok-disabled-opacity: 0.56;
+}
+
+html[data-theme='dark'] {
+  // --tok-orlando-base: 240, 2%, 11%;
+
+  // --tok-oslo-base: 0, 0, 100%;
+
+  // --tok-primary: var(--tg-theme-button-color, #3e88f7);
+  // --tok-primary-text: var(--tg-theme-button-text-color, var(--tok-white));
+
+  // --tok-stinger: #333333;
+}

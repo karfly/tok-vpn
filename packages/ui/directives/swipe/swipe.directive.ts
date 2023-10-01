@@ -1,0 +1,112 @@
+import { DirectiveBinding, ObjectDirective } from 'vue';
+
+export interface Swipe {
+  direction: 'top' | 'left' | 'bottom' | 'right';
+  events: [TouchEvent, TouchEvent];
+}
+
+const INSTANCE_KEY_START = '__tok_swipe_start';
+const INSTANCE_KEY_END = '__tok_swipe_end';
+const DEFAULT_THRESHOLD = 30;
+const DEFAULT_TIMEOUT = 500;
+
+interface SwipableElement extends HTMLElement {
+  [INSTANCE_KEY_START]: (event: TouchEvent) => void;
+}
+
+interface SwipableDocument extends Document {
+  [INSTANCE_KEY_END]: (event: TouchEvent) => void;
+}
+
+type Binding = {
+  onEvent: (element: EventTarget | null, swipe: Swipe) => void;
+  timeout?: number;
+  threshold?: number;
+};
+
+function getSwipeDirection(deltaX: number, deltaY: number): Swipe['direction'] {
+  if (Math.abs(deltaY) > Math.abs(deltaX)) {
+    return deltaY > 0 ? 'top' : 'bottom';
+  } else {
+    return deltaX > 0 ? 'left' : 'right';
+  }
+}
+
+export const SwipeDirective: ObjectDirective<SwipableElement, Binding> = {
+  beforeMount: (
+    element: SwipableElement,
+    { value }: DirectiveBinding<Binding>
+  ) => {
+    const events = [null, null] as [TouchEvent | null, TouchEvent | null];
+    const threshold =
+      typeof value.threshold === 'number' ? value.threshold : DEFAULT_THRESHOLD;
+    const timeout =
+      typeof value.timeout === 'number' ? value.timeout : DEFAULT_TIMEOUT;
+
+    const handle = () => {
+      const first = events[0];
+      const second = events[1];
+
+      if (first === null || second === null) {
+        return;
+      }
+
+      const isHandlable =
+        !!first.touches.length &&
+        first.touches[0].identifier === second.changedTouches[0].identifier;
+
+      if (!isHandlable) {
+        return;
+      }
+
+      const { clientX: startX, clientY: startY } = first.touches[0];
+      const { clientX: endX, clientY: endY } = second.changedTouches[0];
+
+      const distanceX = startX - endX;
+      const distanceY = startY - endY;
+
+      const duration = second.timeStamp - first.timeStamp;
+
+      const isSwipe =
+        (Math.abs(distanceX) > threshold || Math.abs(distanceY) > threshold) &&
+        duration < timeout;
+
+      if (isSwipe) {
+        const swipeEvent = {
+          direction: getSwipeDirection(distanceX, distanceY),
+          events: [first, second] as [TouchEvent, TouchEvent],
+        };
+
+        value.onEvent(element, swipeEvent);
+      }
+    };
+
+    const touchStart = (event: TouchEvent) => {
+      events[0] = event;
+    };
+
+    const touchEnd = (event: TouchEvent) => {
+      events[1] = event;
+
+      handle();
+    };
+
+    element.addEventListener('touchstart', touchStart, { passive: true });
+    document.addEventListener('touchend', touchEnd);
+
+    element[INSTANCE_KEY_START] = touchStart;
+    (document as SwipableDocument)[INSTANCE_KEY_END] = touchEnd;
+  },
+  beforeUnmount: (element: SwipableElement) => {
+    if (element[INSTANCE_KEY_START]) {
+      element.removeEventListener('touchstart', element[INSTANCE_KEY_START]);
+    }
+
+    if ((document as SwipableDocument)[INSTANCE_KEY_END]) {
+      document.removeEventListener(
+        'touchend',
+        (document as SwipableDocument)[INSTANCE_KEY_END]
+      );
+    }
+  },
+};
