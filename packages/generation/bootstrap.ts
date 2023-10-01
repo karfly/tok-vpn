@@ -82,7 +82,7 @@ export function bootstrapJson(App: _App, json: any) {
   });
 
   const router = createRouter({
-    history: createWebHistory(import.meta.env.base || '/'),
+    history: createWebHistory(import.meta.env.VITE_BASE || '/'),
     routes: ([] as RouteRecordRaw[]).concat(pages).concat({
       path: '/not-found',
       alias: '/:catchAll(.*)*',
