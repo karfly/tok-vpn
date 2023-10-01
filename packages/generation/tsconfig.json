@@ -5,7 +5,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["pako", "@types/node"]
+    "types": ["pako", "@types/node", "vite/client"]
   },
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
