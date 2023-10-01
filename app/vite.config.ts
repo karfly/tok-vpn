@@ -5,6 +5,7 @@ import svgLoader from 'vite-svg-loader';
 import { telegramStickerLoader } from './_internal/tgs.loader';
 
 export default defineConfig({
+  base: '/tok',
   plugins: [
     telegramStickerLoader(),
     vue(),
