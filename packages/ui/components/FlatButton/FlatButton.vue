@@ -2,10 +2,11 @@
   <component
     v-ripple
     :is="computedComponent"
-    :class="['tok-button', loading && 'tok-button_loading']"
+    class="tok-button"
     :data-appearance="appearance"
     :data-size="size"
     :data-shape="computedShape"
+    :data-loading="loading"
     :disabled="disabled"
     :href="href"
     :to="to"
@@ -14,7 +15,7 @@
       <svg-icon v-if="icon" :name="icon" :rotate="rotate" />
     </slot>
 
-    <span v-if="!iconButton"><slot /></span>
+    <slot v-if="!iconButton" />
 
     <slot name="iconRight">
       <svg-icon v-if="iconRight" :name="iconRight" :rotate="rightRotate" />
@@ -92,7 +93,7 @@ const computedComponent = computed(() => {
     padding: 0 var(--tok-padding, 0.375rem);
     border-radius: var(--tok-radius-xs);
 
-    font: var(--tok-font-s);
+    font: var(--tok-font-xs);
   }
 
   &[data-size='s'] {
@@ -196,17 +197,17 @@ const computedComponent = computed(() => {
     border-radius: 100%;
   }
 
-  &:disabled {
-    pointer-events: none;
-    opacity: var(--tok-disabled-opacity);
-  }
-
-  &_loading {
+  &[data-loading='true'] {
     pointer-events: none;
 
     & > *:not(.spinner) {
       opacity: 0 !important;
     }
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: var(--tok-disabled-opacity);
   }
 }
 

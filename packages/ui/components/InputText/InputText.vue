@@ -4,7 +4,7 @@
     :for="id"
     class="tok-input"
     :data-size="size"
-    :disabled="disabled"
+    :data-state="state"
   >
     <div class="wrapper">
       <input
@@ -38,7 +38,7 @@
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { getElementId } from '@tok/ui/functions';
 import { useFocused } from '@tok/ui/use/focused';
-import { ref, toRefs, watch } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 
 import {
   InputTextDefaultProps,
@@ -53,12 +53,28 @@ const props = withDefaults(
 
 const emit = defineEmits<InputTextEmits>();
 
-const { placeholder } = toRefs(props);
+const { placeholder, invalid, disabled } = toRefs(props);
 
 const nativeRef = ref<HTMLInputElement | null>(null);
 
 const focused = useFocused(nativeRef);
 const id = getElementId();
+
+const state = computed(() => {
+  if (disabled.value) {
+    return 'disabled';
+  }
+
+  if (invalid.value) {
+    return 'invalid';
+  }
+
+  if (focused.value) {
+    return 'focused';
+  }
+
+  return undefined;
+});
 
 const onUpdate = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -119,7 +135,7 @@ defineExpose({
   align-items: center;
 
   outline: 1px solid var(--tok-oslo-16);
-  background-color: var(--tok-input-background, var(--tok-orlando));
+  background-color: var(--tok-orlando);
   cursor: text;
 
   &[data-size='s'] {
@@ -127,7 +143,7 @@ defineExpose({
     min-height: var(--tok-height-s);
     border-radius: var(--tok-radius-s);
 
-    font: var(--tok-font-s);
+    font: var(--tok-font-xs);
 
     padding-left: var(--tok-padding-s);
   }
@@ -147,21 +163,23 @@ defineExpose({
     min-height: var(--tok-height-l);
     border-radius: var(--tok-radius-l);
 
-    font: var(--tok-font-l);
-    line-height: 1.25rem;
+    font: var(--tok-font-m);
 
     padding-left: var(--tok-padding-l);
   }
 
-  &:focus-visible,
-  &:focus,
-  &:focus-within {
+  &[data-state='focused'] {
     outline-color: var(--tok-primary);
     outline-width: 2px;
     box-shadow: 0px 4px 8px 0px #f6e5640a;
   }
 
-  &:disabled {
+  &[data-state='invalid'] {
+    outline-color: var(--tok-error);
+    outline-width: 2px;
+  }
+
+  &[data-state='disabled'] {
     opacity: var(--tok-disabled-opacity);
     pointer-events: none;
   }
@@ -172,7 +190,7 @@ defineExpose({
   height: 100%;
   width: 100%;
 
-  color: var(--tok-text-01);
+  color: var(--tok-oslo);
   border-radius: inherit;
 }
 

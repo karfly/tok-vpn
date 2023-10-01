@@ -6,7 +6,7 @@
       </div>
 
       <div>
-        <div :class="['b-text_h4', $style.title]">
+        <div :class="$style.title">
           <h4 v-html="translatedTitle" />
 
           <money :value="product.price" />
@@ -135,6 +135,7 @@ mainButton.registerOnClick(onSubmit);
   margin-bottom: 0.25rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--tok-oslo-08);
+  font: var(--tok-font-h4);
 }
 
 .links {

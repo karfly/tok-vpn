@@ -65,6 +65,8 @@
   --tok-link: var(--tg-theme-link-color, var(--tok-oslo-80));
 
   --tok-disabled-opacity: 0.56;
+
+  --tok-error: #ce372d;
 }
 
 html {
@@ -80,6 +82,8 @@ html[data-theme='dark'] {
   --tok-primary-text: var(--tg-theme-button-text-color, var(--tok-white));
 
   --tok-stinger: #333333;
+
+  --tok-error: #d65f58;
 }
 
 body {
@@ -96,11 +100,6 @@ body {
   background-color: var(--tok-orlando);
 
   overflow-x: hidden;
-}
-
-.b-container {
-  padding: 1em;
-  overflow-y: auto;
 }
 
 h1 {
@@ -141,10 +140,6 @@ p {
   b {
     font-weight: 600;
   }
-}
-
-.b-fullwidth {
-  width: 100%;
 }
 
 .tok-ripple {

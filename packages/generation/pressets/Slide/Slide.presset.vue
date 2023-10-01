@@ -1,6 +1,6 @@
 <template>
   <primitive-slide v-bind="props" @on-click="onClick">
-    <h2 v-html="i18nTitle" class="b-text_h2" />
+    <h2 v-html="i18nTitle" />
 
     <p
       v-if="i18nDescription"

@@ -2,6 +2,14 @@ export type CheckboxBlockProps = {
   modelValue: boolean | null;
 
   placeholder?: string;
+
+  size?: 's' | 'm' | 'l';
+
+  shape?: 'rounded';
+
+  disabled?: boolean;
+
+  invalid?: boolean;
 };
 
 export type CheckboxBlockEmits = {
@@ -10,4 +18,5 @@ export type CheckboxBlockEmits = {
 
 export const CheckboxBlockDefaultProps = {
   placeholder: '',
+  size: 'm',
 } as const;

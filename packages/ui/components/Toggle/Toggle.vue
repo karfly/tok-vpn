@@ -1,24 +1,41 @@
 <template>
-  <div :class="[$style.toggle, modelValue && $style.toggle_checked]">
-    <span :class="$style.circle" />
+  <div
+    class="tok-toggle"
+    :data-checked="!!modelValue"
+    :data-state="state"
+    :data-size="size"
+  >
+    <span class="tok-toggle-circle" />
 
     <input
       :id="id"
       type="checkbox"
       role="switch"
       :checked="modelValue"
-      :class="$style.native"
+      class="tok-toggle-native"
       @change="onChange"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ToggleEmits, ToggleProps } from './Toggle.props';
+import { computed, toRefs } from 'vue';
 
-defineProps<ToggleProps>();
+import { ToggleDefaultProps, ToggleEmits, ToggleProps } from './Toggle.props';
+
+const props = withDefaults(defineProps<ToggleProps>(), ToggleDefaultProps);
 
 const emit = defineEmits<ToggleEmits>();
+
+const { disabled } = toRefs(props);
+
+const state = computed(() => {
+  if (disabled.value) {
+    return 'disabled';
+  }
+
+  return undefined;
+});
 
 const onChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -28,34 +45,46 @@ const onChange = (event: Event) => {
 };
 </script>
 
-<style lang="scss" module>
-.toggle {
+<style lang="scss" scoped>
+.tok-toggle {
   @include transition(background);
 
   position: relative;
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
-  background-color: var(--tok-toggle-background, var(--tok-base-02));
+  background-color: var(--tok-oslo-32);
   border-radius: 1rem;
-  color: var(--tok-toggle-color, var(--tok-white));
+  color: var(--tok-white);
+  height: 2em;
+  width: 3.5em;
 
-  height: 2rem;
-  width: 3.5rem;
+  &[data-size='s'] {
+    font: var(--tok-font-s);
+  }
 
-  &_checked {
-    background: var(--tok-toggle-checked-background, var(--tok-primary));
+  &[data-size='m'] {
+    font: var(--tok-font-m);
+  }
+
+  &[data-checked='true'] {
+    background: var(--tok-primary);
+  }
+
+  &[data-state='disabled'] {
+    pointer-events: none;
+    opacity: var(--tok-disabled-opacity);
   }
 }
 
-.circle {
+.tok-toggle-circle {
   @include transition(transform);
 
   position: absolute;
 
   display: inline-block;
-  height: 1.825rem;
-  width: 1.825rem;
+  height: 2em;
+  width: 2em;
   border-radius: 100%;
   flex-shrink: 0;
 
@@ -64,14 +93,14 @@ const onChange = (event: Event) => {
 
   background-color: currentColor;
 
-  transform: translate(0.1rem, -50%);
+  transform: translate(0, -50%) scale(0.925);
 
-  .toggle_checked & {
-    transform: translate(calc(100% - 0.2rem), -50%);
+  .tok-toggle[data-checked='true'] & {
+    transform: translate(1.5em, -50%) scale(0.925);
   }
 }
 
-.native {
+.tok-toggle-native {
   @include clearinput;
 
   position: absolute;

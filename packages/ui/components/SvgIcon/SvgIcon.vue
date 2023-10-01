@@ -5,7 +5,7 @@
     :style="style"
   >
     <component
-      :is="name"
+      :is="icon"
       tabindex="-1"
       focusable="false"
       aria-hidden="true"
@@ -24,7 +24,6 @@ const props = defineProps<SvgIconProps>();
 
 const { name, size } = toRefs(props);
 
-// todo
 const icon = computed(() => {
   const value = name.value;
 
@@ -32,7 +31,7 @@ const icon = computed(() => {
     return;
   }
 
-  if (typeof value === 'function') {
+  if (typeof value === 'function' || typeof value === 'object') {
     return value;
   }
 

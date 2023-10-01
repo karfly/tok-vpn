@@ -2,20 +2,20 @@
   <div :class="$style.slide">
     <media-presset v-bind="_media" :class="$style.media" />
 
-    <p :class="['b-text_xs', $style.count]">
+    <p :class="['tok-text_xs', $style.count]">
       {{ index }} / {{ carousel.length }}
     </p>
 
-    <h2 v-html="translatedTitle" class="b-text_h2" :class="$style.title" />
+    <h2 v-html="translatedTitle" :class="$style.title" />
 
     <p v-html="translatedDescription" :class="$style.description" />
 
     <div :class="$style.footer">
       <flat-button
         size="l"
+        shape="rounded"
         :appearance="applied ? 'outline' : 'primary'"
         :class="$style.footer__button"
-        style="--ark-padding: 0"
         @click="onToggle"
       >
         <template #icon>
@@ -29,6 +29,7 @@
       <flat-button
         v-bind="typeof nextButton === 'string' ? {} : nextButton"
         size="l"
+        shape="rounded"
         @click="onNext"
       >
         {{ translatedNext }}
@@ -105,8 +106,8 @@ const onNext = () => {
 <style lang="scss" module>
 .slide {
   position: relative;
-  min-height: calc(var(--ark-vh, 1vh) * 100);
-  height: calc(var(--ark-vh, 1vh) * 100);
+  min-height: calc(var(--tok-vh, 1vh) * 100);
+  height: calc(var(--tok-vh, 1vh) * 100);
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
@@ -136,7 +137,7 @@ const onNext = () => {
 }
 
 .count {
-  color: var(--ark-oslo-64);
+  color: var(--tok-oslo-64);
 
   margin-top: auto;
   margin-bottom: 1rem;
@@ -146,7 +147,7 @@ const onNext = () => {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: calc(var(--ark-vh, 1vh) * 100);
+  height: calc(var(--tok-vh, 1vh) * 100);
   width: auto;
   z-index: -1;
   transform: translate(-50%, -50%);

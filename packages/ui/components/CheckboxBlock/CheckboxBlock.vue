@@ -1,15 +1,22 @@
 <template>
-  <label :for="id" :class="[$style.label, modelValue && $style.label_checked]">
+  <label
+    :for="id"
+    class="tok-checkbox-block"
+    :data-size="size"
+    :data-shape="shape"
+    :data-state="state"
+  >
     <slot>
       <span>{{ placeholder }}</span>
     </slot>
 
-    <primitive-checkbox :value="modelValue" :class="$style.check">
+    <primitive-checkbox class="tok-checkbox-block-check" :value="modelValue">
       <input
         :id="id"
+        class="tok-checkbox-block-native"
         type="checkbox"
         :checked="!!modelValue"
-        :class="$style.native"
+        :disabled="disabled"
         @change="onChange"
       />
     </primitive-checkbox>
@@ -18,6 +25,7 @@
 
 <script setup lang="ts">
 import { getElementId } from '@tok/ui/functions';
+import { computed, toRefs } from 'vue';
 
 import {
   CheckboxBlockDefaultProps,
@@ -26,11 +34,32 @@ import {
 } from './CheckboxBlock.props';
 import PrimitiveCheckbox from './PrimitiveCheckbox.vue';
 
-withDefaults(defineProps<CheckboxBlockProps>(), CheckboxBlockDefaultProps);
+const props = withDefaults(
+  defineProps<CheckboxBlockProps>(),
+  CheckboxBlockDefaultProps
+);
 
 const emit = defineEmits<CheckboxBlockEmits>();
 
+const { invalid, disabled, modelValue } = toRefs(props);
+
 const id = getElementId();
+
+const state = computed(() => {
+  if (disabled.value) {
+    return 'disabled';
+  }
+
+  if (invalid.value) {
+    return 'invalid';
+  }
+
+  if (modelValue.value) {
+    return 'checked';
+  }
+
+  return undefined;
+});
 
 const onChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -40,8 +69,8 @@ const onChange = (event: Event) => {
 };
 </script>
 
-<style lang="scss" module>
-.label {
+<style lang="scss" scoped>
+.tok-checkbox-block {
   @include transition(outline-color);
 
   display: inline-flex;
@@ -54,26 +83,61 @@ const onChange = (event: Event) => {
   cursor: pointer;
   text-align: left;
 
+  white-space: pre-line;
   color: var(--tok-oslo);
 
-  padding: 0 var(--tok-padding-m);
-  height: var(--tok-height-m);
-  min-height: var(--tok-height-m);
-  border-radius: var(--tok-radius-m);
+  &[data-size='s'] {
+    padding: 0 var(--tok-padding-s);
+    height: var(--tok-height-s);
+    min-height: var(--tok-height-s);
+    border-radius: var(--tok-radius-s);
 
-  white-space: pre-line;
+    font: var(--tok-font-xs);
+  }
 
-  &_checked {
+  &[data-size='m'] {
+    padding: 0 var(--tok-padding-m);
+    height: var(--tok-height-m);
+    min-height: var(--tok-height-m);
+    border-radius: var(--tok-radius-m);
+
+    font: var(--tok-font-m);
+  }
+
+  &[data-size='l'] {
+    padding: 0 var(--tok-padding-l);
+    height: var(--tok-height-l);
+    min-height: var(--tok-height-l);
+    border-radius: var(--tok-radius-l);
+
+    font: var(--tok-font-m);
+  }
+
+  &[data-shape='rounded'] {
+    border-radius: 6.25rem;
+  }
+
+  &[data-state='checked'] {
     outline-color: var(--tok-primary);
     outline-width: 2px;
   }
+
+  &[data-state='invalid'] {
+    outline-color: var(--tok-error);
+    outline-width: 2px;
+  }
+
+  &[data-state='disabled'] {
+    opacity: var(--tok-disabled-opacity);
+    pointer-events: none;
+  }
 }
 
-.check {
+.tok-checkbox-block-check {
   margin-left: 1rem;
 }
 
-.native {
+.tok-checkbox-block-native {
   @include clearinput;
 
   position: absolute;
@@ -86,6 +150,7 @@ const onChange = (event: Event) => {
 
   &:disabled {
     cursor: default;
+    pointer-events: none;
   }
 }
 </style>

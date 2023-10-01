@@ -6,6 +6,7 @@ export type InputTextProps<T = string | null> = {
   autocomplete?: string;
   name?: string;
   disabled?: boolean;
+  invalid?: boolean;
   inputmode?:
     | 'text'
     | 'search'

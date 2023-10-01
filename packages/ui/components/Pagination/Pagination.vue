@@ -13,18 +13,30 @@
       :min="0"
       :max="length - 1"
       :step="1"
-      :style="{ width: `${(length - 1) * 32 + 16}px` }"
+      :style="style"
       @input="onChange"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed, toRefs } from 'vue';
+
 import { PaginationEmits, PaginationProps } from './Pagination.props';
 
-defineProps<PaginationProps>();
+const props = defineProps<PaginationProps>();
 
 const emit = defineEmits<PaginationEmits>();
+
+const { length } = toRefs(props);
+
+const style = computed(() => {
+  const value = length.value;
+
+  return {
+    width: `calc(${value - 1} * 2rem - 1rem)`,
+  };
+});
 
 const onEmit = (index: number) => {
   emit('update:modelValue', index);
@@ -74,7 +86,7 @@ const onChange = (event: Event) => {
     height: 0.5rem;
     border-radius: 100%;
     transform: translate(-50%, -50%);
-    background-color: var(--tok-text-02);
+    background-color: var(--tok-oslo-32);
   }
 
   &_active {
