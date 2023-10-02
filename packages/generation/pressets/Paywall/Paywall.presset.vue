@@ -84,6 +84,8 @@ const onSelectOption = (
   const dataProduct = {
     ..._product,
     payment_method: id,
+    title: translatedTitle.value,
+    description: translatedDescription.value,
   };
 
   const data = JSON.stringify({
