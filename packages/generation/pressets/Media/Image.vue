@@ -3,7 +3,7 @@
     <source v-if="webp" type="image/webp" :srcset="loadedWebp" />
 
     <img
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...props }"
       :src="loadedSrc"
       :class="[$style.img, allowIntersection && $style.img_intersection]"
     />

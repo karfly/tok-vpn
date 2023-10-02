@@ -92,8 +92,8 @@ const onClick = () => {
 <style lang="scss" module>
 .slide {
   position: relative;
-  min-height: calc(100vh - 1px);
-  height: calc(100vh - 1px);
+  min-height: 100vh;
+  height: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
