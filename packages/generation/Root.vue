@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { BackButton } from '@tok/telegram-ui/components/BackButton';
-import { useTelegram } from '@tok/telegram-ui/use';
+import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { useTheme } from '@tok/telegram-ui/use/theme';
 import { Root } from '@tok/ui/components/Root';
 import { computed, inject, onMounted, ref, watch } from 'vue';
@@ -21,7 +21,7 @@ import { useAutoi18nFromTelegram } from './use/i18n';
 const themeParam = inject('__theme', 'auto');
 
 const theme = useTheme(themeParam);
-const tg = useTelegram();
+const tg = useTelegramSdk();
 const router = useRouter();
 const _ = useAutoi18nFromTelegram();
 const opened = ref(false);

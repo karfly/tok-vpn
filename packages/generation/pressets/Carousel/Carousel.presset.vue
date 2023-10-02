@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { DrawPresset } from '@tok/generation/pressets/DrawPresset';
 import { CAROUSEL_ACCESSOR_TOKEN } from '@tok/generation/use/carousel';
-import { useTelegram } from '@tok/telegram-ui/use';
+import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Carousel } from '@tok/ui/components/Carousel';
 import { clamp } from '@tok/ui/number';
 import { computed, provide, ref, toRefs, watch } from 'vue';
@@ -35,7 +35,7 @@ const props = withDefaults(
 const { slides } = toRefs(props);
 
 const router = useRouter();
-const tg = useTelegram();
+const tg = useTelegramSdk();
 
 const length = computed(() => {
   return slides.value.length;
@@ -83,7 +83,7 @@ const safeSet = (value: number) => {
 
   activeSlide.value = clamp(value, 0, length - 1);
 
-  tg.haptic();
+  tg.HapticFeedback.impactOccurred('light');
 };
 
 const next = () => {

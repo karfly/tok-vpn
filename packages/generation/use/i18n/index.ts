@@ -1,17 +1,20 @@
 import { ASSETS_LOADER_TOKEN } from '@tok/generation/tokens';
-import { useTelegram } from '@tok/telegram-ui/use';
+import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { inject, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export function useAutoi18nFromTelegram() {
-  const tg = useTelegram();
+  const tg = useTelegramSdk();
+  const user = tg.initDataUnsafe.user;
+  const tgLanguage = user?.language_code || 'en';
+
   const i18n = useI18n({ useScope: 'global' });
   const { locale: localeLoader = {} } = inject(ASSETS_LOADER_TOKEN, {});
 
   const available = Object.keys(localeLoader).filter((m) => m !== 'default');
 
-  const lang = available.includes(tg.user.language)
-    ? tg.user.language
+  const lang = available.includes(tgLanguage)
+    ? tgLanguage
     : (localeLoader.default as string);
 
   function loadAndSet(locale: string) {

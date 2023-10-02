@@ -25,6 +25,8 @@
       v-bind="popup"
       @onSelect="onSelectOption"
     />
+
+    <main-button :text="mainButtonText" @on-click="onSubmit" />
   </slide-presset>
 </template>
 
@@ -34,10 +36,11 @@ import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { NANO_STATE_TOKEN } from '@tok/generation/tokens/nanoState.token';
 import { useTranslated } from '@tok/generation/use/translated';
-import { useTelegram, useTelegramMainButton } from '@tok/telegram-ui/use';
+import { MainButton } from '@tok/telegram-ui/components/MainButton';
+import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Money } from '@tok/ui/components/Money';
 import { setupMoney } from '@tok/ui/setup/setupMoney';
-import { computed, inject, onBeforeUnmount, ref, toRefs } from 'vue';
+import { computed, inject, ref, toRefs } from 'vue';
 
 import PaywallPopup from './PaywallPopup.vue';
 import {
@@ -62,15 +65,10 @@ const description = computed(() => product.value.description);
 
 const translatedTitle = useTranslated(title);
 const translatedDescription = useTranslated(description);
-const mainButton = useTelegramMainButton();
-const tg = useTelegram();
+const tg = useTelegramSdk();
 const nanoState = inject(NANO_STATE_TOKEN, null);
 
 const popupOpened = ref(false);
-
-mainButton.show({
-  text: mainButtonText.value,
-});
 
 const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
@@ -93,19 +91,12 @@ const onSelectOption = (
     payload,
   });
 
-  tg.sendData?.(data);
+  tg.sendData(data);
 };
 
 const onSubmit = () => {
   popupOpened.value = true;
 };
-
-onBeforeUnmount(() => {
-  mainButton.unregisterOnClick(onSubmit);
-  mainButton.hide();
-});
-
-mainButton.registerOnClick(onSubmit);
 </script>
 
 <style lang="scss" module>

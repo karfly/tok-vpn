@@ -8,7 +8,6 @@ import {
   PressetOverrider,
   PRESSETS_OVERRIDER_TOKEN,
 } from '@tok/generation/tokens';
-import { TelegramPlugin } from '@tok/telegram-ui/use';
 import { AlertsPlugin } from '@tok/ui/use/alerts';
 import { createApp, Plugin, ref } from 'vue';
 import { createI18n } from 'vue-i18n';
@@ -99,7 +98,6 @@ export function bootstrapJson(App: _App, json: any) {
   });
 
   return createApp(App)
-    .use(TelegramPlugin)
     .use(AlertsPlugin)
     .use(router)
     .use(i18n)
