@@ -137,7 +137,7 @@ const onNext = () => {
 }
 
 .count {
-  color: var(--tok-background-color-64);
+  color: var(--tok-text-color-64);
 
   margin-top: auto;
   margin-bottom: 1rem;

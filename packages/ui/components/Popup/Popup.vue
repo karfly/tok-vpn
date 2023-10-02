@@ -16,10 +16,7 @@
         <div :class="$style.popup">
           <div v-focustrap ref="contentRef" :class="$style.content">
             <div :class="$style.content__header">
-              <h4
-                v-html="translatedTitle"
-                :class="['b-text_h4', $style.content__title]"
-              />
+              <h4 v-html="translatedTitle" :class="$style.content__title" />
 
               <flat-button
                 ref="closeButtonRef"
@@ -49,7 +46,6 @@
 </template>
 
 <script setup lang="ts">
-// fix
 import { useTranslated } from '@tok/i18n';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 import { Portal } from '@tok/ui/components/Portal';
@@ -65,22 +61,11 @@ import {
   watch,
 } from 'vue';
 
-const props = withDefaults(
-  defineProps<{
-    modelValue: boolean;
-    title: string;
-    message?: string;
-  }>(),
-  {
-    modelValue: false,
-    title: '',
-    message: '',
-  }
-);
+import { PopupDefaultProps, PopupEmits, PopupProps } from './Popup.props';
 
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: boolean): void;
-}>();
+const props = withDefaults(defineProps<PopupProps>(), PopupDefaultProps);
+
+const emit = defineEmits<PopupEmits>();
 
 const { modelValue, title, message } = toRefs(props);
 
@@ -152,7 +137,7 @@ onBeforeUnmount(() => {
 
 .content {
   border-radius: inherit;
-  background: var(--tok-text-color);
+  background: var(--tok-background-color);
   padding: 0.25rem;
 
   &:focus-visible {

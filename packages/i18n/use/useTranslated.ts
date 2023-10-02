@@ -5,7 +5,8 @@ const resolve = <T>(r: T) => {
   return typeof r === 'function' ? computed<T>(r as any) : ref(r);
 };
 
-const translate = <T>(
+// todo expose all login in useTranslate
+export const tokTranslate = <T = string>(
   messages: Record<string, unknown>,
   key: string
 ): T | undefined => {
@@ -16,7 +17,7 @@ const translate = <T>(
   }
 
   if (_key in messages) {
-    return translate((messages as any)[_key], _rest.join('.'));
+    return tokTranslate((messages as any)[_key], _rest.join('.'));
   }
 
   return undefined;
@@ -44,9 +45,13 @@ export function useTranslated<T = string>(
   return computed(() => {
     const value = keyRef.value as string;
 
+    if (!value) {
+      return fallback ?? value;
+    }
+
     const _localed = localed.value as Record<string, unknown>;
 
-    const firstTry = translate(_localed, value);
+    const firstTry = tokTranslate(_localed, value);
 
     if (firstTry) {
       return firstTry as T;
@@ -58,7 +63,7 @@ export function useTranslated<T = string>(
       const fallbackLocaled =
         instance!.messages.value?.[instance!.fallbackLocale] || {};
 
-      const secondTry = translate(fallbackLocaled as {}, value) as T;
+      const secondTry = tokTranslate(fallbackLocaled as {}, value) as T;
 
       return secondTry ?? fallback ?? value;
     }

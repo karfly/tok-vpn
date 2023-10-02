@@ -62,6 +62,6 @@
     -webkit-text-fill-color: inherit !important;
     color: inherit !important;
     background-color: transparent !important;
-    -webkit-box-shadow: 0 0 0 1000px var(--tok-background-color) 5c0 inset !important; // to overlay native background
+    -webkit-box-shadow: 0 0 0 1000px var(--tok-text-color) 5c0 inset !important; // to overlay native background
   }
 }

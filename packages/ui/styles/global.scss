@@ -32,18 +32,7 @@
   --tok-padding-xs: 0.25rem;
 
   // #fff -> rgb(255, 255, 255)
-  --tok-text-color-base: 255, 255, 255;
-  --tok-text-color: rgba(var(--tok-text-color-base), 1);
-  --tok-text-color-80: rgba(var(--tok-text-color-base), 0.8);
-  --tok-text-color-64: rgba(var(--tok-text-color-base), 0.64);
-  --tok-text-color-48: rgba(var(--tok-text-color-base), 0.48);
-  --tok-text-color-32: rgba(var(--tok-text-color-base), 0.32);
-  --tok-text-color-24: rgba(var(--tok-text-color-base), 0.24);
-  --tok-text-color-16: rgba(var(--tok-text-color-base), 0.16);
-  --tok-text-color-08: rgba(var(--tok-text-color-base), 0.08);
-
-  // #1c1c1d -> rgb(27, 27, 29)
-  --tok-background-color-base: 27, 27, 29;
+  --tok-background-color-base: 255, 255, 255;
   --tok-background-color: rgba(var(--tok-background-color-base), 1);
   --tok-background-color-80: rgba(var(--tok-background-color-base), 0.8);
   --tok-background-color-64: rgba(var(--tok-background-color-base), 0.64);
@@ -52,6 +41,17 @@
   --tok-background-color-24: rgba(var(--tok-background-color-base), 0.24);
   --tok-background-color-16: rgba(var(--tok-background-color-base), 0.16);
   --tok-background-color-08: rgba(var(--tok-background-color-base), 0.08);
+
+  // #1c1c1d -> rgb(27, 27, 29)
+  --tok-text-color-base: 27, 27, 29;
+  --tok-text-color: rgba(var(--tok-text-color-base), 1);
+  --tok-text-color-80: rgba(var(--tok-text-color-base), 0.8);
+  --tok-text-color-64: rgba(var(--tok-text-color-base), 0.64);
+  --tok-text-color-48: rgba(var(--tok-text-color-base), 0.48);
+  --tok-text-color-32: rgba(var(--tok-text-color-base), 0.32);
+  --tok-text-color-24: rgba(var(--tok-text-color-base), 0.24);
+  --tok-text-color-16: rgba(var(--tok-text-color-base), 0.16);
+  --tok-text-color-08: rgba(var(--tok-text-color-base), 0.08);
 
   --tok-white: #fff;
   --tok-dark: #111;
@@ -62,7 +62,7 @@
 
   --tok-stinger: #f6f6f9;
 
-  --tok-link: var(--tg-theme-link-color, var(--tok-background-color-80));
+  --tok-link: var(--tg-theme-link-color, var(--tok-text-color-80));
 
   --tok-disabled-opacity: 0.56;
 
@@ -80,9 +80,9 @@ html {
 }
 
 html[data-theme='dark'] {
-  --tok-text-color-base: 27, 27, 29;
+  --tok-background-color-base: 27, 27, 29;
 
-  --tok-background-color-base: 255, 255, 255;
+  --tok-text-color-base: 255, 255, 255;
 
   --tok-primary: var(--tg-theme-button-color, #3e88f7);
   --tok-primary-text: var(--tg-theme-button-text-color, var(--tok-white));
@@ -106,8 +106,8 @@ body {
   margin: 0 auto;
 
   font: var(--tok-font-m);
-  color: var(--tok-background-color);
-  background-color: var(--tok-text-color);
+  color: var(--tok-text-color);
+  background-color: var(--tok-background-color);
 
   overflow-x: hidden;
 }
@@ -160,7 +160,7 @@ p {
 .tok-ripple-ink {
   display: block;
   position: absolute;
-  background: var(--tok-text-color-48);
+  background: var(--tok-background-color-48);
   border-radius: 100%;
   transform: scale(0);
   pointer-events: none;

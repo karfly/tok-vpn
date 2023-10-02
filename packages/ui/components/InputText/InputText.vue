@@ -126,7 +126,7 @@ defineExpose({
   }
 
   &::placeholder {
-    color: var(--tok-background-color-64);
+    color: var(--tok-text-color-64);
   }
 }
 
@@ -136,8 +136,8 @@ defineExpose({
   display: flex;
   align-items: center;
 
-  outline: 1px solid var(--tok-background-color-16);
-  background-color: var(--tok-text-color);
+  outline: 1px solid var(--tok-text-color-16);
+  background-color: var(--tok-background-color);
   cursor: text;
 
   &[data-size='s'] {
@@ -192,7 +192,7 @@ defineExpose({
   height: 100%;
   width: 100%;
 
-  color: var(--tok-background-color);
+  color: var(--tok-text-color);
   border-radius: inherit;
 }
 
@@ -205,7 +205,7 @@ defineExpose({
   align-items: center;
   height: inherit;
   padding-left: 0.5em;
-  color: var(--tok-background-color-48);
+  color: var(--tok-text-color-48);
   cursor: pointer;
 
   &:hover {

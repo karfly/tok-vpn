@@ -4,25 +4,30 @@
     :class="[$style.icon, rotate && $style.icon_rotate]"
     :style="style"
   >
-    <component
-      :is="icon"
-      tabindex="-1"
-      focusable="false"
-      aria-hidden="true"
-      width="100%"
-      height="100%"
-    />
+    <slot>
+      <component
+        :is="icon"
+        tabindex="-1"
+        focusable="false"
+        aria-hidden="true"
+        width="100%"
+        height="100%"
+      />
+    </slot>
   </span>
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent, toRefs } from 'vue';
+import { CUSTOM_ICONS_TOKEN } from '@tok/ui/tokens';
+import { computed, defineAsyncComponent, inject, toRefs } from 'vue';
 
 import { SvgIconProps } from './SvgIcon.props';
 
 const props = defineProps<SvgIconProps>();
 
 const { name, size } = toRefs(props);
+
+const customIcons = inject(CUSTOM_ICONS_TOKEN, {});
 
 const icon = computed(() => {
   const value = name.value;
@@ -31,11 +36,9 @@ const icon = computed(() => {
     return;
   }
 
-  if (typeof value === 'function' || typeof value === 'object') {
-    return value;
-  }
+  const custom = customIcons[value];
 
-  return defineAsyncComponent(() => import(`./icons/${value}.svg`));
+  return custom ?? defineAsyncComponent(() => import(`./icons/${value}.svg`));
 });
 
 const px = (value: number): string => {

@@ -12,34 +12,38 @@
         v-bind="button"
         :border="index < buttons.length - 1"
         @click="onUpdate(false, button.id)"
-      />
+      >
+        <template #icon>
+          <slot name="button-icon" :item="button" />
+        </template>
+      </tg-popup-button>
     </div>
   </popup>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends PopupButton">
 import { Popup } from '@tok/ui/components/Popup';
 import Telegram from '@twa-dev/sdk';
 import { PopupButton } from '@twa-dev/types';
 import { computed, ref, toRefs, watch } from 'vue';
 
+import {
+  TgPopupDefaultProps,
+  TgPopupEmits,
+  TgPopupProps,
+  TgPopupSlots,
+} from './TgPopup.props';
 import TgPopupButton from './TgPopupButton.vue';
 
 const props = withDefaults(
-  defineProps<{
-    type?: 'web' | 'telegram';
-    modelValue: boolean;
-    title: string;
-    message?: string;
-    buttons: PopupButton[];
-  }>(),
-  { title: '', message: '', buttons: () => [], type: 'telegram' }
+  defineProps<TgPopupProps<T>>(),
+  // @ts-expect-error familiar problem with generic props and default props
+  TgPopupDefaultProps
 );
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void;
-  (e: 'onSelect', value: string | undefined): void;
-}>();
+const emit = defineEmits<TgPopupEmits>();
+
+defineSlots<TgPopupSlots<T>>();
 
 const { type, modelValue, title, message, buttons } = toRefs(props);
 

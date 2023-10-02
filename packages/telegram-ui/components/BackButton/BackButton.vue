@@ -8,7 +8,7 @@
     :icon-size="16"
     @click="onClick"
   >
-    Back
+    <slot>Back</slot>
   </flat-button>
 </template>
 

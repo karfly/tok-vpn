@@ -1,5 +1,5 @@
 export type SvgIconProps = {
-  name: string | (() => any) | {} | null;
+  name: string;
 
   size?: number | [number, number];
 

@@ -24,7 +24,7 @@ defineProps<{ value: boolean | null }>();
   justify-content: center;
   position: relative;
 
-  outline: 2px solid var(--tok-background-color-24);
+  outline: 2px solid var(--tok-text-color-24);
   border-radius: 100%;
 
   &_checked {

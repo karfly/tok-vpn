@@ -42,5 +42,6 @@ export function useI18n() {
     load,
     setMessages,
     locale: instance.locale,
+    messages: instance.messages,
   };
 }

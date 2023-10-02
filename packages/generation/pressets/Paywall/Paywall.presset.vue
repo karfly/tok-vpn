@@ -12,7 +12,7 @@
           <money :value="product.price" />
         </div>
 
-        <p v-html="translatedDescription" class="b-text_xs" />
+        <p v-html="translatedDescription" :class="$style.description" />
       </div>
     </div>
 
@@ -20,13 +20,22 @@
       <Link v-for="link in links" v-bind="link" :key="link.text" />
     </div>
 
-    <paywall-popup
+    <tg-popup
       v-model="popupOpened"
       v-bind="popup"
+      :buttons="translatedPopupButtons"
       @onSelect="onSelectOption"
-    />
+    >
+      <template #button-icon="{ item }">
+        <media-presset
+          v-if="item.media"
+          v-bind="item.media"
+          :class="$style.icon"
+        />
+      </template>
+    </tg-popup>
 
-    <main-button :text="mainButtonText" @on-click="onSubmit" />
+    <main-button :text="translatedMainButton" @on-click="onSubmit" />
   </slide-presset>
 </template>
 
@@ -35,14 +44,14 @@ import { Link } from '@tok/generation/pressets/Link';
 import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { NANO_STATE_TOKEN } from '@tok/generation/tokens/nanoState.token';
-import { useTranslated } from '@tok/i18n';
+import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
+import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Money } from '@tok/ui/components/Money';
 import { setupMoney } from '@tok/ui/setup/setupMoney';
 import { computed, inject, ref, toRefs } from 'vue';
 
-import PaywallPopup from './PaywallPopup.vue';
 import {
   PaywallPressetDefaultProps,
   PaywallPressetProps,
@@ -62,9 +71,41 @@ setupMoney({
 
 const title = computed(() => product.value.title);
 const description = computed(() => product.value.description);
+const popupButtons = computed(() => popup.value.buttons);
 
+const i18n = useI18n();
 const translatedTitle = useTranslated(title);
 const translatedDescription = useTranslated(description);
+const translatedMainButton = useTranslated(mainButtonText);
+const translatedPopupButtons = computed(() => {
+  const buttons = popupButtons.value;
+  const locale = i18n.locale.value;
+  // todo type
+  const messages = (i18n.messages.value[locale] || {}) as Record<
+    string,
+    unknown
+  >;
+  // todo type
+  const defaultMessages = i18n.messages.value[i18n.fallbackLocale] as Record<
+    string,
+    unknown
+  >;
+
+  return buttons.map((button) => {
+    if ('text' in button) {
+      return {
+        ...button,
+        text:
+          tokTranslate(messages, button.text) ??
+          tokTranslate(defaultMessages, button.text) ??
+          button.text,
+      };
+    }
+
+    return button;
+  });
+});
+
 const tg = useTelegramSdk();
 const nanoState = inject(NANO_STATE_TOKEN, null);
 
@@ -111,7 +152,7 @@ const onSubmit = () => {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
 
-  box-shadow: 0px 4px 24px 0px var(--tok-background-color-08);
+  box-shadow: 0px 4px 24px 0px var(--tok-text-color-08);
 }
 
 .media {
@@ -127,7 +168,7 @@ const onSubmit = () => {
   padding-top: 0.5rem;
   margin-bottom: 0.25rem;
   padding-bottom: 0.25rem;
-  border-bottom: 1px solid var(--tok-background-color-08);
+  border-bottom: 1px solid var(--tok-text-color-08);
   font: var(--tok-font-h4);
 }
 
@@ -138,5 +179,14 @@ const onSubmit = () => {
   gap: 1rem;
 
   margin-top: auto;
+}
+
+.description {
+  font: var(--tok-font-xs);
+}
+
+.icon {
+  margin-right: 0.75rem;
+  color: var(--tok-background-color);
 }
 </style>

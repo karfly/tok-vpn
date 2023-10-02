@@ -29,6 +29,8 @@ withDefaults(
 <style lang="scss" module>
 .button {
   @include clearbutton;
+  @include transition(opacity);
+
   position: relative;
 
   display: flex;
@@ -39,9 +41,10 @@ withDefaults(
   padding: 0.6875rem 0.75rem;
 
   text-align: left;
-  color: var(--tok-background-color);
+  color: var(--tok-text-color);
 
   font: var(--tok-font-l);
+  cursor: pointer;
 
   &_border {
     &:after {
@@ -51,8 +54,12 @@ withDefaults(
       bottom: 0;
       width: calc(100% - 4.125rem);
       height: 1px;
-      background: var(--tok-background-color-08);
+      background: var(--tok-text-color-08);
     }
+  }
+
+  &:hover {
+    opacity: var(--tok-hover-opacity);
   }
 }
 
@@ -66,6 +73,6 @@ withDefaults(
 
 .icon {
   margin-left: 0.125rem;
-  color: var(--tok-background-color-32);
+  color: var(--tok-text-color-32);
 }
 </style>
