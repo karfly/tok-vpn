@@ -2,7 +2,11 @@
   <picture v-if="type === 'image'">
     <source v-if="webp" type="image/webp" :srcset="loadedWebp" />
 
-    <img v-bind="{ ...$attrs, ...props }" :src="loaded" :class="$style.img" />
+    <img
+      v-bind="{ ...$attrs, ...props }"
+      :src="loaded"
+      :class="[$style.img, (props as any).allowIntersection && $style.img_intersection]"
+    />
   </picture>
 
   <div v-else-if="type === 'sticker'">
@@ -66,5 +70,10 @@ watch(
 .img {
   width: inherit;
   height: inherit;
+
+  &_intersection {
+    position: absolute;
+    z-index: -1;
+  }
 }
 </style>

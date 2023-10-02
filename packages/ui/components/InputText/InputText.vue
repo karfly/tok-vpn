@@ -175,7 +175,7 @@ defineExpose({
   }
 
   &[data-state='invalid'] {
-    outline-color: var(--tok-error);
+    outline-color: var(--tok-error-fill);
     outline-width: 2px;
   }
 
