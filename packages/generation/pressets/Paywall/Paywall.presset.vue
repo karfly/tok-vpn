@@ -23,6 +23,8 @@
     <tg-popup
       v-model="popupOpened"
       v-bind="popup"
+      :title="translatedPopupTitle"
+      :message="translatedPopupMessage"
       :buttons="translatedPopupButtons"
       @onSelect="onSelectOption"
     >
@@ -72,11 +74,15 @@ setupMoney({
 const title = computed(() => product.value.title);
 const description = computed(() => product.value.description);
 const popupButtons = computed(() => popup.value.buttons);
+const popupTitle = computed(() => popup.value.title);
+const popupMessage = computed(() => popup.value.message || '');
 
 const i18n = useI18n();
 const translatedTitle = useTranslated(title);
 const translatedDescription = useTranslated(description);
 const translatedMainButton = useTranslated(mainButtonText);
+const translatedPopupTitle = useTranslated(popupTitle);
+const translatedPopupMessage = useTranslated(popupMessage);
 const translatedPopupButtons = computed(() => {
   const buttons = popupButtons.value;
   const locale = i18n.locale.value;
