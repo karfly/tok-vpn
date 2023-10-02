@@ -161,7 +161,7 @@ export default <Config>{
       textAlign: 'center',
       title: '_paywall.title',
       description: '_paywall.description',
-      main: '_paywall.main',
+      mainButtonText: '_paywall.main',
       product: {
         media: {
           type: 'icon',
