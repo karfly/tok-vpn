@@ -14,6 +14,7 @@ import { BackButton } from '@tok/telegram-ui/components/BackButton';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { useTheme } from '@tok/telegram-ui/use/theme';
 import { Root } from '@tok/ui/components/Root';
+import { useAlerts } from '@tok/ui/use/alerts';
 import { computed, inject, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -29,10 +30,12 @@ const isSupported = i18n.available.includes(tgLang);
 
 const lang = isSupported ? tgLang : i18n.fallbackLocale;
 
-i18n.locale.value = lang;
+const alerts = useAlerts();
 
 onMounted(() => {
   tg.expand();
+
+  alerts.show(`actual: ${lang} fallback: ${i18n.fallbackLocale}`);
 
   if (i18n.fallbackLocale !== lang) {
     i18n.load(i18n.fallbackLocale).then((messages) => {
@@ -44,6 +47,7 @@ onMounted(() => {
     .load(lang)
     .then((messages) => {
       i18n.setMessages(lang, messages);
+      i18n.locale.value = lang;
     })
     .finally(() => {
       tg.ready();
