@@ -37,7 +37,8 @@
     "policy": "Политика конфиденциальности",
     "policy_href": "https://ya.ru",
     "terms": "Условия использования",
-    "terms_href": "https://ya.ru"
+    "terms_href": "https://ya.ru",
+    "main": "Продолжить"
   },
   "Bank card": "Оплата картой"
 }

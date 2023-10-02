@@ -37,6 +37,7 @@
     "policy": "Privacy policy",
     "policy_href": "https://google.com",
     "terms": "Terms of use",
-    "terms_href": "https://google.com"
+    "terms_href": "https://google.com",
+    "main": "Continue"
   }
 }
