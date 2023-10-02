@@ -16,7 +16,6 @@
 import { PrimitiveSlide } from '@tok/generation/pressets/PrimitiveSlide';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useTranslated } from '@tok/i18n';
-import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { toRefs } from 'vue';
 
 import {
@@ -28,8 +27,6 @@ const props = withDefaults(
   defineProps<SlidePressetProps>(),
   SlidePressetDefaultProps
 );
-
-const sdk = useTelegramSdk();
 
 const { title, description, button } = toRefs(props);
 
