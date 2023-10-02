@@ -86,7 +86,7 @@ const onChange = (event: Event) => {
     height: 0.5rem;
     border-radius: 100%;
     transform: translate(-50%, -50%);
-    background-color: var(--tok-oslo-32);
+    background-color: var(--tok-background-color-32);
   }
 
   &_active {

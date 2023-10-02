@@ -53,7 +53,7 @@ const onChange = (event: Event) => {
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
-  background-color: var(--tok-oslo-32);
+  background-color: var(--tok-background-color-32);
   border-radius: 1rem;
   color: var(--tok-white);
   height: 2em;

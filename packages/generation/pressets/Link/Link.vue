@@ -30,7 +30,7 @@ const translatedHref = useTranslated(href);
   font: var(--tok-font-s);
 
   &:hover {
-    opacity: 0.82;
+    opacity: var(--tok-hover-opacity);
   }
 }
 </style>

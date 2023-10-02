@@ -81,13 +81,13 @@ const onChange = (event: Event) => {
 
   align-items: center;
   justify-content: space-between;
-  outline: 1px solid var(--tok-oslo-16);
+  outline: 1px solid var(--tok-background-color-16);
   user-select: none;
   cursor: pointer;
   text-align: left;
 
   white-space: pre-line;
-  color: var(--tok-oslo);
+  color: var(--tok-background-color);
 
   &[data-size='s'] {
     padding: 0 var(--tok-padding-s);

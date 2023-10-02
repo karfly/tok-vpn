@@ -28,26 +28,26 @@
   // --tok-padding-s: 0.5rem;
   // --tok-padding-xs: 0.25rem;
 
-  // --tok-orlando-base: 0, 0%, 100%;
+  // --tok-text-color-base: 0, 0%, 100%;
 
-  // --tok-orlando: hsl(var(--tok-orlando-base));
-  // --tok-orlando-80: hsla(var(--tok-orlando-base), 0.8);
-  // --tok-orlando-64: hsla(var(--tok-orlando-base), 0.64);
-  // --tok-orlando-48: hsla(var(--tok-orlando-base), 0.48);
-  // --tok-orlando-32: hsla(var(--tok-orlando-base), 0.32);
-  // --tok-orlando-24: hsla(var(--tok-orlando-base), 0.24);
-  // --tok-orlando-16: hsla(var(--tok-orlando-base), 0.16);
-  // --tok-orlando-08: hsla(var(--tok-orlando-base), 0.08);
+  // --tok-text-color: hsl(var(--tok-text-color-base));
+  // --tok-text-color-80: hsla(var(--tok-text-color-base), 0.8);
+  // --tok-text-color-64: hsla(var(--tok-text-color-base), 0.64);
+  // --tok-text-color-48: hsla(var(--tok-text-color-base), 0.48);
+  // --tok-text-color-32: hsla(var(--tok-text-color-base), 0.32);
+  // --tok-text-color-24: hsla(var(--tok-text-color-base), 0.24);
+  // --tok-text-color-16: hsla(var(--tok-text-color-base), 0.16);
+  // --tok-text-color-08: hsla(var(--tok-text-color-base), 0.08);
 
-  // --tok-oslo-base: 240, 2%, 11%;
-  // --tok-oslo: hsl(var(--tok-oslo-base));
-  // --tok-oslo-80: hsla(var(--tok-oslo-base), 0.8);
-  // --tok-oslo-64: hsla(var(--tok-oslo-base), 0.64);
-  // --tok-oslo-48: hsla(var(--tok-oslo-base), 0.48);
-  // --tok-oslo-32: hsla(var(--tok-oslo-base), 0.32);
-  // --tok-oslo-24: hsla(var(--tok-oslo-base), 0.24);
-  // --tok-oslo-16: hsla(var(--tok-oslo-base), 0.16);
-  // --tok-oslo-08: hsla(var(--tok-oslo-base), 0.08);
+  // --tok-background-color-base: 240, 2%, 11%;
+  // --tok-background-color: hsl(var(--tok-background-color-base));
+  // --tok-background-color-80: hsla(var(--tok-background-color-base), 0.8);
+  // --tok-background-color-64: hsla(var(--tok-background-color-base), 0.64);
+  // --tok-background-color-48: hsla(var(--tok-background-color-base), 0.48);
+  // --tok-background-color-32: hsla(var(--tok-background-color-base), 0.32);
+  // --tok-background-color-24: hsla(var(--tok-background-color-base), 0.24);
+  // --tok-background-color-16: hsla(var(--tok-background-color-base), 0.16);
+  // --tok-background-color-08: hsla(var(--tok-background-color-base), 0.08);
 
   // --tok-white: #fff;
   // --tok-dark: #111;
@@ -58,15 +58,15 @@
 
   // --tok-stinger: #f6f6f9;
 
-  // --tok-link: var(--tg-theme-link-color, var(--tok-oslo-80));
+  // --tok-link: var(--tg-theme-link-color, var(--tok-background-color-80));
 
   // --tok-disabled-opacity: 0.56;
 }
 
 html[data-theme='dark'] {
-  // --tok-orlando-base: 240, 2%, 11%;
+  // --tok-text-color-base: 240, 2%, 11%;
 
-  // --tok-oslo-base: 0, 0, 100%;
+  // --tok-background-color-base: 0, 0, 100%;
 
   // --tok-primary: var(--tg-theme-button-color, #3e88f7);
   // --tok-primary-text: var(--tg-theme-button-text-color, var(--tok-white));

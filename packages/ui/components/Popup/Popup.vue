@@ -152,7 +152,7 @@ onBeforeUnmount(() => {
 
 .content {
   border-radius: inherit;
-  background: var(--tok-orlando);
+  background: var(--tok-text-color);
   padding: 0.25rem;
 
   &:focus-visible {

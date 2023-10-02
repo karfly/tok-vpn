@@ -45,25 +45,25 @@ const { type } = toRefs(props);
 
 const successColors = {
   iconColor: 'var(--tok-success-fill)',
-  close: 'var(--tok-oslo-32)',
-  color: 'var(--tok-oslo)',
+  close: 'var(--tok-background-color-32)',
+  color: 'var(--tok-background-color)',
   background:
-    'linear-gradient(var(--tok-success-bg),var(--tok-success-bg)),var(--tok-orlando)',
+    'linear-gradient(var(--tok-success-bg),var(--tok-success-bg)),var(--tok-text-color)',
 } as const;
 
 const errorColors = {
   iconColor: 'var(--tok-error-fill)',
-  close: 'var(--tok-oslo-32)',
-  color: 'var(--tok-oslo)',
+  close: 'var(--tok-background-color-32)',
+  color: 'var(--tok-background-color)',
   background:
-    'linear-gradient(var(--tok-error-bg),var(--tok-error-bg)),var(--tok-orlando)',
+    'linear-gradient(var(--tok-error-bg),var(--tok-error-bg)),var(--tok-text-color)',
 } as const;
 
 const telegramColors = {
   iconColor: 'var(--tok-error-fill)',
-  close: 'var(--tok-orlando-32)',
-  color: 'var(--tok-orlando)',
-  background: 'var(--tok-oslo-64)',
+  close: 'var(--tok-text-color-32)',
+  color: 'var(--tok-text-color)',
+  background: 'var(--tok-background-color-64)',
 } as const;
 
 const colors = {

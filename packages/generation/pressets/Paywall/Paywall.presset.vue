@@ -111,7 +111,7 @@ const onSubmit = () => {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
 
-  box-shadow: 0px 4px 24px 0px var(--tok-oslo-08);
+  box-shadow: 0px 4px 24px 0px var(--tok-background-color-08);
 }
 
 .media {
@@ -127,7 +127,7 @@ const onSubmit = () => {
   padding-top: 0.5rem;
   margin-bottom: 0.25rem;
   padding-bottom: 0.25rem;
-  border-bottom: 1px solid var(--tok-oslo-08);
+  border-bottom: 1px solid var(--tok-background-color-08);
   font: var(--tok-font-h4);
 }
 

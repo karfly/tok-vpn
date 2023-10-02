@@ -210,6 +210,10 @@ const computedComponent = computed(() => {
     }
   }
 
+  &:hover {
+    opacity: var(--tok-hover-opacity);
+  }
+
   &:disabled {
     pointer-events: none;
     opacity: var(--tok-disabled-opacity);

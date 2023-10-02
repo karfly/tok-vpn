@@ -39,7 +39,7 @@ withDefaults(
   padding: 0.6875rem 0.75rem;
 
   text-align: left;
-  color: var(--tok-oslo);
+  color: var(--tok-background-color);
 
   font: var(--tok-font-l);
 
@@ -51,7 +51,7 @@ withDefaults(
       bottom: 0;
       width: calc(100% - 4.125rem);
       height: 1px;
-      background: var(--tok-oslo-08);
+      background: var(--tok-background-color-08);
     }
   }
 }
@@ -66,6 +66,6 @@ withDefaults(
 
 .icon {
   margin-left: 0.125rem;
-  color: var(--tok-oslo-32);
+  color: var(--tok-background-color-32);
 }
 </style>
