@@ -1,7 +1,5 @@
 <template>
   <primitive-slide v-bind="props" @on-click="onClick">
-    {{ sdk.initDataUnsafe }}
-
     <h2 v-html="i18nTitle" />
 
     <p
