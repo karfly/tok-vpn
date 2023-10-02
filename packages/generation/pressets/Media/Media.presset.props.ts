@@ -18,6 +18,8 @@ export type ImagePressetProps = {
   type: 'image';
   src: _MediaLoader<any>;
   webp?: _MediaLoader<any>;
+
+  static?: boolean;
 };
 
 export type MediaPressetProps =

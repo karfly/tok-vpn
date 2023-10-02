@@ -2,7 +2,7 @@
   <slide-presset v-bind="props" full-height>
     <div :class="$style.content">
       <div v-if="product.media" :class="$style.media">
-        <media-presset v-bind="product.media" />
+        <media-presset v-bind="product.media" static />
       </div>
 
       <div>
