@@ -9,21 +9,13 @@
       :class="$style.media"
     />
 
-    <div
-      :class="[
-        $style.content,
-        fullHeight && $style.content_fullHeight,
-        buttonText && $style.content_withButton,
-      ]"
-      :style="{ textAlign: textAlign }"
-    >
+    <div :class="$style.content" :style="{ textAlign: textAlign }">
       <slot />
-    </div>
 
-    <div v-if="buttonText" :class="$style.footer">
       <flat-button
+        v-if="buttonText"
         v-bind="buttonProps"
-        :class="$style.footer__button"
+        :class="$style.button"
         @click="onClick"
       >
         {{ i18nButton }}
@@ -106,29 +98,14 @@ const onClick = () => {
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 1rem;
-
-  &_fullHeight {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  &_withButton {
-    padding-bottom: 76px;
-  }
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0.5rem;
-  padding: 1rem;
-  box-sizing: border-box;
-  width: calc(100% - 1rem);
-
-  &__button {
-    width: 100%;
-  }
+.button {
+  margin-top: auto;
+  width: 100%;
 }
 </style>

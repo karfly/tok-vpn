@@ -5,7 +5,7 @@
     <img
       v-bind="{ ...$attrs, ...props }"
       :src="loadedSrc"
-      :class="[$style.img, allowIntersection && $style.img_intersection]"
+      :class="$style.img"
     />
   </picture>
 </template>
@@ -26,12 +26,9 @@ const loadedWebp = useLoadedImage(webp);
 
 <style lang="scss" module>
 .img {
+  position: absolute;
+  z-index: -1;
   width: inherit;
   height: inherit;
-
-  &_intersection {
-    position: absolute;
-    z-index: -1;
-  }
 }
 </style>

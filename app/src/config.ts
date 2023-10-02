@@ -17,7 +17,6 @@ export default <Config>{
             src: import('./assets/img/first.png'),
             webp: import('./assets/img/first.webp'),
             style: 'aspect-ratio: 420/465',
-            allowIntersection: true,
           },
           textAlign: 'center',
           title: '_s1.title',

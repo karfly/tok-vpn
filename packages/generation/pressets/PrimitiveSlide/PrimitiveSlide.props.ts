@@ -9,8 +9,6 @@ export type PrimitiveSlideProps = {
   media?: MediaPressetProps;
 
   textAlign?: 'left' | 'right' | 'center';
-
-  fullHeight?: boolean;
 };
 
 export type PrimitiveSlideEmits = {
