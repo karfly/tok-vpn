@@ -19,14 +19,6 @@ const onClick = () => {
 };
 
 onMounted(() => {
-  TgMainButton.hide();
-  TgMainButton.enable();
-  TgMainButton.hideProgress();
-  TgMainButton.setParams({
-    color: color?.value,
-    text_color: textColor?.value,
-  });
-
   TgMainButton.onClick(onClick);
 });
 
