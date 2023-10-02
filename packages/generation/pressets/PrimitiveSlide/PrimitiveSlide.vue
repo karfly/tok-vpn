@@ -93,7 +93,7 @@ const onClick = () => {
 .slide {
   position: relative;
   min-height: 100vh;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
