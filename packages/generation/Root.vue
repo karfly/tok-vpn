@@ -30,8 +30,6 @@ const isSupported = i18n.available.includes(tgLang);
 const lang = isSupported ? tgLang : i18n.fallbackLocale;
 
 onMounted(() => {
-  tg.expand();
-
   if (i18n.fallbackLocale !== lang) {
     i18n.load(i18n.fallbackLocale).then((messages) => {
       i18n.setMessages(i18n.fallbackLocale, messages);
@@ -46,6 +44,7 @@ onMounted(() => {
     })
     .finally(() => {
       tg.ready();
+      tg.expand();
     });
 });
 
