@@ -54,17 +54,6 @@ const showBackButton = computed(() => {
   return window.history.length > 2;
 });
 
-const calcAppHeight = () => {
-  const doc = document.documentElement;
-
-  const height = window.innerHeight;
-
-  doc.style.setProperty('--tok-vh', height * 0.01 + 'px');
-};
-
-window.addEventListener('resize', calcAppHeight);
-calcAppHeight();
-
 const setThemeAttribute = (theme: 'dark' | 'light') => {
   document.documentElement.setAttribute('data-theme', theme);
 };

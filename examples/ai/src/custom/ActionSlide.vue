@@ -106,8 +106,8 @@ const onNext = () => {
 <style lang="scss" module>
 .slide {
   position: relative;
-  min-height: calc(var(--tok-vh, 1vh) * 100);
-  height: calc(var(--tok-vh, 1vh) * 100);
+  min-height: 100vh;
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
@@ -147,7 +147,7 @@ const onNext = () => {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: calc(var(--tok-vh, 1vh) * 100);
+  height: 100vh;
   width: auto;
   z-index: -1;
   transform: translate(-50%, -50%);
