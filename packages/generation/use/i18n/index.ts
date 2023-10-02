@@ -1,5 +1,5 @@
 import { ASSETS_LOADER_TOKEN } from '@tok/generation/tokens';
-import { useTelegram } from '@tok/telegram';
+import { useTelegram } from '@tok/telegram-ui/use';
 import { inject, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 

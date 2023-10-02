@@ -12,13 +12,18 @@
     :to="to"
   >
     <slot name="icon">
-      <svg-icon v-if="icon" :name="icon" :rotate="rotate" />
+      <svg-icon v-if="icon" :name="icon" :rotate="rotate" :size="iconSize" />
     </slot>
 
     <slot v-if="!iconButton" />
 
     <slot name="iconRight">
-      <svg-icon v-if="iconRight" :name="iconRight" :rotate="rightRotate" />
+      <svg-icon
+        v-if="iconRight"
+        :name="iconRight"
+        :rotate="rightRotate"
+        :size="iconSize"
+      />
     </slot>
 
     <svg-icon v-if="loading" name="spinner" class="spinner" />

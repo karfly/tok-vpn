@@ -1,6 +1,6 @@
 import type { MediaPressetProps } from '@tok/generation/pressets/Media';
 import type { SlidePressetProps } from '@tok/generation/pressets/Slide';
-import type { TelegramPopupButton } from '@tok/telegram';
+import type { TelegramPopupButton } from '@tok/telegram-ui/use';
 
 export type PaywalPressetButtons = (TelegramPopupButton & {
   media?: MediaPressetProps;

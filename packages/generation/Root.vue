@@ -1,30 +1,40 @@
 <template>
   <root>
     <router-view />
+
+    <template #overContent>
+      <back-button :show="showBackButton" @on-click="onBackButton" />
+    </template>
   </root>
 </template>
 
 <script setup lang="ts">
-import { useTelegram, useTelegramBackButton } from '@tok/telegram';
+import { BackButton } from '@tok/telegram-ui/components/BackButton';
+import { useTelegram } from '@tok/telegram-ui/use';
+import { useTheme } from '@tok/telegram-ui/use/theme';
 import { Root } from '@tok/ui/components/Root';
-import { computed, inject, onMounted, watch } from 'vue';
+import { computed, inject, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useAutoi18nFromTelegram } from './use/i18n';
 
-const theme = inject('__theme', 'auto');
+const themeParam = inject('__theme', 'auto');
 
-useAutoi18nFromTelegram();
-
+const theme = useTheme(themeParam);
 const tg = useTelegram();
-const backButton = useTelegramBackButton();
 const router = useRouter();
+const _ = useAutoi18nFromTelegram();
+const opened = ref(false);
+
+setTimeout(() => {
+  opened.value = true;
+}, 200);
 
 onMounted(() => {
   tg.expand();
 });
 
-const backButtonCallback = () => {
+const onBackButton = () => {
   const hasHistory = window.history.length > 2;
 
   if (hasHistory) {
@@ -34,27 +44,11 @@ const backButtonCallback = () => {
   }
 };
 
-const pageQuery = computed(() => {
+const showBackButton = computed(() => {
   const value = router.currentRoute.value;
 
-  return value.query.page;
+  return !!value.query.page && value.fullPath !== '/';
 });
-
-watch(
-  [router.currentRoute, pageQuery],
-  ([value]) => {
-    const hasHistory = window.history.length > 2 && value.fullPath !== '/';
-
-    if (hasHistory) {
-      backButton.show();
-    } else {
-      backButton.hide();
-    }
-  },
-  { immediate: true }
-);
-
-backButton.registerOnClick(backButtonCallback);
 
 const calcAppHeight = () => {
   const doc = document.documentElement;
@@ -67,19 +61,9 @@ const calcAppHeight = () => {
 window.addEventListener('resize', calcAppHeight);
 calcAppHeight();
 
-const setTheme = (theme: 'light' | 'dark' | 'auto' = 'light') => {
-  if (theme !== 'auto') {
-    document.documentElement.setAttribute('data-theme', theme);
-  }
+const setThemeAttribute = (theme: 'dark' | 'light') => {
+  document.documentElement.setAttribute('data-theme', theme);
 };
 
-const onChangeTheme = () => {
-  setTheme(tg.getTheme());
-};
-
-if (theme === 'auto') {
-  tg.onEvent?.('themeChanged', onChangeTheme);
-}
-
-setTheme(theme);
+watch(theme, setThemeAttribute, { immediate: true });
 </script>

@@ -1,5 +1,84 @@
-<template><div>hello</div></template>
+<template>
+  <flat-button
+    v-if="showWebButton"
+    size="s"
+    icon="arrow-back"
+    :appearance="appearance"
+    :class="$style.button"
+    :icon-size="16"
+    @click="onClick"
+  >
+    Back
+  </flat-button>
+</template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { FlatButton } from '@tok/ui/components/FlatButton';
+import Tg from '@twa-dev/sdk';
+import { computed, ref, toRefs, watch } from 'vue';
 
-<style lang="scss" module></style>
+import {
+  BackButtonDefaultProps,
+  BackButtonEmits,
+  BackButtonProps,
+} from './BackButton.props';
+
+const props = withDefaults(
+  defineProps<BackButtonProps>(),
+  BackButtonDefaultProps
+);
+
+const emit = defineEmits<BackButtonEmits>();
+
+const { show, type } = toRefs(props);
+
+const tgBackButton = Tg.BackButton;
+const trigger = ref(NaN);
+
+const showWebButton = computed(() => {
+  if (!show.value) {
+    return false;
+  }
+
+  trigger.value;
+
+  return type.value === 'web' || !tgBackButton.isVisible;
+});
+
+const onClick = () => {
+  emit('onClick');
+};
+
+watch(
+  [show, type],
+  ([_show, _type], [_, prevType], onCleanup) => {
+    onCleanup(() => {
+      tgBackButton.offClick(onClick);
+    });
+
+    if (prevType === 'telegram' && prevType !== _type) {
+      tgBackButton.hide();
+    }
+
+    if (_type !== 'telegram') {
+      return;
+    }
+
+    if (_show) {
+      tgBackButton.show();
+      tgBackButton.onClick(onClick);
+    } else {
+      tgBackButton.hide();
+    }
+  },
+  { immediate: true }
+);
+</script>
+
+<style lang="scss" module>
+.button {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+</style>

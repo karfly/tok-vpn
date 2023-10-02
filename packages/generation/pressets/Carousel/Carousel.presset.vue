@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { DrawPresset } from '@tok/generation/pressets/DrawPresset';
 import { CAROUSEL_ACCESSOR_TOKEN } from '@tok/generation/use/carousel';
-import { useTelegram } from '@tok/telegram';
+import { useTelegram } from '@tok/telegram-ui/use';
 import { Carousel } from '@tok/ui/components/Carousel';
 import { clamp } from '@tok/ui/number';
 import { computed, provide, ref, toRefs, watch } from 'vue';

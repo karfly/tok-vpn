@@ -27,7 +27,7 @@ const props = defineProps<MediaPressetProps>();
 const { type, src, webp } = toRefs(props);
 
 const TelegramSticker = defineAsyncComponent(() =>
-  import('@tok/telegram/components/Sticker').then((m) => m.Sticker)
+  import('@tok/telegram-ui/components/Sticker').then((m) => m.Sticker)
 );
 
 const loaded = ref<any>(null);

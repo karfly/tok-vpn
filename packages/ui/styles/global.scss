@@ -67,6 +67,12 @@
   --tok-disabled-opacity: 0.56;
 
   --tok-error: #ce372d;
+
+  --tok-error-bg: rgba(244, 87, 37, 0.12);
+  --tok-error-fill: #f45725;
+
+  --tok-success-bg: rgba(74, 201, 155, 0.12);
+  --tok-success-fill: #4ac99b;
 }
 
 html {
@@ -84,6 +90,12 @@ html[data-theme='dark'] {
   --tok-stinger: #333333;
 
   --tok-error: #d65f58;
+
+  --tok-error-bg: rgba(244, 87, 37, 0.32);
+  --tok-error-fill: #ff8c67;
+
+  --tok-success-bg: rgba(74, 201, 155, 0.32);
+  --tok-success-fill: #4ac99b;
 }
 
 body {

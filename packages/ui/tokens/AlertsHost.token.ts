@@ -1,4 +1,5 @@
-import { InjectionKey, markRaw, Ref, ref } from 'vue';
+import { noop } from '@tok/ui/functions';
+import { InjectionKey, Ref, ref } from 'vue';
 
 type Component = any;
 
@@ -15,6 +16,8 @@ export type AlertHostParams<T = unknown> = {
   hasClose?: boolean;
 
   data?: T;
+
+  onClose?: () => void;
 };
 
 type InternalAlert = {
@@ -24,7 +27,7 @@ type InternalAlert = {
   type: NonNullable<AlertHostParams['type']>;
   closable: boolean;
   data: unknown;
-  alertComponent: Component;
+  onClose?: () => void;
 };
 
 const DEFAULT_CLOSE_TIMEOUT = 5000;
@@ -35,6 +38,7 @@ export const AlertHostDefaultParams: Required<AlertHostParams> = {
   data: undefined,
   label: '',
   hasClose: true,
+  onClose: noop,
 };
 
 type AlertsConnector = {
@@ -42,7 +46,6 @@ type AlertsConnector = {
   show: (
     id: string,
     content: string | Component,
-    alertComponent: Component,
     params?: AlertHostParams
   ) => void;
   close: (id: string) => void;
@@ -69,7 +72,6 @@ export function createAlertsConnector(): AlertsConnector {
   const show: AlertsConnector['show'] = (
     id,
     content,
-    alertComponent,
     params = AlertHostDefaultParams
   ) => {
     const {
@@ -77,16 +79,17 @@ export function createAlertsConnector(): AlertsConnector {
       autoClose = AlertHostDefaultParams.autoClose,
       label,
       hasClose = AlertHostDefaultParams.hasClose,
+      onClose,
     } = params;
 
     alerts.value = alerts.value.concat({
       id,
       content,
-      alertComponent: markRaw(alertComponent),
       type: type,
       label: label || '',
       closable: hasClose,
       data: params.data,
+      onClose,
     });
 
     if (autoClose) {

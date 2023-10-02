@@ -1,9 +1,15 @@
 <template>
   <slot />
 
+  <slot name="overContent" />
+
   <popups-host ref="popupsHostRef" :class="$style.host" />
 
+  <slot name="overPopups" />
+
   <alerts-host />
+
+  <slot name="overAlerts" />
 </template>
 
 <script setup lang="ts">

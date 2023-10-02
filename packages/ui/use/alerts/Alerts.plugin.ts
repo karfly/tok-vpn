@@ -1,6 +1,5 @@
+import { ALERTS_HOST_TOKEN, createAlertsConnector } from '@tok/ui/tokens';
 import { App, Plugin } from 'vue';
-
-import { ALERTS_HOST_TOKEN, createAlertsConnector } from './alertsConnector';
 
 const install = (app: App) => {
   const connector = createAlertsConnector();

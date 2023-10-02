@@ -1,7 +1,6 @@
 import { getElementId, tryOnBeforeUnmount } from '@tok/ui/functions';
+import { AlertHostParams, ALERTS_HOST_TOKEN } from '@tok/ui/tokens';
 import { Component, inject } from 'vue';
-
-import { AlertHostParams, ALERTS_HOST_TOKEN } from './alertsConnector';
 
 type Config = {
   autoCloseOnUnmount: boolean;

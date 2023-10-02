@@ -1,3 +1,4 @@
+import { SvgIconProps } from 'components/SvgIcon';
 import { RouteLocationRaw } from 'vue-router';
 
 export type FlatButtonProps = {
@@ -13,6 +14,8 @@ export type FlatButtonProps = {
   iconButton?: boolean;
   href?: string;
   to?: RouteLocationRaw;
+
+  iconSize?: SvgIconProps['size'];
 };
 
 export const FlatButtonDefaultProps = {

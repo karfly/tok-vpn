@@ -34,7 +34,7 @@ import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { NANO_STATE_TOKEN } from '@tok/generation/tokens/nanoState.token';
 import { useTranslated } from '@tok/generation/use/translated';
-import { useTelegram, useTelegramMainButton } from '@tok/telegram/use';
+import { useTelegram, useTelegramMainButton } from '@tok/telegram-ui/use';
 import { Money } from '@tok/ui/components/Money';
 import { setupMoney } from '@tok/ui/setup/setupMoney';
 import { computed, inject, onBeforeUnmount, ref, toRefs } from 'vue';

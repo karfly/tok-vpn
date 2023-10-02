@@ -1,18 +1,12 @@
 <template>
   <div data-automation-id="tok-alert" class="alertRoot" :style="style">
-    <svg-icon v-if="iconName" class="icon" :name="iconName" :size="20" />
+    <svg-icon v-if="iconName" class="icon" :name="iconName" />
 
-    <div>
-      <label v-if="label" class="label">
-        {{ label }}
-      </label>
+    <span v-if="typeof content === 'string'" class="text">
+      {{ content }}
+    </span>
 
-      <span v-if="typeof content === 'string'" class="text">
-        {{ content }}
-      </span>
-
-      <component v-else :is="content" :context="context" />
-    </div>
+    <component v-else :is="content" :context="context" />
 
     <button
       v-if="closable"
@@ -51,23 +45,31 @@ const { type } = toRefs(props);
 
 const successColors = {
   iconColor: 'var(--tok-success-fill)',
-  close: 'var(--tok-text-02)',
-  color: 'var(--tok-text-01)',
+  close: 'var(--tok-oslo-32)',
+  color: 'var(--tok-oslo)',
   background:
-    'linear-gradient(var(--tok-success-bg),var(--tok-success-bg)),var(--tok-base-01)',
+    'linear-gradient(var(--tok-success-bg),var(--tok-success-bg)),var(--tok-orlando)',
 } as const;
 
 const errorColors = {
   iconColor: 'var(--tok-error-fill)',
-  close: 'var(--tok-text-02)',
-  color: 'var(--tok-text-01)',
+  close: 'var(--tok-oslo-32)',
+  color: 'var(--tok-oslo)',
   background:
-    'linear-gradient(var(--tok-error-bg),var(--tok-error-bg)),var(--tok-base-01)',
+    'linear-gradient(var(--tok-error-bg),var(--tok-error-bg)),var(--tok-orlando)',
+} as const;
+
+const telegramColors = {
+  iconColor: 'var(--tok-error-fill)',
+  close: 'var(--tok-orlando-32)',
+  color: 'var(--tok-orlando)',
+  background: 'var(--tok-oslo-64)',
 } as const;
 
 const colors = {
   success: successColors,
   error: errorColors,
+  telegram: telegramColors,
 } as any;
 
 const iconName = computed(() => {
@@ -106,14 +108,14 @@ const context = {
 .alertRoot {
   position: relative;
 
-  display: flex;
+  display: inline-flex;
   align-items: center;
 
   width: 100%;
 
-  padding: 16px 32px;
-  padding-left: 16px;
-  border-radius: 12px;
+  padding: 1rem 2rem;
+  padding-left: 1rem;
+  border-radius: 0.75rem;
   color: var(--tok-alert-color);
   background: var(--tok-alert-background);
 }
@@ -127,15 +129,15 @@ const context = {
 
 .close {
   @include clearbutton;
-  @include strict-size(32px, 32px);
+  @include strict-size(2rem, 2rem);
   @include transition(color);
 
   position: absolute;
   right: 0;
   top: 0;
 
-  padding: 4px;
-  border-radius: 12px;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
 
   cursor: pointer;
 
@@ -146,19 +148,9 @@ const context = {
   }
 }
 
-.label {
-  display: block;
-
-  line-height: 1.25rem;
-  font-weight: bold;
-
-  margin-bottom: 4px;
-}
-
 .text {
+  font: var(--tok-font-m);
   word-wrap: break-word;
-  font-size: 0.8125rem;
-  line-height: 1.25rem;
   white-space: pre-line;
 }
 </style>

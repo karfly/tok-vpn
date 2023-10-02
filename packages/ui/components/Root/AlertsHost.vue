@@ -18,7 +18,7 @@
           :data="item.data"
           :closable="item.closable"
           :label="item.label"
-          @close="close(item.id)"
+          @close="close(item.id, item.onClose)"
         />
       </transition-group>
     </div>
@@ -40,8 +40,9 @@ const position = 'top';
 
 const alerts = computed(() => instance?.alerts.value || []);
 
-const close = (id: string) => {
+const close = (id: string, onClose?: () => void) => {
   instance?.close(id);
+  onClose?.();
 };
 </script>
 
