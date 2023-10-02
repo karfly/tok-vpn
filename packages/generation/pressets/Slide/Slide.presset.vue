@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { PrimitiveSlide } from '@tok/generation/pressets/PrimitiveSlide';
 import { useCarousel } from '@tok/generation/use/carousel';
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { toRefs } from 'vue';
 
 import {

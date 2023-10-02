@@ -35,7 +35,7 @@ import { Link } from '@tok/generation/pressets/Link';
 import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { NANO_STATE_TOKEN } from '@tok/generation/tokens/nanoState.token';
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Money } from '@tok/ui/components/Money';

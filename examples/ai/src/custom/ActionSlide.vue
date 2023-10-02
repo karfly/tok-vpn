@@ -44,7 +44,7 @@ import {
   MediaPressetProps,
 } from '@tok/generation/pressets/Media';
 import { useCarousel } from '@tok/generation/use/carousel';
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
 import { computed, ref, toRefs } from 'vue';
 

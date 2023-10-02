@@ -9,29 +9,45 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '@tok/i18n';
 import { BackButton } from '@tok/telegram-ui/components/BackButton';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { useTheme } from '@tok/telegram-ui/use/theme';
 import { Root } from '@tok/ui/components/Root';
-import { computed, inject, onMounted, ref, watch } from 'vue';
+import { computed, inject, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-
-import { useAutoi18nFromTelegram } from './use/i18n';
 
 const themeParam = inject('__theme', 'auto');
 
 const theme = useTheme(themeParam);
 const tg = useTelegramSdk();
 const router = useRouter();
-const _ = useAutoi18nFromTelegram();
-const opened = ref(false);
+const i18n = useI18n();
 
-setTimeout(() => {
-  opened.value = true;
-}, 200);
+const tgLang = tg.initDataUnsafe.user?.language_code || i18n.fallbackLocale;
+const isSupported = i18n.available.includes(tgLang);
+
+const lang = isSupported ? tgLang : i18n.fallbackLocale;
+
+i18n.locale.value = lang;
 
 onMounted(() => {
   tg.expand();
+
+  if (i18n.fallbackLocale !== lang) {
+    i18n.load(i18n.fallbackLocale).then((messages) => {
+      i18n.setMessages(i18n.fallbackLocale, messages);
+    });
+  }
+
+  i18n
+    .load(lang)
+    .then((messages) => {
+      i18n.setMessages(lang, messages);
+    })
+    .finally(() => {
+      tg.ready();
+    });
 });
 
 const onBackButton = () => {

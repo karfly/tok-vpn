@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 // fix
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 import { Portal } from '@tok/ui/components/Portal';
 import { FocustrapDirective as vFocustrap } from '@tok/ui/directives/focustrap';

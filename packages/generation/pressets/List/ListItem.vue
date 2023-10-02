@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/pressets/Media';
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { computed, toRefs } from 'vue';
 
 import { ListPressetProps } from './List.presset.props';

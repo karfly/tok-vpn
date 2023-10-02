@@ -38,7 +38,7 @@
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { NANO_STATE_TOKEN } from '@tok/generation/tokens';
 import { useCarousel } from '@tok/generation/use/carousel';
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { CheckboxBlock } from '@tok/ui/components/CheckboxBlock';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 import { InputText } from '@tok/ui/components/InputText';

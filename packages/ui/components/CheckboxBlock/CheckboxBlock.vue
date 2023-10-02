@@ -7,7 +7,7 @@
     :data-state="state"
   >
     <slot>
-      <span>{{ placeholder }}</span>
+      <span>{{ translatedPlaceholder }}</span>
     </slot>
 
     <primitive-checkbox class="tok-checkbox-block-check" :value="modelValue">
@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import { useTranslated } from '@tok/i18n';
 import { getElementId } from '@tok/ui/functions';
 import { computed, toRefs } from 'vue';
 
@@ -41,7 +42,9 @@ const props = withDefaults(
 
 const emit = defineEmits<CheckboxBlockEmits>();
 
-const { invalid, disabled, modelValue } = toRefs(props);
+const { invalid, disabled, modelValue, placeholder } = toRefs(props);
+
+const translatedPlaceholder = useTranslated(placeholder);
 
 const id = getElementId();
 

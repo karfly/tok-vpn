@@ -15,7 +15,7 @@ import {
   MediaPresset,
   MediaPressetProps,
 } from '@tok/generation/pressets/Media';
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { RippleDirective as vRipple } from '@tok/ui/directives/ripple';
 import { toRefs } from 'vue';

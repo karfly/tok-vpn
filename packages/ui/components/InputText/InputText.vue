@@ -10,7 +10,7 @@
       <input
         :id="id"
         class="native"
-        :placeholder="placeholder"
+        :placeholder="translatedPlaceholder"
         :type="type"
         :name="name"
         :autocomplete="autocomplete"
@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts" generic="T">
+import { useTranslated } from '@tok/i18n';
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { getElementId } from '@tok/ui/functions';
 import { useFocused } from '@tok/ui/use/focused';
@@ -57,6 +58,7 @@ const { placeholder, invalid, disabled } = toRefs(props);
 
 const nativeRef = ref<HTMLInputElement | null>(null);
 
+const translatedPlaceholder = useTranslated(placeholder);
 const focused = useFocused(nativeRef);
 const id = getElementId();
 

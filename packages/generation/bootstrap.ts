@@ -1,16 +1,14 @@
 import '@tok/ui/styles/global.scss';
 
 import {
-  ASSETS_LOADER_TOKEN,
-  AssetsLoader,
   defaultPressetsOptions,
   NANO_STATE_TOKEN,
   PressetOverrider,
   PRESSETS_OVERRIDER_TOKEN,
 } from '@tok/generation/tokens';
+import { TokI18nPlugin } from '@tok/i18n';
 import { AlertsPlugin } from '@tok/ui/use/alerts';
 import { createApp, Plugin, ref } from 'vue';
-import { createI18n } from 'vue-i18n';
 import {
   createRouter,
   createWebHistory,
@@ -19,12 +17,6 @@ import {
 } from 'vue-router';
 
 type _App = Parameters<typeof createApp>[0];
-
-const assetsLoaderPlugin: Plugin<AssetsLoader> = {
-  install(app, options) {
-    app.provide(ASSETS_LOADER_TOKEN, options);
-  },
-};
 
 const pressetsPlugin: Plugin<PressetOverrider> = {
   install(app, options) {
@@ -57,18 +49,13 @@ const themePlugin: Plugin = {
 };
 
 export function bootstrapJson(App: _App, json: any) {
-  const locale = json.locale || {};
-  const fallback = locale.default as string;
+  const { default: fallback, ...asyncLocales } = ((json.locale as {}) ||
+    {}) as any;
 
-  // todo: change to our i18n which support image translation
-  const i18n = createI18n({
-    locale: fallback,
-    fallbackLocale: fallback,
-    legacy: false,
-    fallbackWarn: false,
-    missingWarn: false,
-    silentTranslationWarn: false,
-  });
+  const i18nOptions = {
+    default: fallback || 'en',
+    asyncLocales,
+  };
 
   const pages = (json.pages as any[]).map((config, index) => {
     return {
@@ -100,10 +87,7 @@ export function bootstrapJson(App: _App, json: any) {
   return createApp(App)
     .use(AlertsPlugin)
     .use(router)
-    .use(i18n)
-    .use(assetsLoaderPlugin, {
-      locale: locale,
-    })
+    .use(TokI18nPlugin, i18nOptions)
     .use(themePlugin, json.theme || 'auto')
     .use(nanoStatePlugin)
     .use(pressetsPlugin, json.override || {})

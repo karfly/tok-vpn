@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/generation/use/translated';
+import { useTranslated } from '@tok/i18n';
 import { toRefs } from 'vue';
 
 import { LinkDefaultProps, LinkProps } from './Link.props';

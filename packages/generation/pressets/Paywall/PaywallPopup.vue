@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import type { TelegramPopupButton } from '@tok/telegram-ui/use';
 import { Popup } from '@tok/ui/components/Popup';
 
 // todo: move to telegram-ui
@@ -30,7 +29,7 @@ withDefaults(
     modelValue: boolean;
     title: string;
     message?: string;
-    buttons: TelegramPopupButton[];
+    buttons: any[];
   }>(),
   { title: '', message: '', buttons: () => [] }
 );
