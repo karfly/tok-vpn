@@ -71,9 +71,8 @@ export default <Config>{
       path: '/paywall',
       media: {
         type: 'image',
-        src: '/fifth.png',
-        webp: '/fifth.webp',
-        style: 'aspect-ratio: 420/340',
+        src: import('./assets/img/paywall.png'),
+        style: 'aspect-ratio: 390/251',
       },
       title: '_paywall.title',
       description: '_paywall.description',
