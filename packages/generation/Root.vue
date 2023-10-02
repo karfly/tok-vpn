@@ -47,7 +47,11 @@ const onBackButton = () => {
 const showBackButton = computed(() => {
   const value = router.currentRoute.value;
 
-  return !!value.query.page && value.fullPath !== '/';
+  if (value.fullPath === '/') {
+    return !!value.query.page;
+  }
+
+  return window.history.length > 2;
 });
 
 const calcAppHeight = () => {
