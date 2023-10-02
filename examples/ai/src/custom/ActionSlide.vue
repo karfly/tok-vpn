@@ -108,6 +108,7 @@ const onNext = () => {
   position: relative;
   min-height: 100vh;
   height: 100%;
+  max-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
