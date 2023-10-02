@@ -1,8 +1,8 @@
 <template>
-  <slide-presset v-bind="props" full-height>
+  <slide-presset v-bind="props">
     <div :class="$style.content">
       <div v-if="product.media" :class="$style.media">
-        <media-presset v-bind="product.media" static />
+        <media-presset v-bind="product.media" />
       </div>
 
       <div>

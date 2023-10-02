@@ -1,5 +1,5 @@
 <template>
-  <slide-presset v-bind="props" full-height extends="slide" :button="null">
+  <slide-presset v-bind="props" extends="slide" :button="null">
     <form :class="$style.form" @submit.prevent="onClick">
       <div v-for="control in form" :key="control.id" :class="$style.control">
         <checkbox-block
