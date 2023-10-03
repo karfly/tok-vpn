@@ -112,7 +112,7 @@ const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
 ) => {
   if (!id) {
-    alertsService.show('You have cancelled this order', {
+    alertsService.show('You have canceled the payment selection', {
       type: 'error',
     });
 

@@ -44,5 +44,6 @@
       "telegram_payments": "Оплата картой",
       "wallet_pay": "Wallet Pay"
     }
-  }
+  },
+  "You have canceled the payment selection": "Вы отменили выбор оплаты"
 }
