@@ -204,11 +204,19 @@ export default <Config>{
                 id: 'telegram_payments',
                 text: '_paywall.popup.telegram_payments',
                 type: 'default',
+                media: {
+                  type: 'icon',
+                  src: 'bank-card',
+                },
               },
               {
                 id: 'wallet_pay',
                 text: '_paywall.popup.wallet_pay',
                 type: 'default',
+                media: {
+                  type: 'icon',
+                  src: 'wallet-pay',
+                },
               },
             ],
           },
