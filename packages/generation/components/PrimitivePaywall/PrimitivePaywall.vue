@@ -36,6 +36,7 @@ import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
+import { useAlerts } from '@tok/ui/use/alerts';
 import { computed, inject, ref, toRefs } from 'vue';
 
 import {
@@ -53,6 +54,7 @@ const { mainButtonText, popup, selectedProduct } = toRefs(props);
 const i18n = useI18n();
 const tg = useTelegramSdk();
 const nanoState = inject(NANO_STATE_TOKEN, null);
+const alertsService = useAlerts();
 
 const popupButtons = computed(() => popup.value.buttons);
 const popupTitle = computed(() => popup.value.title);
@@ -97,6 +99,10 @@ const onSubmit = () => {
 const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
 ) => {
+  alertsService.show(
+    `id: ${id}, payload: ${nanoState?.state?.value}, product: ${selectedProduct.value}`
+  );
+
   if (!id) {
     return;
   }
