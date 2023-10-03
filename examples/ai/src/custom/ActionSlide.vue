@@ -16,13 +16,9 @@
         shape="rounded"
         :appearance="applied ? 'outline' : 'primary'"
         :class="$style.footer__button"
+        :icon="applied ? 'check' : 'wind'"
         @click="onToggle"
       >
-        <template #icon>
-          <check-icon v-if="applied" width="1.5em" height="1.5em" />
-          <wind-icon v-else width="1.5em" height="1.5em" />
-        </template>
-
         {{ translatedButton }}
       </flat-button>
 
@@ -46,10 +42,8 @@ import {
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useTranslated } from '@tok/i18n';
 import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
-import { computed, ref, toRefs } from 'vue';
-
-import checkIcon from './check.svg';
-import windIcon from './wind.svg';
+import { CUSTOM_ICONS_TOKEN } from '@tok/ui/tokens';
+import { computed, defineAsyncComponent, provide, ref, toRefs } from 'vue';
 
 const props = defineProps<{
   title: string;
@@ -58,6 +52,11 @@ const props = defineProps<{
   nextButton: string | FlatButtonProps;
   media: [MediaPressetProps, MediaPressetProps];
 }>();
+
+provide(CUSTOM_ICONS_TOKEN, {
+  check: defineAsyncComponent(() => import('./check.svg')),
+  wind: defineAsyncComponent(() => import('./wind.svg')),
+});
 
 const { title, actionButton, nextButton, description, media } = toRefs(props);
 
