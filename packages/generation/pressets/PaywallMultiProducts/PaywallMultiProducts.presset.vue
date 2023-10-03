@@ -1,20 +1,18 @@
 <template>
   <slide-presset v-bind="props" extends="slide" :button="null">
-    <div :class="$style.content">
-      <div v-if="product.media" :class="$style.media">
-        <media-presset v-bind="product.media" />
+    <form :class="$style.form" :style="productWidthStyle" @submit.prevent>
+      <div
+        v-for="item in translatedProducts"
+        :key="item.id"
+        :class="$style.product"
+      >
+        <product
+          v-bind="item"
+          :active="activeId === item.id"
+          @on-select="onProductSelect"
+        />
       </div>
-
-      <div>
-        <div :class="$style.title">
-          <h4 v-html="translatedTitle" />
-
-          <money :value="product.price" />
-        </div>
-
-        <p v-html="translatedDescription" :class="$style.description" />
-      </div>
-    </div>
+    </form>
 
     <div :class="$style.links">
       <Link v-for="link in links" v-bind="link" :key="link.text" />
@@ -44,42 +42,35 @@
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
-import { NANO_STATE_TOKEN } from '@tok/generation/tokens/nanoState.token';
+import { NANO_STATE_TOKEN } from '@tok/generation/tokens';
 import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
-import { Money } from '@tok/ui/components/Money';
-import { setupMoney } from '@tok/ui/setup/setupMoney';
 import { computed, inject, ref, toRefs } from 'vue';
 
 import {
-  PaywallPressetDefaultProps,
-  PaywallPressetProps,
-} from './PaywallPresset.props';
+  PaywallMultiProductsPressetDefaultProps,
+  PaywallMultiProductsPressetProps,
+} from './PaywallMultiProducts.presset.props';
+import Product from './Product.vue';
 
 const props = withDefaults(
-  defineProps<PaywallPressetProps>(),
-  PaywallPressetDefaultProps
+  defineProps<PaywallMultiProductsPressetProps>(),
+  PaywallMultiProductsPressetDefaultProps
 );
 
-const { product, mainButtonText, popup } = toRefs(props);
+const { products, mainButtonText, popup } = toRefs(props);
 
-// todo
-setupMoney({
-  currency: product.value.currency,
-});
+const i18n = useI18n();
+const tg = useTelegramSdk();
+const nanoState = inject(NANO_STATE_TOKEN, null);
 
-const title = computed(() => product.value.title);
-const description = computed(() => product.value.description);
 const popupButtons = computed(() => popup.value.buttons);
 const popupTitle = computed(() => popup.value.title);
 const popupMessage = computed(() => popup.value.message || '');
 
-const i18n = useI18n();
-const translatedTitle = useTranslated(title);
-const translatedDescription = useTranslated(description);
 const translatedMainButton = useTranslated(mainButtonText);
 const translatedPopupTitle = useTranslated(popupTitle);
 const translatedPopupMessage = useTranslated(popupMessage);
@@ -110,10 +101,75 @@ const translatedPopupButtons = computed(() => {
   });
 });
 
-const tg = useTelegramSdk();
-const nanoState = inject(NANO_STATE_TOKEN, null);
-
 const popupOpened = ref(false);
+
+const onSubmit = () => {
+  popupOpened.value = true;
+};
+
+const activeId = ref(products.value[0]?.id || null);
+
+const translatedProducts = computed(() => {
+  return [...products.value].map((item) => {
+    const locale = i18n.locale.value;
+
+    const messages = (i18n.messages.value[locale] || {}) as Record<
+      string,
+      unknown
+    >;
+    // todo type
+    const defaultMessages = (i18n.messages.value[i18n.fallbackLocale] ||
+      {}) as Record<string, unknown>;
+
+    // todo: find the better way
+    if (item.bestText) {
+      item.bestText =
+        tokTranslate(messages, item.bestText) ??
+        tokTranslate(defaultMessages, item.bestText) ??
+        item.bestText;
+    }
+
+    if (item.title) {
+      item.title =
+        tokTranslate(messages, item.title) ??
+        tokTranslate(defaultMessages, item.title) ??
+        item.title;
+    }
+
+    if (item.description) {
+      item.description =
+        tokTranslate(messages, item.description) ??
+        tokTranslate(defaultMessages, item.description) ??
+        item.description;
+    }
+
+    return item;
+  });
+});
+
+const productToSend = computed(() => {
+  const active = activeId.value;
+
+  return translatedProducts.value.find(({ id }) => id === active);
+});
+
+const onProductSelect = (id: string) => {
+  activeId.value = id;
+};
+
+const productWidthStyle = computed(() => {
+  const length = products.value.length;
+
+  if (length <= 3) {
+    return {
+      '--tok-product-width': `calc(100% / ${length})`,
+    };
+  }
+
+  return {
+    '--tok-product-width': `calc(100% / 2 - 10%)`,
+  };
+});
 
 const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
@@ -124,13 +180,11 @@ const onSelectOption = (
 
   const payload = nanoState ? nanoState.state.value : {};
 
-  const { media: _, ..._product } = product.value;
+  const _product = productToSend.value || {};
 
   const dataProduct = {
     ..._product,
     payment_method: id,
-    title: translatedTitle.value,
-    description: translatedDescription.value,
   };
 
   const data = JSON.stringify({
@@ -140,40 +194,26 @@ const onSelectOption = (
 
   tg.sendData(data);
 };
-
-const onSubmit = () => {
-  popupOpened.value = true;
-};
 </script>
 
 <style lang="scss" module>
-.content {
+.form {
+  @include hide-scroll;
+
   display: flex;
+  overflow-x: auto;
 
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  text-align: left;
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-
-  box-shadow: 0px 4px 24px 0px var(--tok-text-color-08);
+  padding-top: 1.25rem;
+  margin: 0 -0.3125rem;
 }
 
-.media {
-  color: var(--tok-primary);
+.product {
+  min-width: var(--tok-product-width);
+  max-width: var(--tok-product-width);
+  flex-basis: var(--tok-product-width);
 
-  margin-right: 0.75rem;
-}
-
-.title {
-  display: flex;
-  justify-content: space-between;
-
-  padding-top: 0.5rem;
-  margin-bottom: 0.25rem;
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid var(--tok-text-color-08);
-  font: var(--tok-font-h4);
+  padding: 0 0.3125rem;
+  box-sizing: border-box;
 }
 
 .links {
@@ -183,14 +223,5 @@ const onSubmit = () => {
   gap: 1rem;
 
   margin-top: auto;
-}
-
-.description {
-  font: var(--tok-font-xs);
-}
-
-.icon {
-  margin-right: 0.75rem;
-  color: var(--tok-background-color);
 }
 </style>

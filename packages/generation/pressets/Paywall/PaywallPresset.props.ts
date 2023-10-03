@@ -6,8 +6,11 @@ export type PaywalPressetButtons = (PopupButton & {
   media?: MediaPressetProps;
 })[];
 
-export type PaywallPressetProps = Omit<SlidePressetProps, 'button'> & {
-  button?: null;
+export type PaywallPressetProps = Omit<
+  SlidePressetProps,
+  'button' | 'extends'
+> & {
+  extends?: 'paywall';
 
   links: { text: string; href: string }[];
 
@@ -28,7 +31,7 @@ export type PaywallPressetProps = Omit<SlidePressetProps, 'button'> & {
   };
 };
 
-const defaultPopup = {
+export const defaultPopup = {
   title: 'Choose the payment method',
   buttons: [
     {
@@ -55,7 +58,7 @@ const defaultPopup = {
 };
 
 export const PaywallPressetDefaultProps = {
-  button: null,
+  extends: 'paywall',
   links: () => [],
   mainButtonText: 'Continue',
   popup: () => defaultPopup,

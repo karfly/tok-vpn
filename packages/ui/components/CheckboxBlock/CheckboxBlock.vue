@@ -7,7 +7,7 @@
     :data-state="state"
   >
     <slot>
-      <span>{{ translatedPlaceholder }}</span>
+      <span v-html="translatedPlaceholder" />
     </slot>
 
     <primitive-checkbox class="tok-checkbox-block-check" :value="modelValue">

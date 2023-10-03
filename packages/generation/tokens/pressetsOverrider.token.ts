@@ -29,6 +29,11 @@ export const defaultPressetsOptions: PressetOverrider = {
   paywall: defineAsyncComponent(() =>
     import('@tok/generation/pressets/Paywall').then((m) => m.PaywallPresset)
   ),
+  paywallMultiProducts: defineAsyncComponent(() =>
+    import('@tok/generation/pressets/PaywallMultiProducts').then(
+      (m) => m.PaywallMultiProductsPresset
+    )
+  ),
 };
 
 export const PRESSETS_OVERRIDER_TOKEN =
