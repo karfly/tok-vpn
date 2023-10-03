@@ -102,7 +102,7 @@ const mainButtonComputedText = computed(() => {
   return _text;
 });
 
-const popupOpened = ref(true);
+const popupOpened = ref(false);
 
 const onSubmit = () => {
   popupOpened.value = true;
@@ -148,7 +148,7 @@ const onSelectOption = (
 }
 
 .media {
-  color: var(--tok-white);
+  color: var(--tok-background-color);
 
   margin-right: 0.75rem;
 }

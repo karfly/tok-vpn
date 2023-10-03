@@ -1,8 +1,8 @@
 <template>
-  <div data-automation-id="tok-alert" class="alertRoot" :style="style">
-    <svg-icon v-if="iconName" class="icon" :name="iconName" />
+  <div class="tok-alert" :data-type="type">
+    <svg-icon v-if="iconName" class="tok-alert-icon" :name="iconName" />
 
-    <span v-if="typeof content === 'string'" class="text">
+    <span v-if="typeof content === 'string'" class="tok-alert-text">
       {{ content }}
     </span>
 
@@ -12,7 +12,7 @@
       v-if="closable"
       aria-label="close alert"
       title="close alert"
-      class="close"
+      class="tok-alert-close"
       @click="onClose"
     >
       <svg-icon name="close" />
@@ -43,35 +43,6 @@ defineSlots<AlertSlots>();
 
 const { type } = toRefs(props);
 
-const successColors = {
-  iconColor: 'var(--tok-success-fill)',
-  close: 'var(--tok-text-color-32)',
-  color: 'var(--tok-text-color)',
-  background:
-    'linear-gradient(var(--tok-success-bg),var(--tok-success-bg)),var(--tok-background-color)',
-} as const;
-
-const errorColors = {
-  iconColor: 'var(--tok-error-fill)',
-  close: 'var(--tok-text-color-32)',
-  color: 'var(--tok-text-color)',
-  background:
-    'linear-gradient(var(--tok-error-bg),var(--tok-error-bg)),var(--tok-background-color)',
-} as const;
-
-const telegramColors = {
-  iconColor: 'var(--tok-error-fill)',
-  close: 'var(--tok-background-color-32)',
-  color: 'var(--tok-background-color)',
-  background: 'var(--tok-text-color-64)',
-} as const;
-
-const colors = {
-  success: successColors,
-  error: errorColors,
-  telegram: telegramColors,
-} as any;
-
 const iconName = computed(() => {
   const value = type.value;
 
@@ -80,18 +51,6 @@ const iconName = computed(() => {
     : value === 'error'
     ? 'warning-fill'
     : null;
-});
-
-const style = computed(() => {
-  const value = type.value;
-  const { background, color, close, iconColor } = colors[value];
-
-  return {
-    '--tok-alert-background': background,
-    '--tok-alert-icon-color': iconColor,
-    '--tok-alert-color': color,
-    '--tok-alert-close': close,
-  };
 });
 
 const onClose = () => {
@@ -105,7 +64,7 @@ const context = {
 </script>
 
 <style lang="scss" scoped>
-.alertRoot {
+.tok-alert {
   position: relative;
 
   display: inline-flex;
@@ -118,16 +77,41 @@ const context = {
   border-radius: 0.75rem;
   color: var(--tok-alert-color);
   background: var(--tok-alert-background);
+
+  &[data-type='success'] {
+    color: var(--tok-text-color);
+    background: linear-gradient(var(--tok-success-bg), var(--tok-success-bg)),
+      var(--tok-background-color);
+  }
+
+  &[data-type='error'] {
+    color: var(--tok-text-color);
+    background: linear-gradient(var(--tok-error-bg), var(--tok-error-bg)),
+      var(--tok-background-color);
+  }
+
+  &[data-type='telegram'] {
+    color: var(--tok-background-color);
+    background: var(--tok-text-color-64);
+  }
 }
 
-.icon {
+.tok-alert-icon {
   align-self: flex-start;
 
   color: var(--tok-alert-icon-color);
   margin-right: 0.5em;
+
+  .tok-alert[data-type='success'] & {
+    color: var(--tok-success-fill);
+  }
+
+  .tok-alert[data-type='error'] & {
+    color: var(--tok-error-fill);
+  }
 }
 
-.close {
+.tok-alert-close {
   @include clearbutton;
   @include strict-size(2rem, 2rem);
   @include transition(color);
@@ -141,14 +125,18 @@ const context = {
 
   cursor: pointer;
 
-  color: var(--tok-alert-close);
+  color: var(--tok-text-color-32);
+
+  .tok-alert[data-type='telegram'] & {
+    color: var(--tok-background-color-32);
+  }
 
   &:hover {
     opacity: 0.8;
   }
 }
 
-.text {
+.tok-alert-text {
   font: var(--tok-font-m);
   word-wrap: break-word;
   white-space: pre-line;

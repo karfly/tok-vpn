@@ -5,8 +5,6 @@ export type AlertProps<T = unknown> = {
 
   content?: string | Component;
 
-  label?: string;
-
   closable?: boolean;
 
   data?: T;

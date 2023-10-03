@@ -88,3 +88,22 @@ html[data-theme='dark'] {
   // --tok-success-bg: #4ac99b52;
   // --tok-success-fill: #4ac99b;
 }
+
+// .tok-alert {
+//   &[data-type='error'] {
+//     background: red !important;
+//     color: white !important;
+//   }
+
+//   &-icon {
+//     .tok-alert[data-type='error'] & {
+//       color: white !important;
+//     }
+//   }
+
+//   &-close {
+//     .tok-alert[data-type='error'] & {
+//       color: white !important;
+//     }
+//   }
+// }

@@ -7,8 +7,6 @@ export type AlertHostParams<T = unknown> = {
   // default: success
   type?: 'success' | 'error' | string;
 
-  label?: string;
-
   // default: true
   autoClose?: boolean | number;
 
@@ -23,7 +21,6 @@ export type AlertHostParams<T = unknown> = {
 type InternalAlert = {
   id: string;
   content: Component | string;
-  label: string;
   type: NonNullable<AlertHostParams['type']>;
   closable: boolean;
   data: unknown;
@@ -36,7 +33,6 @@ export const AlertHostDefaultParams: Required<AlertHostParams> = {
   type: 'success',
   autoClose: 5000,
   data: undefined,
-  label: '',
   hasClose: true,
   onClose: noop,
 };
@@ -77,7 +73,6 @@ export function createAlertsConnector(): AlertsConnector {
     const {
       type = AlertHostDefaultParams.type,
       autoClose = AlertHostDefaultParams.autoClose,
-      label,
       hasClose = AlertHostDefaultParams.hasClose,
       onClose,
     } = params;
@@ -86,7 +81,6 @@ export function createAlertsConnector(): AlertsConnector {
       id,
       content,
       type: type,
-      label: label || '',
       closable: hasClose,
       data: params.data,
       onClose,

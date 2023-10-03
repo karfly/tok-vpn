@@ -31,7 +31,7 @@ export const defaultPopup = {
       id: 'telegram_payments',
       media: {
         type: 'icon' as const,
-        src: 'card',
+        src: 'bank-card',
         size: 32,
       },
       type: 'default' as const,
@@ -40,10 +40,9 @@ export const defaultPopup = {
     {
       id: 'wallet_pay',
       media: {
-        type: 'image' as const,
-        src: import('./assets/walletPay.png'),
-        webp: import('./assets/walletPay.webp'),
-        style: 'width: 32px; height: 32px',
+        type: 'icon' as const,
+        src: 'wallet-pay',
+        size: 32,
       },
       type: 'default' as const,
       text: 'Wallet pay',

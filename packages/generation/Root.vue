@@ -80,11 +80,11 @@ const onBackButton = () => {
 const showBackButton = computed(() => {
   const value = router.currentRoute.value;
 
-  if (value.fullPath === '/') {
+  if (value.path === '/') {
     return !!value.query.page;
   }
 
-  return window.history.length > 2;
+  return true;
 });
 
 const setThemeAttribute = (theme: 'dark' | 'light') => {

@@ -17,7 +17,6 @@
           :content="item.content"
           :data="item.data"
           :closable="item.closable"
-          :label="item.label"
           @close="close(item.id, item.onClose)"
         />
       </transition-group>

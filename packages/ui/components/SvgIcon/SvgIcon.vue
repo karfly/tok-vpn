@@ -1,9 +1,5 @@
 <template>
-  <span
-    data-automation-id="tok-svg-icon"
-    :class="[$style.icon, rotate && $style.icon_rotate]"
-    :style="style"
-  >
+  <span :class="[$style.icon, rotate && $style.icon_rotate]" :style="style">
     <slot>
       <component
         :is="icon"
