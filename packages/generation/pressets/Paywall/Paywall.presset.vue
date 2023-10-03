@@ -5,7 +5,7 @@
         <media-presset v-bind="product.media" />
       </div>
 
-      <div>
+      <div :class="$style.container">
         <div :class="$style.title">
           <h4 v-html="translatedTitle" />
 
@@ -73,6 +73,10 @@ const selectedProduct = computed(() => {
   margin-bottom: 1.25rem;
 
   box-shadow: 0px 4px 24px 0px var(--tok-text-color-08);
+}
+
+.container {
+  width: 100%;
 }
 
 .media {

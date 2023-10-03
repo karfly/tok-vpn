@@ -14,6 +14,7 @@ export default <Config>{
     {
       slides: [
         {
+          extends: 'slide',
           title: 'Transform into a stylish look!',
           description: "See how you'd look in a different outfit",
           actionButton: ['Apply beauty filter', 'Applied'],
@@ -30,6 +31,7 @@ export default <Config>{
           ],
         },
         {
+          extends: 'slide',
           title: 'Ready for an important meeting?',
           description: 'Find the perfect business attire',
           actionButton: ['Apply beauty filter', 'Applied'],
@@ -46,6 +48,7 @@ export default <Config>{
           ],
         },
         {
+          extends: 'slide',
           title: 'Planning a special date?',
           description: 'Choose an outfit that will impress!',
           actionButton: ['Apply beauty filter', 'Applied'],

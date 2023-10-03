@@ -5,8 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
-import { computed, defineAsyncComponent, ref, toRefs, watch } from 'vue';
+import { defineAsyncComponent, ref, toRefs, watch } from 'vue';
 
 import { _MediaLoader, StickerPressetProps } from './Media.presset.props';
 
@@ -15,17 +14,11 @@ const TelegramSticker = defineAsyncComponent(() =>
   import('@tok/telegram-ui/components/Sticker').then((m) => m.Sticker)
 );
 
-const props = defineProps<StickerPressetProps>();
-
-const { src } = toRefs(props);
-
-const probablyTranslated = computed(() => {
-  const value = src?.value;
-
-  return value && typeof value === 'string' ? value : '';
+const props = withDefaults(defineProps<StickerPressetProps>(), {
+  src: null,
 });
 
-const translatedSrc = useTranslated(probablyTranslated);
+const { src } = toRefs(props);
 
 const loaded = ref<TelegramStickerJson | undefined>();
 
@@ -36,11 +29,11 @@ const loadStickerJson = (loader: _MediaLoader<typeof import('*.tgs')>) => {
 };
 
 watch(
-  translatedSrc,
+  src,
   (value) => {
     if (value && typeof value === 'string') {
       console.error(
-        'Sticker Preset: Even after translating the sticker src string, the issue persists. Please fix it'
+        'Sticker Preset: The sticker src is string. You need to use import like that: `import("./assets/.tgs")`. Otherwise it won\'t loaded'
       );
 
       return;

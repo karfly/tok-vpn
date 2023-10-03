@@ -1,12 +1,15 @@
+import { BasePaywallPresset } from '@tok/generation/pressets/BasePaywall';
+import { BaseSlidePresset } from '@tok/generation/pressets/BaseSlide';
 import { CarouselPresset } from '@tok/generation/pressets/Carousel';
 import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { defineAsyncComponent, InjectionKey } from 'vue';
 
 type DefinedPressets =
-  | 'carousel'
   | 'form'
   | 'base'
+  | 'base_slide'
+  | 'base_paywall'
   | 'slide'
   | 'list'
   | 'paywall';
@@ -20,6 +23,8 @@ export const defaultPressetsOptions: PressetOverrider = {
   base: CarouselPresset,
   media: MediaPresset,
   slide: SlidePresset,
+  base_slide: BaseSlidePresset,
+  base_paywall: BasePaywallPresset,
   form: defineAsyncComponent(() =>
     import('@tok/generation/pressets/Form').then((m) => m.FormPresset)
   ),

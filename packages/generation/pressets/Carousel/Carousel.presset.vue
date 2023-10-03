@@ -8,7 +8,7 @@
     <draw-presset
       v-bind="item"
       :active="activeSlide === index"
-      :extends="item.extends || 'slide'"
+      :extends="item.extends || 'base_slide'"
     />
   </carousel>
 </template>

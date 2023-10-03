@@ -3,184 +3,92 @@ type Config = {
 };
 
 export default <Config>{
-  locale: {
-    default: 'en',
-    ru: import('./locales/ru.json'),
-    en: import('./locales/en.json'),
-  },
   pages: [
     {
       slides: [
         {
           media: {
             type: 'image',
-            src: import('./assets/img/first.png'),
-            webp: import('./assets/img/first.webp'),
+            src: import('./assets/img/base.png'),
             style: 'aspect-ratio: 420/465',
           },
-          textAlign: 'center',
-          title: '_s1.title',
-          description: '_s1.description',
-          button: '_s1.button',
+          title: 'ChatGPT – the most powerful AI',
+          description: 'Now in Telegram',
+          button: 'Next',
         },
         {
-          extends: 'form',
           media: {
             type: 'image',
-            src: import('./assets/img/second.png'),
-            webp: import('./assets/img/second.webp'),
-            style: 'aspect-ratio: 2.625/1',
+            src: import('./assets/img/base.png'),
+            style: 'aspect-ratio: 420/465',
           },
-          textAlign: 'center',
-          title: '_s2.title',
-          description: '_s2.description',
-          form: [
-            {
-              id: 'name',
-              placeholder: '_s2.namePlaceholder',
-              type: 'text',
-              style: '--tok-radius-m: 12px',
-            },
-            {
-              id: 'age',
-              placeholder: '_s2.agePlaceholder',
-              type: 'number',
-              inputmode: 'numeric',
-              style: '--tok-radius-m: 12px',
-            },
-          ],
-          button: '_s1.button',
+          title: 'Send voice messages',
+          description: 'Get instant answers',
+          button: 'Next',
         },
         {
-          extends: 'form',
           media: {
             type: 'image',
-            src: import('./assets/img/third.png'),
-            webp: import('./assets/img/third.webp'),
-            style: 'aspect-ratio: 2.625/1',
+            src: import('./assets/img/base.png'),
+            style: 'aspect-ratio: 420/465',
           },
-          textAlign: 'center',
-          title: '_s3.title',
-          form: [
-            {
-              id: 'guided',
-              placeholder: '_s3.guided',
-              type: 'checkbox',
-            },
-            {
-              id: 'mindfulness',
-              placeholder: '_s3.mind',
-              type: 'checkbox',
-            },
-            {
-              id: 'transcendental',
-              placeholder: '_s3.trans',
-              type: 'checkbox',
-            },
-            {
-              id: 'yoga',
-              placeholder: '_s3.yoga',
-              type: 'checkbox',
-            },
-            {
-              id: 'other',
-              placeholder: '_s3.other',
-              type: 'checkbox',
-            },
-          ],
-          button: '_s1.button',
-        },
-        {
-          extends: 'list',
-          media: {
-            type: 'image',
-            src: import('./assets/img/fourth.png'),
-            webp: import('./assets/img/fourth.webp'),
-            style: 'aspect-ratio: 2.625/1',
-          },
-          textAlign: 'center',
-          title: '_s4.title',
-          list: [
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/guide.svg'),
-                size: 40,
-              },
-              text: '_s4.list1',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/language.svg'),
-                size: 40,
-              },
-              text: '_s4.list2',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/time.svg'),
-                size: 40,
-              },
-              text: '_s4.list3',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/night.svg'),
-                size: 40,
-              },
-              text: '_s4.list4',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/track.svg'),
-                size: 40,
-              },
-              text: '_s4.list5',
-            },
-          ],
+          title: 'Generate images from text',
+          description: 'Powered by OpenAI',
           button: {
-            content: '_s4.button',
+            content: 'Next',
             to: '/paywall',
           },
         },
       ],
     },
     {
-      extends: 'paywall',
+      extends: 'base_paywall',
       path: '/paywall',
       media: {
-        type: 'image',
-        src: import('./assets/img/fifth.png'),
-        webp: import('./assets/img/fifth.webp'),
-        style: 'aspect-ratio: 420/340',
+        type: 'sticker',
+        src: import('./assets/stickers/lama_clown.tgs'),
+        style: 'width: 160px; height: 160px; margin: 0 auto',
       },
-      textAlign: 'center',
-      title: '_paywall.title',
-      description: '_paywall.description',
-      mainButtonText: '_paywall.main',
-      product: {
-        media: {
-          type: 'icon',
-          src: import('./assets/icons/star.svg'),
-          size: 40,
+      title: 'Unlock PRO Features',
+      features: [
+        '100,000 tokens per day (50+ A4 pages)',
+        'Access to GPT-4',
+        'Voice messages',
+        'PRO Chat Modes',
+      ],
+      products: [
+        {
+          id: 'id1',
+          title: '12 months',
+          discount: 'Discount 60%',
+          price: 12,
+          currency: 'USD',
+          pricePostfix: '/month',
         },
-        title: '_paywall.product.title',
-        price: 99,
-        currency: 'USD',
-        description: '_paywall.product.description',
-      },
+        {
+          id: 'id2',
+          title: '1 month',
+          discount: 'Discount 60%',
+          price: 16,
+          currency: 'USD',
+          pricePostfix: '/month',
+        },
+        {
+          id: 'id3',
+          title: '1 week',
+          price: 12,
+          currency: 'USD',
+          pricePostfix: '/month',
+        },
+      ],
       links: [
         {
-          text: '_paywall.policy',
-          href: '_paywall.policy_href',
+          text: 'Privacy policy',
+          href: 'https://google.com',
         },
         {
-          text: '_paywall.terms',
-          href: '_paywall.terms_href',
+          text: 'Terms of use',
+          href: 'https://google.com',
         },
       ],
     },

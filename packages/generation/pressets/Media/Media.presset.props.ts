@@ -11,7 +11,7 @@ export type IconPressetProps = {
 
 export type StickerPressetProps = {
   type: 'sticker';
-  src?: _MediaLoader<typeof import('*.tgs')>;
+  src?: _MediaLoader<typeof import('*.tgs')> | null;
 };
 
 export type ImagePressetProps = {

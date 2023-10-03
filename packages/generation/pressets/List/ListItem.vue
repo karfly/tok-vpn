@@ -1,7 +1,6 @@
 <template>
   <li :class="$style.li">
-    <!-- todo -->
-    <span v-if="item.media" style="margin-right: 0.75rem">
+    <span v-if="item.media" :class="$style.media">
       <media-presset v-bind="item.media" />
     </span>
 
@@ -30,5 +29,10 @@ const translatedText = useTranslated(text);
   display: flex;
   text-align: left;
   align-items: center;
+}
+
+.media {
+  margin-right: 0.75rem;
+  color: var(--tok-primary);
 }
 </style>

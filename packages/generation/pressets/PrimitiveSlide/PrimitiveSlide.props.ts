@@ -11,6 +11,8 @@ export type PrimitiveSlideProps = {
   textAlign?: 'left' | 'right' | 'center';
 
   buttonAfterContent?: boolean;
+
+  roundOnTop?: boolean;
 };
 
 export type PrimitiveSlideEmits = {

@@ -12,6 +12,7 @@ export default <Config>{
     {
       slides: [
         {
+          extends: 'slide',
           media: {
             type: 'image',
             src: import('./assets/img/first.png'),

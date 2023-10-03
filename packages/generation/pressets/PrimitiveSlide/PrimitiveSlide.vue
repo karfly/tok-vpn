@@ -9,7 +9,10 @@
       :class="$style.media"
     />
 
-    <div :class="$style.content" :style="{ textAlign: textAlign }">
+    <div
+      :class="[$style.content, roundOnTop && $style.content_roundTop]"
+      :style="{ textAlign: textAlign }"
+    >
       <slot />
 
       <flat-button
@@ -115,6 +118,13 @@ const onClick = () => {
     rgba(var(--tok-background-color-base), 0) 0%,
     var(--tok-background-color) 20%
   );
+
+  &_roundTop {
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    margin-top: -2rem;
+    background: var(--tok-background-color);
+  }
 }
 
 .button {

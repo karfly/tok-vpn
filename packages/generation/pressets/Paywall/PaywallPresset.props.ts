@@ -1,5 +1,5 @@
+import { PrimitivePaywallProps } from '@tok/generation/components/PrimitivePaywall';
 import type { MediaPressetProps } from '@tok/generation/pressets/Media';
-import { PrimitivePaywallProps } from 'components/PrimitivePaywall';
 
 export type PaywallPressetProps = Omit<
   PrimitivePaywallProps,

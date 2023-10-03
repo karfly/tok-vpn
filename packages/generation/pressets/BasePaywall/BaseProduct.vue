@@ -1,0 +1,110 @@
+<template>
+  <label :for="id" :class="[$style.product, active && $style.product_active]">
+    <div :class="$style.title">
+      <p v-html="title" />
+
+      <p v-if="discount" v-html="discount" :class="$style.discount" />
+    </div>
+
+    <span :class="$style.money">
+      <money :value="price" /><span v-html="pricePostfix" />
+    </span>
+
+    <input
+      :id="elementId"
+      type="radio"
+      name="product-item"
+      :class="$style.native"
+      :checked="active"
+      :value="elementId"
+      @change="onChange"
+    />
+  </label>
+</template>
+
+<script setup lang="ts">
+import { Money } from '@tok/ui/components/Money';
+import { getElementId } from '@tok/ui/functions';
+import { setupMoney } from '@tok/ui/setup/setupMoney';
+
+import { BaseProductProps } from './BasePaywallPresset.props';
+
+const props = defineProps<BaseProductProps>();
+
+const emit = defineEmits<{
+  (e: 'onSelect', id: string): void;
+}>();
+
+const elementId = getElementId();
+
+setupMoney({
+  currency: props.currency,
+});
+
+const onChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const value = target.checked;
+
+  if (value) {
+    emit('onSelect', props.id);
+  }
+};
+</script>
+
+<style lang="scss" module>
+.product {
+  @include transition(all);
+
+  transition-property: opacity, border-color;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  border-radius: 0.75rem;
+
+  padding: 6px 12px 10px 12px;
+
+  border: 2px solid transparent;
+
+  min-height: var(--tok-height-l);
+  background-color: var(--tok-stinger);
+
+  &_active {
+    border-color: var(--tok-primary);
+  }
+
+  &:hover {
+    opacity: var(--tok-hover-opacity);
+  }
+}
+
+.native {
+  @include clearinput;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.title {
+  font: var(--tok-font-l);
+}
+
+.discount {
+  color: var(--tok-primary);
+}
+
+.money {
+  color: var(--tok-primary);
+}
+</style>
