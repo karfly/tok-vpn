@@ -84,6 +84,16 @@ export function bootstrapJson(App: _App, json: any) {
     window.scrollTo({ top: 0 });
   });
 
+  router.onError((error, to) => {
+    const dynamicallyImportsError =
+      error.message.includes('Failed to fetch dynamically imported module') ||
+      error.message.includes('Importing a module script failed');
+
+    if (error.name === 'ChunkLoadError' || dynamicallyImportsError) {
+      location.href = to.fullPath;
+    }
+  });
+
   return createApp(App)
     .use(AlertsPlugin)
     .use(router)
