@@ -224,4 +224,10 @@ const onSelectOption = (
 
   margin-top: auto;
 }
+
+.media {
+  color: var(--tok-primary);
+
+  margin-right: 0.75rem;
+}
 </style>
