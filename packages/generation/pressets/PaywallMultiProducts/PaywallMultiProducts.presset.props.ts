@@ -1,10 +1,5 @@
-import {
-  defaultPopup,
-  PaywalPressetButtons,
-} from '@tok/generation/pressets/Paywall';
-import type { SlidePressetProps } from '@tok/generation/pressets/Slide';
-import type { LinkProps } from '@tok/ui/components/Link';
 import type { CurrencyVariants } from '@tok/ui/setup/currency/currency';
+import type { PrimitivePaywallProps } from 'components/PrimitivePaywall';
 
 export type ProductProps = {
   id: string;
@@ -19,27 +14,14 @@ export type ProductProps = {
 };
 
 export type PaywallMultiProductsPressetProps = Omit<
-  SlidePressetProps,
-  'extends' | 'button'
+  PrimitivePaywallProps,
+  'selectedProduct'
 > & {
   extends?: 'paywallMultiProducts';
 
-  products: ProductProps[];
-
-  links: LinkProps[];
-
-  mainButtonText?: string;
-
-  popup?: {
-    title: string;
-    message?: string;
-    buttons: PaywalPressetButtons;
-  };
+  products: Omit<ProductProps, 'active'>[];
 };
 
 export const PaywallMultiProductsPressetDefaultProps = {
   products: () => [],
-  links: () => [],
-  mainButtonText: 'Continue',
-  popup: () => defaultPopup,
-};
+} as const;

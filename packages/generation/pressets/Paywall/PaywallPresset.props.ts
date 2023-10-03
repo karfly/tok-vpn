@@ -1,21 +1,10 @@
 import type { MediaPressetProps } from '@tok/generation/pressets/Media';
-import type { SlidePressetProps } from '@tok/generation/pressets/Slide';
-import { PopupButton } from '@twa-dev/types';
-
-export type PaywalPressetButtons = (PopupButton & {
-  media?: MediaPressetProps;
-})[];
+import { PrimitivePaywallProps } from 'components/PrimitivePaywall';
 
 export type PaywallPressetProps = Omit<
-  SlidePressetProps,
-  'button' | 'extends'
+  PrimitivePaywallProps,
+  'selectedProduct'
 > & {
-  extends?: 'paywall';
-
-  links: { text: string; href: string }[];
-
-  mainButtonText?: string;
-
   product: {
     media?: MediaPressetProps;
     title: string;
@@ -23,43 +12,15 @@ export type PaywallPressetProps = Omit<
     currency?: string;
     description: string;
   };
-
-  popup?: {
-    title: string;
-    message?: string;
-    buttons: PaywalPressetButtons;
-  };
 };
 
-export const defaultPopup = {
-  title: 'Choose the payment method',
-  buttons: [
-    {
-      id: 'telegram_payments',
-      media: {
-        type: 'icon' as const,
-        src: 'card',
-        size: 32,
-      },
-      type: 'default' as const,
-      text: 'Bank card',
-    },
-    {
-      id: 'wallet_pay',
-      media: {
-        type: 'icon' as const,
-        src: 'wallet-pay',
-        size: 32,
-      },
-      type: 'default' as const,
-      text: 'Wallet pay',
-    },
-  ] as PaywalPressetButtons,
+const defaultProduct = {
+  title: 'Product Title',
+  price: 99.99,
+  current: 'USD',
+  description: 'Product description',
 };
 
 export const PaywallPressetDefaultProps = {
-  extends: 'paywall',
-  links: () => [],
-  mainButtonText: 'Continue',
-  popup: () => defaultPopup,
+  product: () => defaultProduct,
 } as const;
