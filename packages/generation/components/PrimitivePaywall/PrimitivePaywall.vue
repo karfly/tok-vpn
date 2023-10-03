@@ -64,6 +64,11 @@ const popupMessage = computed(() => popup.value.message || '');
 const translatedMainButton = useTranslated(mainButtonText);
 const translatedPopupTitle = useTranslated(popupTitle);
 const translatedPopupMessage = useTranslated(popupMessage);
+const paymentCanceledMessage = useTranslated(
+  '_alerts.payment.canceled',
+  'You have canceled the payment selection'
+);
+
 const translatedPopupButtons = computed(() => {
   const buttons = popupButtons.value;
   const locale = i18n.locale.value;
@@ -112,7 +117,7 @@ const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
 ) => {
   if (!id) {
-    alertsService.show('You have canceled the payment selection', {
+    alertsService.show(paymentCanceledMessage.value, {
       type: 'error',
     });
 

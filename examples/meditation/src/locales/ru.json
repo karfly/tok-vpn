@@ -45,5 +45,9 @@
       "wallet_pay": "Wallet Pay"
     }
   },
-  "You have canceled the payment selection": "Вы отменили выбор оплаты"
+  "_alerts": {
+    "payment": {
+      "canceled": "Вы отменили выбор оплаты"
+    }
+  }
 }
