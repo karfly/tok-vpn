@@ -199,7 +199,6 @@ export default <Config>{
         },
       ],
       popup: {
-        type: 'telegram',
         message: '_paywall.popup.title',
         buttons: [
           {
