@@ -1,7 +1,7 @@
 <template>
   <li :class="$style.li">
     <span v-if="item.media" :class="$style.media">
-      <media-presset v-bind="item.media" />
+      <media-presset v-bind="item.media" static />
     </span>
 
     <span v-html="translatedText" :class="$style.text" />

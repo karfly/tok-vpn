@@ -19,6 +19,7 @@
           v-if="item.media"
           v-bind="item.media"
           :class="$style.media"
+          static
         />
       </template>
     </tg-popup>
@@ -101,7 +102,7 @@ const mainButtonComputedText = computed(() => {
   return _text;
 });
 
-const popupOpened = ref(false);
+const popupOpened = ref(true);
 
 const onSubmit = () => {
   popupOpened.value = true;
@@ -110,13 +111,11 @@ const onSubmit = () => {
 const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
 ) => {
-  alertsService.show(
-    `id: ${id}, payload: ${JSON.stringify(
-      nanoState?.state?.value || {}
-    )}, product: ${JSON.stringify(selectedProduct.value || {})}`
-  );
-
   if (!id) {
+    alertsService.show('You have cancelled this order', {
+      type: 'error',
+    });
+
     return;
   }
 
@@ -149,7 +148,7 @@ const onSelectOption = (
 }
 
 .media {
-  color: var(--tok-primary);
+  color: var(--tok-white);
 
   margin-right: 0.75rem;
 }

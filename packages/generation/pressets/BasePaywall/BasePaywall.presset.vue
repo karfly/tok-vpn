@@ -47,7 +47,7 @@ const i18n = useI18n();
 
 const defaultMedia = {
   type: 'icon' as const,
-  src: 'check-filled',
+  src: 'checkmark-fill',
 } as const;
 
 const translatedProducts = computed(() => {

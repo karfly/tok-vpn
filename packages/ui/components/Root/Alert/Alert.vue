@@ -76,9 +76,9 @@ const iconName = computed(() => {
   const value = type.value;
 
   return value === 'success'
-    ? 'check-filled'
+    ? 'checkmark-fill'
     : value === 'error'
-    ? 'warning'
+    ? 'warning-fill'
     : null;
 });
 

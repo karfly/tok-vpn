@@ -2,7 +2,7 @@
   <flat-button
     v-if="showWebButton"
     size="s"
-    icon="arrow-back"
+    icon="arrow-left"
     :appearance="appearance"
     :class="$style.button"
     :icon-size="16"

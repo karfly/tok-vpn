@@ -1,7 +1,7 @@
 <template>
   <div :class="[$style.checkbox, !!value && $style.checkbox_checked]">
     <svg-icon
-      name="check-filled"
+      name="checkmark-fill"
       :class="[$style.mark, value !== false && $style.mark_on]"
     />
 

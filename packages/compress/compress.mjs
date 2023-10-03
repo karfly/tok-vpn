@@ -3,7 +3,7 @@ import path from 'path';
 import sharp from 'sharp';
 
 const inputDir = 'input';
-const outputDir = 'dist';
+const outputDir = 'output';
 
 const SUPPORTED_EXTENSIONS = ['.jpeg', '.jpg', '.png'];
 
@@ -67,7 +67,7 @@ const compressImage = async (inputPath, outputPath, quality, format) => {
 
 const start = async () => {
   let counter = 0;
-  const qualities = [40];
+  const qualities = [40, 60, 80, 100];
   const images = getImagesInMergeRequest();
 
   for (const inputFile of images) {
