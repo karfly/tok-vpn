@@ -94,7 +94,7 @@ const onNext = () => {
 };
 
 const onMainButton = () => {
-  router.push('/paywall');
+  router.push('/?page=6');
 
   alertsService.show(alertText.value);
 };
