@@ -1,5 +1,9 @@
 <template>
-  <primitive-paywall v-bind="props" :selected-product="productToSend">
+  <primitive-paywall
+    v-bind="props"
+    :main-button-text="computedMainButtonText"
+    :selected-product="productToSend"
+  >
     <form :class="$style.form" :style="productWidthStyle" @submit.prevent>
       <div
         v-for="item in translatedProducts"
@@ -18,7 +22,8 @@
 
 <script setup lang="ts">
 import { PrimitivePaywall } from '@tok/generation/components/PrimitivePaywall';
-import { tokTranslate, useI18n } from '@tok/i18n';
+import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';
+import { formatMoney } from '@tok/ui/components/Money/formatMoney';
 import { computed, ref, toRefs } from 'vue';
 
 import {
@@ -32,7 +37,7 @@ const props = withDefaults(
   PaywallMultiProductsPressetDefaultProps
 );
 
-const { products } = toRefs(props);
+const { products, mainButtonText } = toRefs(props);
 
 const i18n = useI18n();
 
@@ -80,6 +85,19 @@ const productToSend = computed(() => {
   const active = activeId.value;
 
   return translatedProducts.value.find(({ id }) => id === active);
+});
+
+const translatedMainButton = useTranslated(mainButtonText);
+const computedMainButtonText = computed(() => {
+  const value = productToSend.value;
+
+  if (!value) {
+    return undefined;
+  }
+
+  const _text = translatedMainButton.value;
+
+  return _text.replace(/\{price\}/g, formatMoney(value.price, value.currency));
 });
 
 const onProductSelect = (id: string) => {

@@ -1,7 +1,7 @@
-import { CHAR_NO_BREAK_SPACE } from '@tok/ui/consts';
+// todo: fix
+import { defaultFormatMoney } from '@tok/ui/components/Money/formatMoney';
 import { inject, InjectionKey, provide } from 'vue';
 
-import { CurrencyCode } from './currency/code.enum';
 import { CurrencyVariants } from './currency/currency';
 
 type Setup = {
@@ -12,23 +12,15 @@ type Setup = {
   thousandSeparator?: string;
 };
 
-const defaultSetup: Required<Setup> = {
-  align: 'left',
-  precision: 2,
-  currency: CurrencyCode.Dollar,
-  decimalSeparator: '.',
-  thousandSeparator: CHAR_NO_BREAK_SPACE,
-};
-
 const token = Symbol() as InjectionKey<Required<Setup>>;
 
 export function setupMoney(options: Setup) {
   const {
-    align = defaultSetup.align,
-    precision = defaultSetup.precision,
-    currency = defaultSetup.currency,
-    decimalSeparator = defaultSetup.decimalSeparator,
-    thousandSeparator = defaultSetup.thousandSeparator,
+    align = defaultFormatMoney.align,
+    precision = defaultFormatMoney.precision,
+    currency = defaultFormatMoney.currency,
+    decimalSeparator = defaultFormatMoney.decimalSeparator,
+    thousandSeparator = defaultFormatMoney.thousandSeparator,
   } = options;
 
   provide(token, {
@@ -41,5 +33,5 @@ export function setupMoney(options: Setup) {
 }
 
 export function useMoney(): Required<Setup> {
-  return inject(token, defaultSetup);
+  return inject(token, defaultFormatMoney);
 }

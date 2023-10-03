@@ -76,6 +76,7 @@ export default <Config>{
       },
       title: 'Purchase credits and redress your photos',
       description: '1 credit = 1 photo re-dress',
+      mainButtonText: 'Subscribe for {price} per month',
       products: [
         {
           id: 'id1',

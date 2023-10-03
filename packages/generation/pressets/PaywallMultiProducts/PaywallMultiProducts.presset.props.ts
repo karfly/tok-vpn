@@ -24,4 +24,5 @@ export type PaywallMultiProductsPressetProps = Omit<
 
 export const PaywallMultiProductsPressetDefaultProps = {
   products: () => [],
+  mainButtonText: '',
 } as const;

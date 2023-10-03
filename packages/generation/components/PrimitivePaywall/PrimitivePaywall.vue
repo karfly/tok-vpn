@@ -23,7 +23,7 @@
       </template>
     </tg-popup>
 
-    <main-button :text="translatedMainButton" @on-click="onSubmit" />
+    <main-button :text="mainButtonComputedText" @on-click="onSubmit" />
   </slide-presset>
 </template>
 
@@ -88,6 +88,17 @@ const translatedPopupButtons = computed(() => {
 
     return button;
   });
+});
+
+const mainButtonComputedText = computed(() => {
+  const value = selectedProduct.value;
+  const _text = translatedMainButton.value;
+
+  if (!value || !_text) {
+    return '';
+  }
+
+  return _text;
 });
 
 const popupOpened = ref(false);
