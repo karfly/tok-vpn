@@ -38,6 +38,11 @@
     "policy_href": "https://google.com",
     "terms": "Terms of use",
     "terms_href": "https://google.com",
-    "main": "Continue"
+    "main": "Continue",
+    "popup": {
+      "title": "Choose the payment method",
+      "telegram_payments": "Bank Card",
+      "wallet_pay": "Wallet Pay"
+    }
   }
 }

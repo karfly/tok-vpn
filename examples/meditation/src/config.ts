@@ -174,6 +174,22 @@ export default <Config>{
         currency: 'USD',
         description: '_paywall.product.description',
       },
+      popup: {
+        type: 'telegram',
+        message: '_paywall.popup.title',
+        buttons: [
+          {
+            id: 'telegram_payments',
+            text: '_paywall.popup.telegram_payments',
+            type: 'default',
+          },
+          {
+            id: 'wallet_pay',
+            text: '_paywall.popup.wallet_pay',
+            type: 'default',
+          },
+        ],
+      },
       links: [
         {
           text: '_paywall.policy',

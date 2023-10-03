@@ -67,10 +67,13 @@ const tryOpenTgPopup = () => {
   try {
     forceWeb.value = false;
 
+    const _message = !message.value ? title.value : message.value;
+    const _title = message.value ? title.value : undefined;
+
     Telegram.showPopup(
       {
-        title: title.value,
-        message: message.value,
+        title: _title,
+        message: _message,
         buttons: buttons.value,
       },
       onClose
