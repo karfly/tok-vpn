@@ -18,7 +18,7 @@
         <media-presset
           v-if="item.media"
           v-bind="item.media"
-          :class="$style.icon"
+          :class="$style.media"
         />
       </template>
     </tg-popup>
