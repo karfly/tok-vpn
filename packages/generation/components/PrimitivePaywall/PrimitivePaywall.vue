@@ -55,7 +55,7 @@ const { mainButtonText, popup, selectedProduct } = toRefs(props);
 const i18n = useI18n();
 const tg = useTelegramSdk();
 const nanoState = inject(NANO_STATE_TOKEN, null);
-const alertsService = useAlerts();
+const alertsService = useAlerts({ autoCloseOnUnmount: true });
 
 const popupButtons = computed(() => popup.value.buttons);
 const popupTitle = computed(() => popup.value.title);
@@ -95,7 +95,7 @@ const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
   const _text = translatedMainButton.value;
 
-  if (!value || !_text) {
+  if (!value || !_text || popupOpened.value) {
     return '';
   }
 
