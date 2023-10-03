@@ -24,29 +24,48 @@ const tg = useTelegramSdk();
 const router = useRouter();
 const i18n = useI18n();
 
-const tgLang = tg.initDataUnsafe.user?.language_code || i18n.fallbackLocale;
-const isSupported = i18n.available.includes(tgLang);
+const isSupportedLocale = (locale: string) => {
+  return i18n.available.includes(locale);
+};
 
-const lang = isSupported ? tgLang : i18n.fallbackLocale;
+const tgLocale = tg.initDataUnsafe.user?.language_code;
+
+if (tgLocale && isSupportedLocale(tgLocale)) {
+  i18n.locale.value = tgLocale;
+}
+
+watch(router.currentRoute, (value) => {
+  const queryLanguageCode = value.query.language_code;
+  const strLang =
+    typeof queryLanguageCode === 'string' ? queryLanguageCode : undefined;
+  const supported = strLang && isSupportedLocale(strLang) ? strLang : undefined;
+
+  if (!tgLocale && supported) {
+    i18n.locale.value = supported;
+  }
+});
 
 onMounted(() => {
-  if (i18n.fallbackLocale !== lang) {
-    i18n.load(i18n.fallbackLocale).then((messages) => {
-      i18n.setMessages(i18n.fallbackLocale, messages);
-    });
-  }
+  tg.expand();
+});
 
+let ready = false;
+
+const onLoadMessages = (locale: string) => {
   i18n
-    .load(lang)
+    .load(locale)
     .then((messages) => {
-      i18n.setMessages(lang, messages);
-      i18n.locale.value = lang;
+      i18n.setMessages(locale, messages);
     })
     .finally(() => {
-      tg.ready();
-      tg.expand();
+      if (!ready) {
+        tg.ready();
+        ready = true;
+      }
     });
-});
+};
+
+watch(i18n.locale, onLoadMessages, { immediate: true });
 
 const onBackButton = () => {
   const hasHistory = window.history.length > 2;
