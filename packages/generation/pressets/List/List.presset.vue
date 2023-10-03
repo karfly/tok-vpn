@@ -1,7 +1,6 @@
 <template>
   <slide-presset v-bind="props" extends="slide">
-    <!-- todo -->
-    <ul style="margin-top: 1rem">
+    <ul>
       <list-item
         v-for="(item, index) in list"
         :key="index"
@@ -28,7 +27,7 @@ const props = withDefaults(
 </script>
 
 <style lang="scss" module>
-.item {
+.item:not(:first-child) {
   margin-top: 0.75em;
 }
 </style>

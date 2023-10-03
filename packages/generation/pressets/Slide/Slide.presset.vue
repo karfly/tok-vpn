@@ -1,12 +1,14 @@
 <template>
   <primitive-slide v-bind="props" @on-click="onClick">
-    <h2 v-html="i18nTitle" />
+    <div>
+      <h2 v-html="i18nTitle" :class="$style.title" />
 
-    <p
-      v-if="i18nDescription"
-      v-html="i18nDescription"
-      :class="$style.description"
-    />
+      <p
+        v-if="i18nDescription"
+        v-html="i18nDescription"
+        :class="$style.description"
+      />
+    </div>
 
     <slot />
   </primitive-slide>
@@ -40,7 +42,11 @@ const onClick = () => {
 </script>
 
 <style lang="scss" module>
+.title {
+  margin-bottom: 0.75rem;
+}
+
 .description {
-  margin-top: 0.75rem;
+  margin-top: -0.25rem;
 }
 </style>

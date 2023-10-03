@@ -108,11 +108,12 @@ const onClick = () => {
   flex-direction: column;
   flex: 1;
   padding: 1rem;
+  gap: 0.75rem;
 
   background: linear-gradient(
     180deg,
     rgba(var(--tok-background-color-base), 0) 0%,
-    var(--tok-background-color) 40%
+    var(--tok-background-color) 20%
   );
 }
 

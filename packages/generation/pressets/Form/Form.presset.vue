@@ -4,7 +4,7 @@
     extends="slide"
     :button-after-content="debouncedFocused"
   >
-    <form :class="$style.form" @submit.prevent>
+    <form @submit.prevent>
       <div v-for="control in form" :key="control.id" :class="$style.control">
         <checkbox-block
           v-if="control.type === 'checkbox'"
@@ -107,11 +107,7 @@ const onFocused = (id: string, value: boolean) => {
 </script>
 
 <style lang="scss" module>
-.form {
+.control:not(:first-child) {
   margin-top: 1.25rem;
-}
-
-.control {
-  margin-bottom: 1.25rem;
 }
 </style>
