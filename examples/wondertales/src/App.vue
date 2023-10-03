@@ -2,7 +2,7 @@
   <root>
     <template #overContent>
       <div class="wt-link-button">
-        <flat-button size="xs" appearance="flat" :href="href">
+        <flat-button size="xs" appearance="flat" target="_blank" :href="href">
           {{ button }}
         </flat-button>
       </div>
