@@ -5,7 +5,7 @@ const resolve = <T>(r: T) => {
   return typeof r === 'function' ? computed<T>(r as any) : ref(r);
 };
 
-// todo expose all login in useTranslate
+// todo expose all logic in useTranslate
 export const tokTranslate = <T = string>(
   messages: Record<string, unknown>,
   key: string

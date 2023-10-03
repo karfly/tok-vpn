@@ -1,4 +1,4 @@
-import { PrimitiveSlideProps } from '@tok/generation/pressets/PrimitiveSlide';
+import type { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
 
 export type SlidePressetProps = PrimitiveSlideProps & {
   title: string;

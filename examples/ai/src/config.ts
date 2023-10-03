@@ -8,13 +8,13 @@ export default <Config>{
   // 'dark' | 'light' | 'auto'
   theme: 'dark',
   override: {
-    slide: ActionSlide,
+    action_slide: ActionSlide,
   },
   pages: [
     {
       slides: [
         {
-          extends: 'slide',
+          extends: 'action_slide',
           title: 'Transform into a stylish look!',
           description: "See how you'd look in a different outfit",
           actionButton: ['Apply beauty filter', 'Applied'],
@@ -31,7 +31,7 @@ export default <Config>{
           ],
         },
         {
-          extends: 'slide',
+          extends: 'action_slide',
           title: 'Ready for an important meeting?',
           description: 'Find the perfect business attire',
           actionButton: ['Apply beauty filter', 'Applied'],
@@ -48,7 +48,7 @@ export default <Config>{
           ],
         },
         {
-          extends: 'slide',
+          extends: 'action_slide',
           title: 'Planning a special date?',
           description: 'Choose an outfit that will impress!',
           actionButton: ['Apply beauty filter', 'Applied'],

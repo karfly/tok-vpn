@@ -1,19 +1,13 @@
 import { MaybeComputedRef, resolveRef } from '@tok/ui/types';
 import { readonly, ref, watch } from 'vue';
 
-// todo
-// import { useControlAccess } from '../useControlAccess';
-
 export function useFocused(native: MaybeComputedRef<HTMLElement | null>) {
-  // const controlAccess = useControlAccess();
-
   const nativeRef = resolveRef(native);
   const focused = ref(false);
 
   const onFocus = () => (focused.value = true);
   const onBlur = () => {
     focused.value = false;
-    // controlAccess?.markAsTouch();
   };
 
   watch(

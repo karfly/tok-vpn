@@ -3,7 +3,7 @@ import { SvgIconProps } from '@tok/ui/components/SvgIcon';
 export type _MediaLoader<T> = Promise<{ default: T }>;
 
 // todo: Find a way to translate images
-// src: '_i18n.imageSrc' -> en.json: import('../assets/*.png');
+// src: '_i18n.imageSrc' -> /locales/en.ts: import('../assets/*.png');
 export type IconPressetProps = {
   type: 'icon';
   src?: string | _MediaLoader<any>;

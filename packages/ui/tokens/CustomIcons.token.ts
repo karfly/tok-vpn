@@ -1,7 +1,5 @@
-import { InjectionKey } from 'vue';
-
-type TODO = any;
+import { defineAsyncComponent, InjectionKey } from 'vue';
 
 export const CUSTOM_ICONS_TOKEN = Symbol() as InjectionKey<
-  Record<string, TODO>
+  Record<string, ReturnType<typeof defineAsyncComponent>>
 >;

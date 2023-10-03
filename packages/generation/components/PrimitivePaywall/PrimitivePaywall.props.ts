@@ -1,6 +1,6 @@
 import type { MediaPressetProps } from '@tok/generation/pressets/Media';
 import type { SlidePressetProps } from '@tok/generation/pressets/Slide';
-import { PopupButton } from '@twa-dev/types';
+import type { PopupButton } from '@twa-dev/types';
 
 export type PaywalPressetButtons = (PopupButton & {
   media?: MediaPressetProps;

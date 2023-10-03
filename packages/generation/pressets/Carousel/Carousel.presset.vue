@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { DrawPresset } from '@tok/generation/pressets/DrawPresset';
+import { DrawPresset } from '@tok/generation/components/DrawPresset';
 import { CAROUSEL_ACCESSOR_TOKEN } from '@tok/generation/use/carousel';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Carousel } from '@tok/ui/components/Carousel';

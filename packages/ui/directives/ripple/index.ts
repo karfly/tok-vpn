@@ -1,8 +1,4 @@
-import { Directive, DirectiveBinding } from 'vue';
-
-type Props = {
-  disabled?: boolean;
-};
+import { Directive } from 'vue';
 
 function rippleShow(e: MouseEvent | TouchEvent) {
   const rootEl = e.currentTarget as HTMLElement | null;
@@ -73,6 +69,8 @@ function rippleShow(e: MouseEvent | TouchEvent) {
   ink.style.top = `${y}px`;
 
   ink.classList.add('tok-ripple-ink_active');
+
+  // memory leak?
   ink.addEventListener(
     'animationend',
     () => {
@@ -82,32 +80,11 @@ function rippleShow(e: MouseEvent | TouchEvent) {
   );
 }
 
-function rippleHide() {
-  console.log('hide');
-  // todo
-}
-
-function rippleCancel(e: MouseEvent | TouchEvent) {
-  // todo
-}
-
 function removeListeners(el: HTMLElement) {
-  // el.removeEventListener('touchstart', rippleShow);
-  // el.removeEventListener('touchend', rippleHide);
-  // el.removeEventListener('touchmove', rippleCancel);
-  // el.removeEventListener('touchcancel', rippleHide);
   el.removeEventListener('mousedown', rippleShow);
-  // el.removeEventListener('mouseup', rippleHide);
-  // el.removeEventListener('mouseleave', rippleHide);
-  // el.removeEventListener('dragstart', rippleHide);
 }
 
-function mounted(el: HTMLElement, { value }: DirectiveBinding<Props>) {
-  // el.addEventListener('touchstart', rippleShow, { passive: true });
-  // el.addEventListener('touchend', rippleHide, { passive: true });
-  // el.addEventListener('touchmove', rippleCancel, { passive: true });
-  // el.addEventListener('touchcancel', rippleHide);
-
+function mounted(el: HTMLElement) {
   const ink = document.createElement('span');
 
   ink.setAttribute('role', 'presentation');
@@ -126,17 +103,14 @@ function mounted(el: HTMLElement, { value }: DirectiveBinding<Props>) {
   ink.style.height = `${maxSize}px`;
 
   el.addEventListener('mousedown', rippleShow);
-  // el.addEventListener('mouseup', rippleHide);
-  // el.addEventListener('mouseleave', rippleHide);
-
-  // el.addEventListener('dragstart', rippleHide, { passive: true });
 }
 
 function beforeUnmount(el: HTMLElement) {
   removeListeners(el);
 }
 
-export const RippleDirective: Directive<HTMLElement, Props> = {
+// todo: refactor this directive or use outsource solution
+export const RippleDirective: Directive<HTMLElement> = {
   mounted,
   beforeUnmount,
 };

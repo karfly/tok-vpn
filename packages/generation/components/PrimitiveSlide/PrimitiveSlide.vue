@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { DrawPresset } from '@tok/generation/pressets/DrawPresset';
+import { DrawPresset } from '@tok/generation/components/DrawPresset';
 import { useTranslated } from '@tok/i18n';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 import { setNativeFocused } from '@tok/ui/dom/focus';

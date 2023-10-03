@@ -17,7 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { PrimitiveSlide } from '@tok/generation/pressets/PrimitiveSlide';
+// todo: Merge Slide.presset and BaseSlide
+import { PrimitiveSlide } from '@tok/generation/components/PrimitiveSlide';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useTranslated } from '@tok/i18n';
 import { computed, toRefs } from 'vue';

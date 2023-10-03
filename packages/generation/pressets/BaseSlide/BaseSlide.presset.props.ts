@@ -1,11 +1,11 @@
-import { PrimitiveSlideProps } from '@tok/generation/pressets/PrimitiveSlide';
+import type { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
 
 export type BaseSlidePressetProps = PrimitiveSlideProps & {
   title: string;
 
   description: string;
 
-  extends?: 'slide';
+  extends?: 'base_slide';
 };
 
 export const BaseSlidePressetDefaultProps = {
