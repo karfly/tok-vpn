@@ -18,6 +18,8 @@ export type PrimitivePaywallProps = Omit<
   mainButtonText?: string;
 
   popup?: {
+    // todo merge with TgPopupProps
+    type?: 'web' | 'telegram';
     title: string;
     message?: string;
     buttons: PaywalPressetButtons;

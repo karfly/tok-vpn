@@ -199,6 +199,7 @@ export default <Config>{
         },
       ],
       popup: {
+        type: 'web',
         message: '_paywall.popup.title',
         buttons: [
           {
