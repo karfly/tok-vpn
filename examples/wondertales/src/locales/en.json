@@ -49,6 +49,10 @@
     "feature1": "An endless number of fairy tales",
     "feature2": "Access to fairy tales anytime",
     "feature3": "All fairy tales are saved",
+    "product1": "1 month",
+    "discount": "Discount 34%",
+    "pricePrefix": "/month",
+    "product2": "1 year",
     "popup": {
       "title": "Choose the payment method",
       "telegram_payments": "Bank Card",

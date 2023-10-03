@@ -184,18 +184,18 @@ export default <Config>{
       products: [
         {
           id: 'monthly',
-          title: '1 month',
+          title: '_paywall.product1',
           price: 8.95,
           currency: 'USD',
-          pricePostfix: '/month',
+          pricePostfix: '_paywall.pricePrefix',
         },
         {
           id: 'yearly',
-          title: '1 year',
+          title: '_paywall.product2',
           price: 5.95,
-          discount: 'Discount 34%',
+          discount: '_paywall.discount',
           currency: 'USD',
-          pricePostfix: '/month',
+          pricePostfix: '_paywall.pricePrefix',
         },
       ],
       popup: {
