@@ -72,10 +72,6 @@ const getInitValue = (control: FormControl) => {
     return stateValue?.value[control.id] ?? false;
   }
 
-  if (control.type === 'input') {
-    return stateValue?.value[control.id] ?? null;
-  }
-
   return stateValue?.value[control.id] ?? null;
 };
 
