@@ -1,3 +1,4 @@
+import { StickerProps } from '@tok/telegram-ui/components/Sticker';
 import { SvgIconProps } from '@tok/ui/components/SvgIcon';
 
 export type _MediaLoader<T> = Promise<{ default: T }>;
@@ -12,7 +13,7 @@ export type IconPressetProps = {
 export type StickerPressetProps = {
   type: 'sticker';
   src?: _MediaLoader<typeof import('*.tgs')> | null;
-};
+} & Omit<StickerProps, 'json' | 'autoplay'>;
 
 export type ImagePressetProps = {
   type: 'image';

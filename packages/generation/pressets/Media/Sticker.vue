@@ -1,6 +1,11 @@
 <template>
   <div>
-    <component v-if="loaded" :is="TelegramSticker" :json="loaded" />
+    <component
+      v-if="loaded"
+      v-bind="props"
+      :is="TelegramSticker"
+      :json="loaded"
+    />
   </div>
 </template>
 

@@ -1,0 +1,31 @@
+:root {
+}
+
+html[data-theme='dark'] {
+  --tok-background-color-base: 66, 68, 86;
+  --tok-background-color: transparent;
+
+  --tok-primary: #c962a9;
+  --tok-primary-text: var(--tok-white);
+}
+
+.wt-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  max-width: 100vw;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.wt-shadow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.52);
+  z-index: -1;
+}

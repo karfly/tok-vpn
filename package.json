@@ -10,8 +10,11 @@
         "dev:ai": "turbo run dev --scope @tok/ai",
         "build:ai": "turbo run build --scope @tok/ai",
         "*** meditation ***": "",
-        "dev:meditation": "turbo run dev --scope @tok/meditation -- --host",
+        "dev:meditation": "turbo run dev --scope @tok/meditation",
         "build:meditation": "turbo run build --scope @tok/meditation",
+        "*** wondertales ***": "",
+        "dev:wondertales": "turbo run dev --scope @tok/wondertales",
+        "build:wondertales": "turbo run build --scope @tok/wondertales",
         "*** other *** ": "",
         "compress": "turbo run compress --scope @tok/compress"
     },
