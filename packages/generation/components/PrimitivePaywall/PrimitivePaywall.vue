@@ -100,7 +100,9 @@ const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
 ) => {
   alertsService.show(
-    `id: ${id}, payload: ${nanoState?.state?.value}, product: ${selectedProduct.value}`
+    `id: ${id}, payload: ${JSON.stringify(
+      nanoState?.state?.value || {}
+    )}, product: ${JSON.stringify(selectedProduct.value || {})}`
   );
 
   if (!id) {
