@@ -105,7 +105,7 @@ export default <Config>{
               text: '_s3.list3',
             },
           ],
-          button: '_s2.button',
+          button: '_s3.button',
         },
         {
           extends: 'list',
@@ -134,7 +134,7 @@ export default <Config>{
               text: '_s4.list2',
             },
           ],
-          button: '_s2.button',
+          button: '_s4.button',
         },
         {
           extends: 'slide',
@@ -146,7 +146,7 @@ export default <Config>{
           },
           title: '_s5.title',
           description: '_s5.description',
-          button: '_s2.button',
+          button: '_s5.button',
         },
         {
           extends: 'slide',

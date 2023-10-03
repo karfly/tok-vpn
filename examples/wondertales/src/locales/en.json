@@ -17,17 +17,20 @@
     "description": "It will be easy and individual<br/><b>Just three steps:</b>",
     "list1": "Choose the main character",
     "list2": "Specify the second character of the fairy tal",
-    "list3": "Choose one of the morals prepared and worked out in advance"
+    "list3": "Choose one of the morals prepared and worked out in advance",
+    "button": "What else?"
   },
   "_s4": {
     "title": "Fast",
     "description": "It will be fast:",
     "list1": "The first page can be seen in<br /><b>2-3 minutes</b>",
-    "list2": "Our fairy tales can be listened to in <b>audio format</b>"
+    "list2": "Our fairy tales can be listened to in <b>audio format</b>",
+    "button": "Wow!"
   },
   "_s5": {
     "title": "Colorful",
-    "description": "Fairy tales are complemented by vivid illustrations created by artificial intelligence and inspired by the best illustrators of children's books"
+    "description": "Fairy tales are complemented by vivid illustrations created by artificial intelligence and inspired by the best illustrators of children's books",
+    "button": "Beautiful!"
   },
   "_s6": {
     "title": "Available in several languages",
@@ -63,6 +66,7 @@
     "page6": "The villagers clapped and cheered as Kayley and Dr Kitty Cat's wish spread, bringing kindness and love to everyone they met. As the night grew darker, Kayley and Dr Kitty Cat realized it was time to head back home. They thanked the villagers and started their journey back, feeling grateful for the incredible adventures and the magical friends they had made along the way. Hand in hand, Kayley and Dr Kitty Cat returned to their cozy home in Cloverville. They cuddled up in bed, knowing that they had experienced a truly enchanting adventure. As they drifted off to sleep, the magic of the day stayed with them, reminding them to always treat others with kindness and love. And so, in Cloverville, Kayley and Dr Kitty Cat's story was whispered throughout generations, reminding everyone of the importance of treating others the way they would like to be treated – with love, kindness, and a touch of enchantment.",
     "end": "THE END",
     "back": "Continue",
-    "alert": "Soon in telegram. Stay tuned"
+    "alert": "Soon in telegram. Stay tuned",
+    "mainButton": "Create your own fairy tale"
   }
 }
