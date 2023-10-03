@@ -1,10 +1,5 @@
 <template>
-  <slide-presset
-    v-bind="props"
-    :active="!!active"
-    extends="slide"
-    :button="null"
-  >
+  <slide-presset v-bind="props" extends="slide" :button="null">
     <slot />
 
     <div :class="$style.links">
@@ -37,6 +32,7 @@
 import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { NANO_STATE_TOKEN } from '@tok/generation/tokens';
+import { useCarousel } from '@tok/generation/use/carousel';
 import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
@@ -59,6 +55,8 @@ const { mainButtonText, popup, selectedProduct, active } = toRefs(props);
 
 const i18n = useI18n();
 const tg = useTelegramSdk();
+// to detect if we inside carousel or not, to prevent triggering MainButton.show()
+const carousel = useCarousel(true);
 const nanoState = inject(NANO_STATE_TOKEN, null);
 const alertsService = useAlerts({ autoCloseOnUnmount: true });
 
@@ -105,7 +103,7 @@ const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
   const _text = translatedMainButton.value;
 
-  if (active.value === false) {
+  if (carousel && active.value === false) {
     return '';
   }
 

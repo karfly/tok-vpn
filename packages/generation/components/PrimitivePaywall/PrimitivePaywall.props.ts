@@ -8,12 +8,10 @@ export type PaywalPressetButtons = (PopupButton & {
 
 export type PrimitivePaywallProps = Omit<
   SlidePressetProps,
-  'button' | 'extends' | 'active'
+  'button' | 'extends'
 > & {
   // todo
   selectedProduct: any;
-
-  active?: boolean | null;
 
   links: { text: string; href: string }[];
 
@@ -55,8 +53,6 @@ export const defaultPopup = {
 };
 
 export const PrimitivePaywallDefaultProps = {
-  // to detect if paywall inside carousel or not
-  active: null,
   links: () => [],
   mainButtonText: 'Continue',
   popup: () => defaultPopup,
