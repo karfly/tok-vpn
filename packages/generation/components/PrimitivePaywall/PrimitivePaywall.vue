@@ -120,11 +120,17 @@ const onSubmit = () => {
   popupOpened.value = true;
 };
 
+let lastAlert: string | undefined;
+
 const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
 ) => {
   if (!id) {
-    alertsService.show(paymentCanceledMessage.value, {
+    if (lastAlert) {
+      alertsService.close(lastAlert);
+    }
+
+    lastAlert = alertsService.show(paymentCanceledMessage.value, {
       type: 'error',
     });
 
