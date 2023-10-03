@@ -1,4 +1,6 @@
 {
+  "_wtHref": "https://wondertales.io/?utm_source=telegram_onboarding",
+  "_wtHrefText": "WonderTales.io",
   "_s1": {
     "title": "Wonder Tales",
     "description": "Your one-stop destination for incredible custom tales for kids",
@@ -43,8 +45,6 @@
     "policy_href": "https://google.com",
     "terms": "Terms of use",
     "terms_href": "https://google.com",
-    "wt": "WonderTales.io",
-    "wt_href": "https://wondertales.io",
     "main": "Continue",
     "feature1": "An endless number of fairy tales",
     "feature2": "Access to fairy tales anytime",

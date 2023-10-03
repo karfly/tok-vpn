@@ -229,10 +229,6 @@ export default <Config>{
               text: '_paywall.terms',
               href: '_paywall.terms_href',
             },
-            {
-              text: '_paywall.wt',
-              href: '_paywall.wt_href',
-            },
           ],
         },
       ],

@@ -1,4 +1,6 @@
 {
+  "_wtHref": "https://wonder-tales.ru/?utm_source=telegram_onboarding",
+  "_wtHrefText": "WonderTales.ru",
   "_s1": {
     "title": "Wonder <span style=\"color: var(--tok-primary)\">Tales</span>",
     "description": "Ваш пункт назначения для невероятных индивидуальных сказок для детей",
@@ -43,8 +45,6 @@
     "policy_href": "https://google.com",
     "terms": "Соглашение о подписке",
     "terms_href": "https://google.com",
-    "wt": "WonderTales.ru",
-    "wt_href": "https://wonder-tales.ru",
     "main": "Продолжить",
     "feature1": "Бесконечное количество сказок",
     "feature2": "Доступ к сказкам в любое время",

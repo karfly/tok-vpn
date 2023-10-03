@@ -4,6 +4,8 @@
 
     <template #overContent>
       <back-button :show="showBackButton" @on-click="onBackButton" />
+
+      <slot name="overContent" />
     </template>
   </root>
 </template>
