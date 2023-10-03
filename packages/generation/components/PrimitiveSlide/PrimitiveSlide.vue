@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { DrawPresset } from '@tok/generation/components/DrawPresset';
 import { useTranslated } from '@tok/i18n';
-import { FlatButton } from '@tok/ui/components/FlatButton';
+import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
 import { setNativeFocused } from '@tok/ui/dom/focus';
 import { computed, ref, toRefs, watch } from 'vue';
 
@@ -62,10 +62,10 @@ const buttonText = computed(() => {
   return typeof value === 'string' ? value : value ? value.content : '';
 });
 
-const buttonProps = computed(() => {
+const buttonProps = computed<FlatButtonProps>(() => {
   const value = button.value;
 
-  return typeof value === 'string' ? {} : value;
+  return typeof value === 'string' ? {} : value || {};
 });
 
 const i18nButton = useTranslated(buttonText);
@@ -81,6 +81,12 @@ watch(
 );
 
 const onClick = () => {
+  const _props = buttonProps.value;
+
+  if ('to' in _props || 'href' in _props) {
+    return;
+  }
+
   emit('onClick');
 };
 </script>
@@ -113,17 +119,20 @@ const onClick = () => {
   padding: 1rem;
   gap: 0.75rem;
 
-  background: linear-gradient(
-    180deg,
-    rgba(var(--tok-background-color-base), 0) 0%,
-    var(--tok-background-color) 20%
+  background: var(
+    --tok-slide-background,
+    linear-gradient(
+      180deg,
+      rgba(var(--tok-background-color-base), 0) 0%,
+      var(--tok-background-color) 20%
+    )
   );
 
   &_roundTop {
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
     margin-top: -2rem;
-    background: var(--tok-background-color);
+    background: var(--tok-slide-background, var(--tok-background-color));
   }
 }
 

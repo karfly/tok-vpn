@@ -163,71 +163,75 @@ export default <Config>{
             to: '/story',
           },
         },
+        {
+          extends: 'base_paywall',
+          media: {
+            type: 'sticker',
+            src: import('./assets/stickers/shpooky_party.tgs'),
+            loop: true,
+            style:
+              'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
+          },
+          title: '_paywall.title',
+          mainButtonText: '_paywall.main',
+          features: [
+            '_paywall.feature1',
+            '_paywall.feature2',
+            '_paywall.feature3',
+          ],
+          products: [
+            {
+              id: 'monthly',
+              title: '_paywall.product1',
+              price: 8.95,
+              currency: 'USD',
+              pricePostfix: '_paywall.pricePrefix',
+            },
+            {
+              id: 'yearly',
+              title: '_paywall.product2',
+              price: 5.95,
+              discount: '_paywall.discount',
+              currency: 'USD',
+              pricePostfix: '_paywall.pricePrefix',
+            },
+          ],
+          popup: {
+            type: 'web',
+            title: '_paywall.popup.title',
+            buttons: [
+              {
+                id: 'telegram_payments',
+                text: '_paywall.popup.telegram_payments',
+                type: 'default',
+              },
+              {
+                id: 'wallet_pay',
+                text: '_paywall.popup.wallet_pay',
+                type: 'default',
+              },
+            ],
+          },
+          links: [
+            {
+              text: '_paywall.policy',
+              href: '_paywall.policy_href',
+            },
+            {
+              text: '_paywall.terms',
+              href: '_paywall.terms_href',
+            },
+            {
+              text: '_paywall.wt',
+              href: '_paywall.wt_href',
+            },
+          ],
+        },
       ],
     },
     {
       extends: 'story',
       path: '/story',
-    },
-    {
-      extends: 'base_paywall',
-      path: '/paywall',
-      media: {
-        type: 'sticker',
-        src: import('./assets/stickers/shpooky_party.tgs'),
-        loop: true,
-        style: 'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
-      },
-      title: '_paywall.title',
-      mainButtonText: '_paywall.main',
-      features: ['_paywall.feature1', '_paywall.feature2', '_paywall.feature3'],
-      products: [
-        {
-          id: 'monthly',
-          title: '_paywall.product1',
-          price: 8.95,
-          currency: 'USD',
-          pricePostfix: '_paywall.pricePrefix',
-        },
-        {
-          id: 'yearly',
-          title: '_paywall.product2',
-          price: 5.95,
-          discount: '_paywall.discount',
-          currency: 'USD',
-          pricePostfix: '_paywall.pricePrefix',
-        },
-      ],
-      popup: {
-        type: 'web',
-        message: '_paywall.popup.title',
-        buttons: [
-          {
-            id: 'telegram_payments',
-            text: '_paywall.popup.telegram_payments',
-            type: 'default',
-          },
-          {
-            id: 'wallet_pay',
-            text: '_paywall.popup.wallet_pay',
-            type: 'default',
-          },
-        ],
-      },
-      links: [
-        {
-          text: '_paywall.policy',
-          href: '_paywall.policy_href',
-        },
-        {
-          text: '_paywall.terms',
-          href: '_paywall.terms_href',
-        },
-        {
-          text: '_paywall.wt',
-          href: '_paywall.wt_href',
-        },
-      ],
     },
   ],
 };

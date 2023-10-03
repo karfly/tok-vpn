@@ -1,5 +1,10 @@
 <template>
-  <slide-presset v-bind="props" extends="slide" :button="null">
+  <slide-presset
+    v-bind="props"
+    :active="!!active"
+    extends="slide"
+    :button="null"
+  >
     <slot />
 
     <div :class="$style.links">
@@ -50,7 +55,7 @@ const props = withDefaults(
   PrimitivePaywallDefaultProps
 );
 
-const { mainButtonText, popup, selectedProduct } = toRefs(props);
+const { mainButtonText, popup, selectedProduct, active } = toRefs(props);
 
 const i18n = useI18n();
 const tg = useTelegramSdk();
@@ -99,6 +104,10 @@ const translatedPopupButtons = computed(() => {
 const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
   const _text = translatedMainButton.value;
+
+  if (active.value === false) {
+    return '';
+  }
 
   if (!value || !_text || popupOpened.value) {
     return '';

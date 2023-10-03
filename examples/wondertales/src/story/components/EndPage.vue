@@ -42,7 +42,7 @@ const onClick = () => {
 
   alertsService.show(text.value);
 
-  router.push('/paywall');
+  router.push('/?page=6');
 };
 </script>
 

@@ -3,7 +3,8 @@
 
 html[data-theme='dark'] {
   --tok-background-color-base: 66, 68, 86;
-  --tok-background-color: transparent;
+
+  --tok-slide-background: transparent;
 
   --tok-primary: #c962a9;
   --tok-primary-text: var(--tok-white);
