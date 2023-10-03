@@ -1,6 +1,10 @@
 <template>
-  <slide-presset v-bind="props" extends="slide" :button="null">
-    <form :class="$style.form" @submit.prevent="onClick">
+  <slide-presset
+    v-bind="props"
+    extends="slide"
+    :button-after-content="debouncedFocused"
+  >
+    <form :class="$style.form" @submit.prevent>
       <div v-for="control in form" :key="control.id" :class="$style.control">
         <checkbox-block
           v-if="control.type === 'checkbox'"
@@ -17,19 +21,6 @@
           @update:model-value="onUpdate(control.id, $event)"
         />
       </div>
-
-      <div
-        :class="[$style.container, debouncedFocused && $style.container_top]"
-      >
-        <flat-button
-          v-bind="buttonProps"
-          type="submit"
-          :class="$style.button"
-          @mousedown.stop.prevent
-        >
-          {{ i18nButton }}
-        </flat-button>
-      </div>
     </form>
   </slide-presset>
 </template>
@@ -37,10 +28,7 @@
 <script setup lang="ts">
 import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { NANO_STATE_TOKEN } from '@tok/generation/tokens';
-import { useCarousel } from '@tok/generation/use/carousel';
-import { useTranslated } from '@tok/i18n';
 import { CheckboxBlock } from '@tok/ui/components/CheckboxBlock';
-import { FlatButton } from '@tok/ui/components/FlatButton';
 import { InputText } from '@tok/ui/components/InputText';
 import { useDebounceFn } from '@tok/ui/use/debounce';
 import { computed, inject, reactive, ref, toRefs, watch } from 'vue';
@@ -56,11 +44,9 @@ const props = withDefaults(
   FormPressetDefaultProps
 );
 
-const { form, button } = toRefs(props);
+const { form } = toRefs(props);
 
 const nanoState = inject(NANO_STATE_TOKEN, null);
-
-const carousel = useCarousel();
 
 const focusedElement = ref<string[]>([]);
 const debouncedFocused = ref(false);
@@ -78,24 +64,6 @@ watch(
   },
   { immediate: true }
 );
-
-const buttonText = computed(() => {
-  const value = button.value;
-
-  return typeof value === 'string' ? value : value ? value.content : '';
-});
-
-const i18nButton = useTranslated(buttonText);
-
-const buttonProps = computed(() => {
-  const value = button.value;
-
-  return typeof value === 'string' ? {} : value;
-});
-
-const onClick = () => {
-  carousel?.next();
-};
 
 const stateValue = nanoState?.state;
 
@@ -140,26 +108,10 @@ const onFocused = (id: string, value: boolean) => {
 
 <style lang="scss" module>
 .form {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
   margin-top: 1.25rem;
 }
 
 .control {
   margin-bottom: 1.25rem;
-}
-
-.container {
-  margin-top: auto;
-
-  &_top {
-    margin-top: initial;
-  }
-}
-
-.button {
-  width: 100%;
 }
 </style>

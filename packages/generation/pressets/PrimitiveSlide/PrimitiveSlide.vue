@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.slide">
-    <div ref="focusTrapRef" tabindex="0" style="width: 0; height: 0" />
+    <div ref="focusTrapRef" tabindex="0" :class="$style.focustrap" />
 
     <draw-presset
       v-if="media"
@@ -15,8 +15,9 @@
       <flat-button
         v-if="buttonText"
         v-bind="buttonProps"
-        :class="$style.button"
+        :class="[$style.button, buttonAfterContent && $style.button_after]"
         @click="onClick"
+        @mousedown.prevent
       >
         {{ i18nButton }}
       </flat-button>
@@ -82,6 +83,11 @@ const onClick = () => {
 </script>
 
 <style lang="scss" module>
+.focustrap {
+  width: 0;
+  height: 0;
+}
+
 .slide {
   position: relative;
   min-height: 100vh;
@@ -113,5 +119,9 @@ const onClick = () => {
 .button {
   margin-top: auto;
   width: 100%;
+
+  &_after {
+    margin-top: initial;
+  }
 }
 </style>

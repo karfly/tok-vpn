@@ -92,10 +92,8 @@ const translatedPopupButtons = computed(() => {
     unknown
   >;
   // todo type
-  const defaultMessages = i18n.messages.value[i18n.fallbackLocale] as Record<
-    string,
-    unknown
-  >;
+  const defaultMessages = (i18n.messages.value[i18n.fallbackLocale] ||
+    {}) as Record<string, unknown>;
 
   return buttons.map((button) => {
     if ('text' in button) {
