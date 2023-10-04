@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-bind="props">
     <component
       v-if="loaded"
       v-bind="props"

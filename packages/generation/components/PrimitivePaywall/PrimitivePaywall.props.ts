@@ -1,30 +1,11 @@
-import type { MediaPressetProps } from '@tok/generation/pressets/Media';
-import type { SlidePressetProps } from '@tok/generation/pressets/Slide';
-import type { PopupButton } from '@twa-dev/types';
+import { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
+import { _GenerationPrimitivePaywallConfig } from '@tok/generation/defineConfig';
 
-export type PaywalPressetButtons = (PopupButton & {
-  media?: MediaPressetProps;
-})[];
-
-export type PrimitivePaywallProps = Omit<
-  SlidePressetProps,
-  'button' | 'extends'
-> & {
-  // todo
-  selectedProduct: any;
-
-  links: { text: string; href: string }[];
-
-  mainButtonText?: string;
-
-  popup?: {
-    // todo merge with TgPopupProps
-    type?: 'web' | 'telegram';
-    title: string;
-    message?: string;
-    buttons: PaywalPressetButtons;
+export type PrimitivePaywallProps = Pick<PrimitiveSlideProps, 'active'> &
+  _GenerationPrimitivePaywallConfig & {
+    // todo
+    selectedProduct: any;
   };
-};
 
 export const defaultPopup = {
   title: 'Choose the payment method',
@@ -49,7 +30,7 @@ export const defaultPopup = {
       type: 'default' as const,
       text: 'Wallet pay',
     },
-  ] as PaywalPressetButtons,
+  ],
 };
 
 export const PrimitivePaywallDefaultProps = {

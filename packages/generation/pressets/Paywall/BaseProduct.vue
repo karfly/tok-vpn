@@ -23,23 +23,21 @@
 </template>
 
 <script setup lang="ts">
+import { _GenerationPaywallProduct } from '@tok/generation/defineConfig';
 import { Money } from '@tok/ui/components/Money';
 import { getElementId } from '@tok/ui/functions';
-import { setupMoney } from '@tok/ui/setup/setupMoney';
 
-import { BaseProductProps } from './BasePaywallPresset.props';
+type Props = _GenerationPaywallProduct & {
+  active?: boolean;
+};
 
-const props = defineProps<BaseProductProps>();
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'onSelect', id: string): void;
 }>();
 
 const elementId = getElementId();
-
-setupMoney({
-  currency: props.currency,
-});
 
 const onChange = (event: Event) => {
   const target = event.target as HTMLInputElement;

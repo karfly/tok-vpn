@@ -1,9 +1,5 @@
 <template>
-  <primitive-paywall
-    v-bind="props"
-    :main-button-text="computedMainButtonText"
-    :selected-product="productToSend"
-  >
+  <primitive-paywall v-bind="props" :selected-product="productToSend">
     <form :class="$style.form" :style="productWidthStyle" @submit.prevent>
       <div
         v-for="item in translatedProducts"
@@ -22,22 +18,21 @@
 
 <script setup lang="ts">
 import { PrimitivePaywall } from '@tok/generation/components/PrimitivePaywall';
-import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';
-import { formatMoney } from '@tok/ui/components/Money/formatMoney';
+import { tokTranslate, useI18n } from '@tok/i18n';
 import { computed, ref, toRefs } from 'vue';
 
 import {
-  PaywallMultiProductsPressetDefaultProps,
-  PaywallMultiProductsPressetProps,
-} from './PaywallMultiProducts.presset.props';
+  PaywallRowPressetDefaultProps,
+  PaywallRowPressetProps,
+} from './PaywallRow.presset.props';
 import Product from './Product.vue';
 
 const props = withDefaults(
-  defineProps<PaywallMultiProductsPressetProps>(),
-  PaywallMultiProductsPressetDefaultProps
+  defineProps<PaywallRowPressetProps>(),
+  PaywallRowPressetDefaultProps
 );
 
-const { products, mainButtonText } = toRefs(props);
+const { products } = toRefs(props);
 
 const i18n = useI18n();
 
@@ -87,19 +82,6 @@ const productToSend = computed(() => {
   return translatedProducts.value.find(({ id }) => id === active);
 });
 
-const translatedMainButton = useTranslated(mainButtonText);
-const computedMainButtonText = computed(() => {
-  const value = productToSend.value;
-
-  if (!value) {
-    return undefined;
-  }
-
-  const _text = translatedMainButton.value;
-
-  return _text.replace(/\{price\}/g, formatMoney(value.price, value.currency));
-});
-
 const onProductSelect = (id: string) => {
   activeId.value = id;
 };
@@ -126,7 +108,6 @@ const productWidthStyle = computed(() => {
   display: flex;
   overflow-x: auto;
 
-  padding-top: 1.25rem;
   margin: 0 -0.3125rem;
 }
 

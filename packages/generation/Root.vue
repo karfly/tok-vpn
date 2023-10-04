@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import { THEME_TOKEN } from '@tok/generation/tokens';
 import { useI18n } from '@tok/i18n';
 import { BackButton } from '@tok/telegram-ui/components/BackButton';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
@@ -19,7 +20,7 @@ import { Root } from '@tok/ui/components/Root';
 import { computed, inject, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
-const themeParam = inject('__theme', 'auto');
+const themeParam = inject(THEME_TOKEN, 'auto');
 
 const theme = useTheme(themeParam);
 const tg = useTelegramSdk();

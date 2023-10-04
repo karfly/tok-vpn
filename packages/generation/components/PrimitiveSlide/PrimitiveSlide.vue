@@ -6,12 +6,12 @@
       v-if="media"
       v-bind="media"
       extends="media"
-      :class="$style.media"
+      :class="[$style.media, $style['media_' + shape]]"
     />
 
     <div
-      :class="[$style.content, roundOnTop && $style.content_roundTop]"
-      :style="{ textAlign: textAlign }"
+      :class="[$style.content, $style['content_' + shape]]"
+      :style="{ textAlign: textAlign, background: background }"
     >
       <slot />
 
@@ -106,10 +106,21 @@ const onClick = () => {
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow: hidden;
 }
 
 .media {
   width: 100%;
+
+  &_stacked {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100vh;
+    width: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .content {
@@ -128,11 +139,17 @@ const onClick = () => {
     )
   );
 
-  &_roundTop {
+  &_rounded {
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
     margin-top: -2rem;
     background: var(--tok-slide-background, var(--tok-background-color));
+  }
+
+  &_stacked {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 }
 

@@ -1,9 +1,5 @@
 <template>
-  <slide-presset
-    v-bind="props"
-    extends="slide"
-    :button-after-content="debouncedFocused"
-  >
+  <slide-presset v-bind="props" :button-after-content="debouncedFocused">
     <form @submit.prevent>
       <div v-for="control in form" :key="control.id" :class="$style.control">
         <checkbox-block
@@ -26,15 +22,15 @@
 </template>
 
 <script setup lang="ts">
+import { _GenerationFormControlConfig } from '@tok/generation/defineConfig';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
-import { NANO_STATE_TOKEN } from '@tok/generation/tokens';
+import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { CheckboxBlock } from '@tok/ui/components/CheckboxBlock';
 import { InputText } from '@tok/ui/components/InputText';
 import { useDebounceFn } from '@tok/ui/use/debounce';
 import { computed, inject, reactive, ref, toRefs, watch } from 'vue';
 
 import {
-  FormControl,
   FormPressetDefaultProps,
   FormPressetProps,
 } from './Form.presset.props';
@@ -46,7 +42,7 @@ const props = withDefaults(
 
 const { form } = toRefs(props);
 
-const nanoState = inject(NANO_STATE_TOKEN, null);
+const formState = inject(FORM_STATE_TOKEN, null);
 
 const focusedElement = ref<string[]>([]);
 const debouncedFocused = ref(false);
@@ -65,10 +61,10 @@ watch(
   { immediate: true }
 );
 
-const stateValue = nanoState?.state;
+const stateValue = formState?.state;
 
-const getInitValue = (control: FormControl) => {
-  if (control.type === 'checkbox' || control.type === 'radio') {
+const getInitValue = (control: _GenerationFormControlConfig) => {
+  if (control.type === 'checkbox') {
     return stateValue?.value[control.id] ?? false;
   }
 
@@ -83,14 +79,14 @@ const reactiveValue = form.value.reduce((acc, control) => {
   return acc;
 }, {} as Record<string, unknown>);
 
-nanoState?.update(reactiveValue);
+formState?.update(reactiveValue);
 
 const generatedForm = reactive<Record<string, unknown>>(reactiveValue);
 
 const onUpdate = (id: string, value: unknown) => {
   generatedForm[id] = value;
 
-  nanoState?.update({ [id]: value });
+  formState?.update({ [id]: value });
 };
 
 const onFocused = (id: string, value: boolean) => {

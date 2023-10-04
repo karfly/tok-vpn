@@ -1,22 +1,7 @@
-import { MediaPressetProps } from '@tok/generation/pressets/Media';
-import {
-  SlidePressetDefaultProps,
-  SlidePressetProps,
-} from '@tok/generation/pressets/Slide';
+import { _GenerationListConfig } from '@tok/generation/defineConfig';
 
-export type ListPressetProps = Omit<
-  SlidePressetProps,
-  'extends' | 'description'
-> & {
-  extends?: 'list';
-
-  description?: string;
-
-  list: { media: MediaPressetProps; text: string }[];
-};
+export type ListPressetProps = Omit<_GenerationListConfig, 'extends'>;
 
 export const ListPressetDefaultProps = {
-  ...SlidePressetDefaultProps,
-  description: '',
   list: () => [],
 } as const;

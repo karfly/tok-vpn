@@ -1,5 +1,14 @@
 <template>
-  <slide-presset v-bind="props" extends="slide" :button="null">
+  <slide-presset v-bind="props" :button="null">
+    <ul v-if="computedFeatures.length > 0">
+      <list-item
+        v-for="(feature, index) in computedFeatures"
+        :key="index"
+        :item="feature"
+        :class="$style.feature"
+      />
+    </ul>
+
     <slot />
 
     <div :class="$style.links">
@@ -29,15 +38,17 @@
 </template>
 
 <script setup lang="ts">
+import { ListItem } from '@tok/generation/pressets/List';
 import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/Slide';
-import { NANO_STATE_TOKEN } from '@tok/generation/tokens';
+import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
+import { useMoney } from '@tok/ui/setup/setupMoney';
 import { useAlerts } from '@tok/ui/use/alerts';
 import { computed, inject, ref, toRefs } from 'vue';
 
@@ -51,13 +62,14 @@ const props = withDefaults(
   PrimitivePaywallDefaultProps
 );
 
-const { mainButtonText, popup, selectedProduct, active } = toRefs(props);
+const { mainButtonText, popup, selectedProduct, active, features } =
+  toRefs(props);
 
 const i18n = useI18n();
 const tg = useTelegramSdk();
 // to detect if we inside carousel or not, to prevent triggering MainButton.show()
 const carousel = useCarousel(true);
-const nanoState = inject(NANO_STATE_TOKEN, null);
+const formState = inject(FORM_STATE_TOKEN, null);
 const alertsService = useAlerts({ autoCloseOnUnmount: true });
 
 const popupButtons = computed(() => popup.value.buttons);
@@ -99,6 +111,30 @@ const translatedPopupButtons = computed(() => {
   });
 });
 
+const defaultMedia = {
+  type: 'icon' as const,
+  src: 'checkmark-fill',
+} as const;
+
+const computedFeatures = computed(() => {
+  return (features?.value || []).map((item) => {
+    if (typeof item === 'string') {
+      return {
+        media: defaultMedia,
+        text: item,
+      };
+    }
+
+    return {
+      ...item,
+      media: item.media ?? defaultMedia,
+    };
+  });
+});
+
+// todo
+const formattedPrice = useMoney();
+
 const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
   const _text = translatedMainButton.value;
@@ -111,7 +147,7 @@ const mainButtonComputedText = computed(() => {
     return '';
   }
 
-  return _text;
+  return _text.replace(/\{price\}/g, value.price);
 });
 
 const popupOpened = ref(false);
@@ -137,7 +173,7 @@ const onSelectOption = (
     return;
   }
 
-  const payload = nanoState ? nanoState.state.value : {};
+  const payload = formState ? formState.state.value : {};
 
   const _product = selectedProduct.value || {};
 

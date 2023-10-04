@@ -1,6 +1,10 @@
 <template>
   <primitive-slide v-bind="props" @on-click="onClick">
-    <div>
+    <div :class="$style.content">
+      <p v-if="carousel && pagination === 'count'" :class="$style.count">
+        {{ slideCount }}
+      </p>
+
       <h2 v-html="i18nTitle" :class="$style.title" />
 
       <p
@@ -18,7 +22,7 @@
 import { PrimitiveSlide } from '@tok/generation/components/PrimitiveSlide';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useTranslated } from '@tok/i18n';
-import { toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 
 import {
   SlidePressetDefaultProps,
@@ -30,11 +34,19 @@ const props = withDefaults(
   SlidePressetDefaultProps
 );
 
-const { title, description, button } = toRefs(props);
+const { title, description } = toRefs(props);
 
-const carousel = useCarousel(!button.value);
+const carousel = useCarousel(true);
 const i18nTitle = useTranslated(title);
 const i18nDescription = useTranslated(description);
+
+const slideCount = computed(() => {
+  if (!carousel) {
+    return null;
+  }
+
+  return `${carousel.index.value + 1} / ${carousel.length.value}`;
+});
 
 const onClick = () => {
   carousel?.next();
@@ -42,6 +54,13 @@ const onClick = () => {
 </script>
 
 <style lang="scss" module>
+.count {
+  font: var(--tok-font-s);
+
+  padding-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
 .title {
   margin-bottom: 0.75rem;
 }

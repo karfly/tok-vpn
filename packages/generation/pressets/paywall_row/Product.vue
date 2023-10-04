@@ -25,27 +25,20 @@
 </template>
 
 <script setup lang="ts">
+import { _GenerationPaywallRowProductConfig } from '@tok/generation/defineConfig';
 import { Money } from '@tok/ui/components/Money';
 import { PrimitiveRadio } from '@tok/ui/components/PrimitiveRadio';
 import { getElementId } from '@tok/ui/functions';
-import { setupMoney } from '@tok/ui/setup/setupMoney';
 
-import { ProductProps } from './PaywallMultiProducts.presset.props';
+type Props = _GenerationPaywallRowProductConfig & {
+  active: boolean;
+};
 
-const props = withDefaults(defineProps<ProductProps>(), {
-  title: '',
-  description: '',
-  bestText: '',
-  active: false,
-});
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'onSelect', id: string): void;
 }>();
-
-setupMoney({
-  currency: props.currency,
-});
 
 const elementId = getElementId();
 

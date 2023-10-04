@@ -1,24 +1,31 @@
 import { StickerProps } from '@tok/telegram-ui/components/Sticker';
 import { SvgIconProps } from '@tok/ui/components/SvgIcon';
+import { CSSProperties } from 'vue';
 
 export type _MediaLoader<T> = Promise<{ default: T }>;
 
-// todo: Find a way to translate images
-// src: '_i18n.imageSrc' -> /locales/en.ts: import('../assets/*.png');
 export type IconPressetProps = {
   type: 'icon';
   src?: string | _MediaLoader<any>;
+
+  style?: string | CSSProperties;
 } & Omit<SvgIconProps, 'name'>;
 
 export type StickerPressetProps = {
   type: 'sticker';
-  src?: _MediaLoader<typeof import('*.tgs')> | null;
+  src?: Promise<typeof import('*.tgs')> | null;
+
+  style?: string | CSSProperties;
 } & Omit<StickerProps, 'json' | 'autoplay'>;
 
+// todo: Find a way to translate images
+// src: '_i18n.imageSrc' -> /locales/en.ts: import('../assets/*.png');
 export type ImagePressetProps = {
   type: 'image';
-  src: _MediaLoader<any>;
-  webp?: _MediaLoader<any>;
+  src: Promise<typeof import('*.png') | typeof import('*.jpg')>;
+  webp?: Promise<typeof import('*.webp')>;
+
+  style?: string | CSSProperties;
 
   static?: boolean;
 };

@@ -1,18 +1,12 @@
-import type { MediaPressetProps } from '@tok/generation/pressets/Media';
-import type { FlatButtonProps } from '@tok/ui/components/FlatButton';
+import { _GenerationSlideConfig } from 'defineConfig';
 
-export type PrimitiveSlideProps = {
-  button: string | (FlatButtonProps & { content: string }) | null;
-
+export type PrimitiveSlideProps = Pick<
+  _GenerationSlideConfig,
+  'media' | 'textAlign' | 'shape' | 'background' | 'button' | 'extends'
+> & {
   active?: boolean;
 
-  media?: MediaPressetProps;
-
-  textAlign?: 'left' | 'right' | 'center';
-
   buttonAfterContent?: boolean;
-
-  roundOnTop?: boolean;
 };
 
 export type PrimitiveSlideEmits = {
@@ -20,6 +14,7 @@ export type PrimitiveSlideEmits = {
 };
 
 export const PrimitiveSlideDefaultProps = {
-  button: 'Button',
+  button: 'Next',
   textAlign: 'left',
+  shape: 'square',
 } as const;

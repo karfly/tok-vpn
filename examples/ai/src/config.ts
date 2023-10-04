@@ -1,17 +1,19 @@
+import { defineConfig } from '@tok/generation';
+
 import ActionSlide from './custom/ActionSlide.vue';
 
-type Config = {
-  pages: any[];
-};
-
-export default <Config>{
-  // 'dark' | 'light' | 'auto'
+export default defineConfig({
   theme: 'dark',
-  override: {
+  definePressets: {
     action_slide: ActionSlide,
+  },
+  setupCurrency: {
+    currency: 'USD',
+    align: 'right',
   },
   pages: [
     {
+      extends: 'base',
       slides: [
         {
           extends: 'action_slide',
@@ -70,7 +72,7 @@ export default <Config>{
       ],
     },
     {
-      extends: 'paywallMultiProducts',
+      extends: 'paywall_row',
       path: '/paywall',
       media: {
         type: 'image',
@@ -83,14 +85,12 @@ export default <Config>{
       products: [
         {
           id: 'id1',
-          currency: 'USD',
           price: 4.99,
           title: '4<br />credits',
           description: 'Perfect to<br />start with',
         },
         {
           id: 'id2',
-          currency: 'USD',
           price: 8.99,
           title: '20<br />credits',
           description: 'Best value<br />offer',
@@ -98,7 +98,6 @@ export default <Config>{
         },
         {
           id: 'id3',
-          currency: 'USD',
           price: 19.99,
           title: '100<br />credits',
           description: 'For the true<br />enthusiasts',
@@ -116,4 +115,4 @@ export default <Config>{
       ],
     },
   ],
-};
+});

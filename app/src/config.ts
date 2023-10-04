@@ -1,8 +1,6 @@
-type Config = {
-  pages: any[];
-};
+import { defineConfig } from '@tok/generation';
 
-export default <Config>{
+export default defineConfig({
   pages: [
     {
       slides: [
@@ -22,6 +20,7 @@ export default <Config>{
             src: import('./assets/img/base.png'),
             style: 'aspect-ratio: 420/465',
           },
+          shape: 'rounded',
           title: 'Send voice messages',
           description: 'Get instant answers',
           button: 'Next',
@@ -32,6 +31,7 @@ export default <Config>{
             src: import('./assets/img/base.png'),
             style: 'aspect-ratio: 420/465',
           },
+          shape: 'rounded',
           title: 'Generate images from text',
           description: 'Powered by OpenAI',
           button: {
@@ -42,7 +42,7 @@ export default <Config>{
       ],
     },
     {
-      extends: 'base_paywall',
+      extends: 'paywall',
       path: '/paywall',
       media: {
         type: 'sticker',
@@ -62,7 +62,6 @@ export default <Config>{
           title: '12 months',
           discount: 'Discount 60%',
           price: 12,
-          currency: 'USD',
           pricePostfix: '/month',
         },
         {
@@ -70,14 +69,12 @@ export default <Config>{
           title: '1 month',
           discount: 'Discount 60%',
           price: 16,
-          currency: 'USD',
           pricePostfix: '/month',
         },
         {
           id: 'id3',
           title: '1 week',
           price: 12,
-          currency: 'USD',
           pricePostfix: '/month',
         },
       ],
@@ -93,4 +90,4 @@ export default <Config>{
       ],
     },
   ],
-};
+});

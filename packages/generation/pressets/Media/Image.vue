@@ -1,5 +1,5 @@
 <template>
-  <picture v-if="type === 'image'">
+  <picture v-if="type === 'image'" v-bind="props">
     <source v-if="webp" type="image/webp" :srcset="loadedWebp" />
 
     <img

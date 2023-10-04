@@ -11,11 +11,10 @@
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/pressets/Media';
 import { useTranslated } from '@tok/i18n';
+import { _GenerationListOptionsConfig } from 'defineConfig';
 import { computed, toRefs } from 'vue';
 
-import { ListPressetProps } from './List.presset.props';
-
-const props = defineProps<{ item: ListPressetProps['list'][number] }>();
+const props = defineProps<{ item: _GenerationListOptionsConfig }>();
 
 const { item } = toRefs(props);
 

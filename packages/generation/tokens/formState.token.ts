@@ -5,4 +5,4 @@ type State = {
   update(value: Record<string, unknown>): void;
 };
 
-export const NANO_STATE_TOKEN = Symbol() as InjectionKey<State>;
+export const FORM_STATE_TOKEN = Symbol() as InjectionKey<State>;

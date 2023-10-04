@@ -1,16 +1,10 @@
 import type { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
+import { _GenerationSlideConfig } from '@tok/generation/defineConfig';
 
-export type SlidePressetProps = PrimitiveSlideProps & {
-  title: string;
-
-  description: string;
-
-  extends?: 'slide';
-};
+export type SlidePressetProps = PrimitiveSlideProps &
+  Pick<_GenerationSlideConfig, 'title' | 'description' | 'pagination'>;
 
 export const SlidePressetDefaultProps = {
   title: 'Title',
-  description: 'Description',
-  button: 'Button',
-  textAlign: 'left',
+  description: '',
 } as const;
