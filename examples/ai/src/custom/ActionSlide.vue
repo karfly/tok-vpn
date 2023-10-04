@@ -31,11 +31,11 @@
 </template>
 
 <script setup lang="ts">
+import { MediaPressetProps } from '@tok/generation/pressets/Media';
 import {
   SlidePresset,
   SlidePressetProps,
-} from '@tok/generation/pressets/_slide';
-import { MediaPressetProps } from '@tok/generation/pressets/Media';
+} from '@tok/generation/pressets/slide';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useTranslated } from '@tok/i18n';
 import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';

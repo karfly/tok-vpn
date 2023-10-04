@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { SlidePresset } from '@tok/generation/pressets/_slide';
+import { SlidePresset } from '@tok/generation/pressets/slide';
 
 import {
   ListPressetDefaultProps,
