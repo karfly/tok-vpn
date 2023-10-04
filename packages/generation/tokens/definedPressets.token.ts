@@ -1,7 +1,7 @@
 import { DefinedPressetsKeys } from '@tok/generation/defineConfig';
+import { SlidePresset } from '@tok/generation/pressets/_slide';
 import { CarouselPresset } from '@tok/generation/pressets/Carousel';
 import { MediaPresset } from '@tok/generation/pressets/Media';
-import { SlidePresset } from '@tok/generation/pressets/slide';
 import { defineAsyncComponent, InjectionKey } from 'vue';
 
 export type DefinePressets = Record<

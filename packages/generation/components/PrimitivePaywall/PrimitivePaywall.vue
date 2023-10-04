@@ -38,9 +38,9 @@
 </template>
 
 <script setup lang="ts">
+import { SlidePresset } from '@tok/generation/pressets/_slide';
 import { ListItem } from '@tok/generation/pressets/List';
 import { MediaPresset } from '@tok/generation/pressets/Media';
-import { SlidePresset } from '@tok/generation/pressets/Slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';

@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { _GenerationFormControlConfig } from '@tok/generation/defineConfig';
-import { SlidePresset } from '@tok/generation/pressets/Slide';
+import { SlidePresset } from '@tok/generation/pressets/_slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { CheckboxBlock } from '@tok/ui/components/CheckboxBlock';
 import { InputText } from '@tok/ui/components/InputText';
