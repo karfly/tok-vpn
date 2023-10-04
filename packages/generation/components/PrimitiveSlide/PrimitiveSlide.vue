@@ -102,11 +102,11 @@ const onClick = () => {
   min-height: 100vh;
   height: 100%;
   max-height: 100vh;
+  overflow-x: hidden;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow: hidden;
 }
 
 .media {
