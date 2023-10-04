@@ -1,7 +1,7 @@
 import { DefinedPressetsKeys } from '@tok/generation/defineConfig';
 import { CarouselPresset } from '@tok/generation/pressets/Carousel';
 import { MediaPresset } from '@tok/generation/pressets/Media';
-import { SlidePresset } from '@tok/generation/pressets/Slide';
+import { SlidePresset } from '@tok/generation/pressets/slide';
 import { defineAsyncComponent, InjectionKey } from 'vue';
 
 export type DefinePressets = Record<
@@ -14,7 +14,7 @@ export const predefinedPressets: DefinePressets = {
   media: MediaPresset,
   slide: SlidePresset,
   paywall: defineAsyncComponent(() =>
-    import('@tok/generation/pressets/_paywall').then((m) => m.PaywallPresset)
+    import('@tok/generation/pressets/paywall').then((m) => m.PaywallPresset)
   ),
   form: defineAsyncComponent(() =>
     import('@tok/generation/pressets/Form').then((m) => m.FormPresset)
