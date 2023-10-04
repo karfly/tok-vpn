@@ -3,6 +3,7 @@ import { ThemeConfigParam } from '@tok/generation/tokens';
 import { FlatButtonProps } from '@tok/ui/components/FlatButton';
 import { CurrencyVariants } from '@tok/ui/setup/currency/currency';
 import type { PopupButton } from '@twa-dev/types';
+import { CSSProperties } from 'vue';
 
 export type PaywalPopupPressetButtons = (PopupButton & {
   media?: MediaPressetProps;
@@ -33,7 +34,8 @@ export type _GenerationSlideConfig = {
 export type _GenerationFormControlConfig = {
   id: string;
   placeholder: string;
-  type: 'checkbox' | string;
+  type?: 'checkbox' | 'number' | 'text';
+  style?: string | CSSProperties;
 };
 
 export type _GenerationFormConfig = Omit<_GenerationSlideConfig, 'extends'> & {
@@ -120,7 +122,7 @@ export type _GenerationPaywallRowConfig = _GenerationPrimitivePaywallConfig & {
   products: _GenerationPaywallRowProductConfig[];
 };
 
-export type _GenerationCarouselConfig = {
+export type _GenerationCarouselConfig<T> = {
   extends?: 'base';
   slides: (
     | _GenerationPaywallConfig
@@ -129,36 +131,43 @@ export type _GenerationCarouselConfig = {
     | _GenerationSlideConfig
     | _GenerationFormConfig
     | _GenerationListConfig
+    | {
+        [key in keyof T]: { extends: keyof T; [key: string]: any };
+      }[keyof T]
   )[];
 };
 
-type BootstrapPage<Todo> = {
+type BootstrapPage<TCustom> = {
   path?: string;
 } & (
-  | _GenerationCarouselConfig
+  | _GenerationCarouselConfig<TCustom>
   | _GenerationPaywallConfig
   | _GenerationPaywallSingleConfig
   | _GenerationPaywallRowConfig
   | _GenerationSlideConfig
   | _GenerationFormConfig
   | _GenerationListConfig
+  | {
+      [key in keyof TCustom]: {
+        extends: keyof TCustom;
+        [key: string]: any;
+      };
+    }[keyof TCustom]
 );
 
-export type DefinedPressetsKeys<T = BootstrapPage<any>> = T extends {
+export type DefinedPressetsKeys<T = BootstrapPage<{}>> = T extends {
   extends: infer E;
 }
   ? E
   : T extends { extends?: string }
-  ? 'base'
+  ? 'base' | 'slide'
   : never;
-
-type A = DefinedPressetsKeys;
 
 export type BootstrapConfig<TDefined extends {}> = {
   theme?: ThemeConfigParam;
   locale?: {
     fallback: string;
-  } & Record<string, Promise<TODO>>;
+  } & Record<string, TODO>;
   setupCurrency?: {
     // left
     align?: 'left' | 'right';

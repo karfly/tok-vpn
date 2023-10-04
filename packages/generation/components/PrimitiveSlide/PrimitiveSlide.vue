@@ -150,6 +150,22 @@ const onClick = () => {
     position: absolute;
     bottom: 0;
     left: 0;
+    min-height: 100vh;
+    height: 100%;
+    overflow: auto;
+
+    background: var(
+      --tok-slide-background,
+      linear-gradient(
+        180deg,
+        rgba(var(--tok-background-color-base), 0) 0%,
+        var(--tok-background-color) 80%
+      )
+    );
+
+    & > *:first-child {
+      margin-top: auto;
+    }
   }
 }
 

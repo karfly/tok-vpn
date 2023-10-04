@@ -17,7 +17,7 @@ import { BootstrapConfig } from './defineConfig';
 
 type _App = Parameters<typeof createApp>[0];
 
-export function bootstrap<T extends BootstrapConfig<unknown>>(
+export function bootstrap<T extends BootstrapConfig<any>>(
   App: _App,
   config: T
 ) {

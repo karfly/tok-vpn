@@ -13,7 +13,6 @@ export default defineConfig({
   },
   pages: [
     {
-      extends: 'base',
       slides: [
         {
           extends: 'action_slide',

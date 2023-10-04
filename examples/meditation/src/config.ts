@@ -1,10 +1,8 @@
-type Config = {
-  pages: any[];
-};
+import { defineConfig } from '@tok/generation';
 
-export default <Config>{
+export default defineConfig({
   locale: {
-    default: 'en',
+    fallback: 'en',
     ru: import('./locales/ru.json'),
     en: import('./locales/en.json'),
   },
@@ -12,7 +10,6 @@ export default <Config>{
     {
       slides: [
         {
-          extends: 'slide',
           media: {
             type: 'image',
             src: import('./assets/img/first.png'),
@@ -46,7 +43,6 @@ export default <Config>{
               id: 'age',
               placeholder: '_s2.agePlaceholder',
               type: 'number',
-              inputmode: 'numeric',
               style: '--tok-radius-m: 12px',
             },
           ],
@@ -151,7 +147,7 @@ export default <Config>{
       ],
     },
     {
-      extends: 'paywall',
+      extends: 'paywall_single',
       path: '/paywall',
       media: {
         type: 'image',
@@ -164,6 +160,7 @@ export default <Config>{
       description: '_paywall.description',
       mainButtonText: '_paywall.main',
       product: {
+        id: 'productId',
         media: {
           type: 'icon',
           src: import('./assets/icons/star.svg'),
@@ -171,12 +168,11 @@ export default <Config>{
         },
         title: '_paywall.product.title',
         price: 99,
-        currency: 'USD',
         description: '_paywall.product.description',
       },
       popup: {
         type: 'telegram',
-        message: '_paywall.popup.title',
+        title: '_paywall.popup.title',
         buttons: [
           {
             id: 'telegram_payments',
@@ -202,4 +198,4 @@ export default <Config>{
       ],
     },
   ],
-};
+});

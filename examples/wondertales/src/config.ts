@@ -1,17 +1,15 @@
+import { defineConfig } from '@tok/generation';
+
 import Story from './story/StoryExample.vue';
 
-type Config = {
-  pages: any[];
-};
-
-export default <Config>{
+export default defineConfig({
   theme: 'dark',
   locale: {
-    default: 'en',
+    fallback: 'en',
     ru: import('./locales/ru.json'),
     en: import('./locales/en.json'),
   },
-  override: {
+  definePressets: {
     story: Story,
   },
   pages: [
@@ -164,7 +162,7 @@ export default <Config>{
           },
         },
         {
-          extends: 'base_paywall',
+          extends: 'paywall',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_party.tgs'),
@@ -184,7 +182,6 @@ export default <Config>{
               id: 'monthly',
               title: '_paywall.product1',
               price: 8.95,
-              currency: 'USD',
               pricePostfix: '_paywall.pricePrefix',
             },
             {
@@ -192,7 +189,6 @@ export default <Config>{
               title: '_paywall.product2',
               price: 5.95,
               discount: '_paywall.discount',
-              currency: 'USD',
               pricePostfix: '_paywall.pricePrefix',
             },
           ],
@@ -233,9 +229,10 @@ export default <Config>{
         },
       ],
     },
+    // todo
     {
       extends: 'story',
       path: '/story',
-    },
+    } as any,
   ],
-};
+});

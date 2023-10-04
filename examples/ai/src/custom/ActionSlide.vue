@@ -1,15 +1,11 @@
 <template>
-  <div :class="$style.slide">
-    <media-presset v-bind="_media" :class="$style.media" />
-
-    <p :class="['tok-text_xs', $style.count]">
-      {{ index }} / {{ carousel.length }}
-    </p>
-
-    <h2 v-html="translatedTitle" :class="$style.title" />
-
-    <p v-html="translatedDescription" :class="$style.description" />
-
+  <slide-presset
+    v-bind="props"
+    pagination="count"
+    shape="stacked"
+    :media="_media"
+    :button="null"
+  >
     <div :class="$style.footer">
       <flat-button
         size="l"
@@ -31,43 +27,42 @@
         {{ translatedNext }}
       </flat-button>
     </div>
-  </div>
+  </slide-presset>
 </template>
 
 <script setup lang="ts">
+import { MediaPressetProps } from '@tok/generation/pressets/Media';
 import {
-  MediaPresset,
-  MediaPressetProps,
-} from '@tok/generation/pressets/Media';
+  SlidePresset,
+  SlidePressetProps,
+} from '@tok/generation/pressets/slide';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useTranslated } from '@tok/i18n';
 import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
 import { CUSTOM_ICONS_TOKEN } from '@tok/ui/tokens';
 import { computed, defineAsyncComponent, provide, ref, toRefs } from 'vue';
 
-const props = defineProps<{
-  title: string;
-  description: string;
+type Props = Omit<
+  SlidePressetProps,
+  'media' | 'button' | 'buttonAfterContent' | 'shape' | 'pagination'
+> & {
   actionButton: [string, string];
-  nextButton: string | FlatButtonProps;
+  nextButton: string | (FlatButtonProps & { content: string });
   media: [MediaPressetProps, MediaPressetProps];
-}>();
+};
+
+const props = defineProps<Props>();
 
 provide(CUSTOM_ICONS_TOKEN, {
   check: defineAsyncComponent(() => import('./check.svg')),
   wind: defineAsyncComponent(() => import('./wind.svg')),
 });
 
-const { title, actionButton, nextButton, description, media } = toRefs(props);
+const { actionButton, nextButton, media } = toRefs(props);
 
 const applied = ref(false);
 
-const translatedTitle = useTranslated(title);
 const carousel = useCarousel();
-
-const index = computed(() => {
-  return carousel.index.value + 1;
-});
 
 const action = computed(() => {
   const value = applied.value;
@@ -86,11 +81,10 @@ const _media = computed(() => {
 const computedNext = computed(() => {
   const value = nextButton.value;
 
-  return typeof value === 'string' ? value : (value as any).content;
+  return typeof value === 'string' ? value : value.content;
 });
 
 const translatedButton = useTranslated(action);
-const translatedDescription = useTranslated(description);
 const translatedNext = useTranslated(computedNext);
 
 const onToggle = () => {
@@ -127,6 +121,8 @@ const onNext = () => {
 
 .footer {
   display: flex;
+
+  margin-top: 1rem;
 
   &__button {
     width: 100%;
