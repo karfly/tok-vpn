@@ -14,7 +14,7 @@ export const predefinedPressets: DefinePressets = {
   media: MediaPresset,
   slide: SlidePresset,
   paywall: defineAsyncComponent(() =>
-    import('@tok/generation/pressets/paywall').then((m) => m.PaywallPresset)
+    import('@tok/generation/pressets/_paywall').then((m) => m.PaywallPresset)
   ),
   form: defineAsyncComponent(() =>
     import('@tok/generation/pressets/Form').then((m) => m.FormPresset)
