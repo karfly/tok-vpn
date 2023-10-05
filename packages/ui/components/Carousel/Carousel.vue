@@ -7,21 +7,14 @@
     <div v-carousel-scroll="carouselScrollProps" :class="$style.scroller">
       <div :class="$style.wrapper">
         <div
-          v-drag-drop="{ onEvent: onDragDrop }"
-          v-swipe="{ onEvent: onSwipe }"
+          v-drag-drop="dragDropProps"
+          v-swipe="swipeProps"
           :class="[$style.items, transitioned && $style.items_transitioned]"
           :style="transform"
         >
           <div
-            v-for="(item, index) in compuedItems"
-            v-intersection="{
-              options: {
-                threshold: 0.01,
-              },
-              disconnectAfterIntersect: false,
-              isObserve: true,
-              onIntersect: onIntersect.bind(null, index + itemIndexCorrection),
-            }"
+            v-for="(item, index) in computedItems"
+            v-intersection="getIntersectionProps(index + itemIndexCorrection)"
             :key="index + itemIndexCorrection"
             :style="computedStyle"
             :class="[
@@ -100,6 +93,7 @@ const transform = computed(() => {
   };
 });
 
+// This is a solution for implementing "virtual scroll" to enhance performance when dealing with a large number of elements in a carousel
 const virtualIndexStartEnd = computed(() => {
   const value = modelValue.value;
   const length = items.value.length;
@@ -116,7 +110,7 @@ const itemIndexCorrection = computed(() => {
   return (value === 0 ? 0 : -1) + value;
 });
 
-const compuedItems = computed(() => {
+const computedItems = computed(() => {
   const { start, end } = virtualIndexStartEnd.value;
 
   return items.value.slice(start, end + 1);
@@ -133,18 +127,6 @@ onMounted(() => {
 
     element.addEventListener('mousedown', startTouch, { passive: true });
     document.addEventListener('mouseup', endTouch, { passive: true });
-  }
-});
-
-onBeforeUnmount(() => {
-  const element = host.value;
-
-  if (element) {
-    element.removeEventListener('touchstart', startTouch);
-    element.removeEventListener('touchend', endTouch);
-
-    element.removeEventListener('mousedown', startTouch);
-    document.removeEventListener('mouseup', endTouch);
   }
 });
 
@@ -198,17 +180,44 @@ const endTouch = () => {
   transitioned.value = true;
 };
 
-const onIntersect = (
-  index: number,
-  { intersectionRatio }: IntersectionObserverEntry
-) => {
-  if (intersectionRatio && intersectionRatio !== 1 && !transitioned.value) {
-    shouldPreventClick.value = true;
-
-    updateIndex(
-      modelValue.value < index ? index - itemsCount.value + 1 : index
-    );
+const memoIntersection = new Map<
+  number,
+  {
+    onEvent: IntersectionObserverCallback;
+    options: IntersectionObserverInit;
   }
+>();
+
+// todo: find a way to improve this behavior instead memo solution
+const getIntersectionProps = (correctIndex: number) => {
+  if (memoIntersection.has(correctIndex)) {
+    return memoIntersection.get(correctIndex)!;
+  }
+
+  const intersection = {
+    onEvent: (entries: IntersectionObserverEntry[]) => {
+      const { isIntersecting, intersectionRatio } = entries[0];
+
+      if (!isIntersecting) {
+        return;
+      }
+
+      if (intersectionRatio && intersectionRatio !== 1 && !transitioned.value) {
+        updateIndex(
+          modelValue.value < correctIndex
+            ? correctIndex - itemsCount.value + 1
+            : correctIndex
+        );
+      }
+    },
+    options: {
+      threshold: 0.01,
+    },
+  };
+
+  memoIntersection.set(correctIndex, intersection);
+
+  return intersection;
 };
 
 const onScroll = (delta: 1 | -1) => {
@@ -234,8 +243,26 @@ const onSwipe = (_: unknown, swipe: Swipe) => {
 
 const carouselScrollProps = { onEvent: onScroll };
 
+const dragDropProps = { onEvent: onDragDrop };
+
+const swipeProps = { onEvent: onSwipe };
+
 const paddingComputed = computed(() => {
   return `${paddingPx.value}px`;
+});
+
+onBeforeUnmount(() => {
+  const element = host.value;
+
+  memoIntersection.clear();
+
+  if (element) {
+    element.removeEventListener('touchstart', startTouch);
+    element.removeEventListener('touchend', endTouch);
+
+    element.removeEventListener('mousedown', startTouch);
+    document.removeEventListener('mouseup', endTouch);
+  }
 });
 
 defineExpose({

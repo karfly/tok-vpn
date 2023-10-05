@@ -1,66 +1,39 @@
 import { DirectiveBinding, ObjectDirective } from 'vue';
 
-interface ObserverHTMLElement extends HTMLElement {
-  __observer_intersection: IntersectionObserver;
-}
-
-type Options = IntersectionObserverInit & {
-  root?: () =>
-    | IntersectionObserverInit['root']
-    | IntersectionObserverInit['root'];
-};
-
-type BindingValue = {
-  onIntersect: (el: IntersectionObserverEntry) => void;
-  isObserve?: boolean;
-  disconnectAfterIntersect?: boolean;
-  options?: Options;
+type Binding = {
+  onEvent: IntersectionObserverCallback;
+  options?: IntersectionObserverInit;
 };
 
 const OPTIONS: IntersectionObserverInit = {
   threshold: 1.0,
 } as const;
 
-export const IntersectionDirective: ObjectDirective<
-  ObserverHTMLElement,
-  BindingValue
-> = {
-  mounted(el: ObserverHTMLElement, { value }: DirectiveBinding<BindingValue>) {
-    const {
-      onIntersect,
-      isObserve = true,
-      disconnectAfterIntersect = true,
-      options = {} as Options,
-    } = value as BindingValue;
+const dict = new Map<HTMLElement, IntersectionObserver>();
 
-    if (!isObserve) {
-      return;
-    }
+function mounted(element: HTMLElement, { value }: DirectiveBinding<Binding>) {
+  if (!(window && 'IntersectionObserver' in window)) {
+    return;
+  }
 
-    const cb: IntersectionObserverCallback = ([entry]) => {
-      const { isIntersecting } = entry;
+  const { options = OPTIONS } = value;
 
-      if (isIntersecting) {
-        onIntersect(entry);
+  const observer = new IntersectionObserver(value.onEvent, options);
 
-        if (disconnectAfterIntersect) {
-          el.__observer_intersection.disconnect();
-        }
-      }
-    };
+  observer.observe(element);
 
-    el.__observer_intersection = new IntersectionObserver(cb, {
-      ...OPTIONS,
-      ...options,
-      root:
-        typeof options.root === 'function'
-          ? (options.root as any)()
-          : options.root,
-    });
+  dict.set(element, observer);
+}
 
-    el.__observer_intersection.observe(el);
-  },
-  beforeUnmount(el: ObserverHTMLElement) {
-    el.__observer_intersection && el.__observer_intersection.disconnect();
-  },
+function beforeUnmount(element: HTMLElement) {
+  const observer = dict.get(element);
+
+  observer?.disconnect();
+
+  dict.delete(element);
+}
+
+export const IntersectionDirective: ObjectDirective<HTMLElement, Binding> = {
+  mounted,
+  beforeUnmount,
 };

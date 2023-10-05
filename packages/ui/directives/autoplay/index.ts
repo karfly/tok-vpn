@@ -15,8 +15,8 @@ const mounted = (el: HTMLVideoElement) => {
     el.play();
   };
 
+  window.addEventListener('mousedown', play, { passive: true, once: true });
   window.addEventListener('touchstart', play, { passive: true, once: true });
-
   window.addEventListener('touchend', play, { passive: true, once: true });
 };
 

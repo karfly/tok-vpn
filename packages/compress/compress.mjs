@@ -18,7 +18,7 @@ const getImagesInMergeRequest = () => {
     );
 
     if (!supported) {
-      console.info(`${fileName} не поддерживается, поэтому он не будет сжат`);
+      console.info(`${fileName} doesn't support and won't be compress`);
     }
 
     return supported;
