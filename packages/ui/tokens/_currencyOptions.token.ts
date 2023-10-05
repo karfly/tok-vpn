@@ -1,6 +1,6 @@
 import { CHAR_NO_BREAK_SPACE } from '@tok/ui/consts';
-import { CurrencyVariants } from '@tok/ui/setup/currency/currency';
-import { InjectionKey } from 'vue';
+import type { CurrencyVariants } from '@tok/ui/use/money/currency';
+import type { InjectionKey } from 'vue';
 
 export type CurrencyOptions = {
   align?: 'left' | 'right' | string;
