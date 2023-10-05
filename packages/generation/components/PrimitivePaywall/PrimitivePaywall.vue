@@ -184,6 +184,7 @@ const onSelectOption = (
   const _product = selectedProduct.value || {};
 
   const dataProduct = {
+    description: 'Payment',
     ..._product,
     payment_method: id,
   };
