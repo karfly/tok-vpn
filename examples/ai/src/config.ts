@@ -72,7 +72,7 @@ export default defineConfig({
               webp: import('./assets/img/slide1_res.webp'),
             },
           ],
-        } as any,
+        },
       ],
     },
     {

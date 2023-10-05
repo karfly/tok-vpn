@@ -36,7 +36,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_love.tgs'),
-            loop: true,
             style:
               'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
           },
@@ -78,7 +77,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_easy.tgs'),
-            loop: true,
             style:
               'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
           },
@@ -114,7 +112,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_speed.tgs'),
-            loop: true,
             style:
               'height: 160px; width: 160px; margin: 0 auto; margin-top: 1rem',
           },
@@ -170,7 +167,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_party.tgs'),
-            loop: true,
             style:
               'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
           },
@@ -233,10 +229,9 @@ export default defineConfig({
         },
       ],
     },
-    // todo
     {
       extends: 'story',
       path: '/story',
-    } as any,
+    },
   ],
 });

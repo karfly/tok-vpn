@@ -6,17 +6,17 @@ export type _MediaLoader<T> = Promise<{ default: T }>;
 
 export type IconPressetProps = {
   type: 'icon';
-  src?: string | _MediaLoader<any>;
+  src: string | _MediaLoader<any>;
 
   style?: string | CSSProperties;
 } & Omit<SvgIconProps, 'name'>;
 
 export type StickerPressetProps = {
   type: 'sticker';
-  src?: Promise<typeof import('*.tgs')> | null;
+  src: Promise<typeof import('*.tgs')> | null;
 
   style?: string | CSSProperties;
-} & Omit<StickerProps, 'json' | 'autoplay'>;
+} & Pick<StickerProps, 'speed'>;
 
 // todo: Find a way to translate images
 // src: '_i18n.imageSrc' -> /locales/en.ts: import('../assets/*.png');

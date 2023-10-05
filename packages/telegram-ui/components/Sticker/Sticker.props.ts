@@ -12,6 +12,7 @@ export type StickerProps = {
 
 export const StickerDefaultProps = {
   autoplay: true,
+  loop: true,
   speed: 1,
   playOnClick: true,
 } as const;

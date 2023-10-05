@@ -112,7 +112,7 @@ export type _GenerationPaywallRowConfig = _GenerationPrimitivePaywallConfig & {
   products: _GenerationPaywallRowProductConfig[];
 };
 
-export type _GenerationCarouselConfig<T> = {
+export type _GenerationCarouselConfig<T extends Record<string, unknown>> = {
   extends?: 'base';
   slides: (
     | _GenerationPaywallConfig
@@ -121,13 +121,14 @@ export type _GenerationCarouselConfig<T> = {
     | _GenerationSlideConfig
     | _GenerationFormConfig
     | _GenerationListConfig
+    | { extends: keyof T; [key: string]: any }
   )[];
   // | {
   //     [key in keyof T]: { extends: keyof T; [key: string]: any };
   //   }[keyof T]
 };
 
-type BootstrapPage<TCustom> = {
+type BootstrapPage<TCustom extends Record<string, unknown>> = {
   path?: string;
 } & (
   | _GenerationCarouselConfig<TCustom>
@@ -137,6 +138,7 @@ type BootstrapPage<TCustom> = {
   | _GenerationSlideConfig
   | _GenerationFormConfig
   | _GenerationListConfig
+  | { extends: keyof TCustom }
 );
 // | {
 //     [key in keyof TCustom]: {
@@ -153,7 +155,7 @@ export type DefinedPressetsKeys<T = BootstrapPage<{}>> = T extends {
   ? 'base' | 'slide'
   : never;
 
-export type BootstrapConfig<TDefined extends {}> = {
+export type BootstrapConfig<TDefined extends Record<string, unknown>> = {
   theme?: ThemeConfigParam;
   locale?: {
     fallback: string;
@@ -163,7 +165,7 @@ export type BootstrapConfig<TDefined extends {}> = {
   pages: BootstrapPage<TDefined>[];
 };
 
-export function defineConfig<TDefined extends {}>(
+export function defineConfig<TDefined extends Record<string, unknown>>(
   config: BootstrapConfig<TDefined>
 ) {
   return config;
