@@ -44,12 +44,12 @@ const translatedProducts = computed(() => {
       item.title = i18n.translate(item.title);
     }
 
-    if (item.discount) {
-      item.discount = i18n.translate(item.discount);
+    if (item.description) {
+      item.description = i18n.translate(item.description);
     }
 
-    if (item.priceText) {
-      item.priceText = i18n.translate(item.priceText);
+    if (item.discount) {
+      item.discount = i18n.translate(item.discount);
     }
 
     return item;

@@ -7,7 +7,7 @@
     </div>
 
     <span :class="$style.money">
-      <span v-if="priceText" v-html="priceText" />
+      <span v-if="description" v-html="description" />
 
       <money v-else :value="price" />
     </span>

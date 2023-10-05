@@ -145,7 +145,7 @@ const mainButtonComputedText = computed(() => {
   return _text.replace(/\{price\}/g, _price);
 });
 
-const popupOpened = ref(false);
+const popupOpened = ref(true);
 
 const onSubmit = () => {
   popupOpened.value = true;

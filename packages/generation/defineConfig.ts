@@ -84,7 +84,6 @@ export type _GenerationPrimitivePaywallProduct = {
 
 export type _GenerationPaywallProduct = _GenerationPrimitivePaywallProduct & {
   discount?: string;
-  priceText?: string;
 };
 
 export type _GenerationPaywallConfig = _GenerationPrimitivePaywallConfig & {

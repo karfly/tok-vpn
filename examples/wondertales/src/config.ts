@@ -185,17 +185,15 @@ export default defineConfig({
             {
               id: 'monthly',
               title: '_paywall.product1',
-              description: '_paywall.product1',
+              description: '_paywall.price1Text',
               price: '_paywall.product1Price',
-              priceText: '_paywall.price1Text',
             },
             {
               id: 'yearly',
               title: '_paywall.product2',
-              description: '_paywall.product2',
+              description: '_paywall.price2Text',
               price: '_paywall.product2Price',
               discount: '_paywall.discount',
-              priceText: '_paywall.price2Text',
             },
           ],
           popup: {
