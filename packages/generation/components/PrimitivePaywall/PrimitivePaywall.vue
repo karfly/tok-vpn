@@ -197,14 +197,12 @@ const onSelectOption = (
     description: _product.description ?? 'Payment description',
   };
 
-  console.log(dataProduct);
+  const data = JSON.stringify({
+    product: dataProduct,
+    payload,
+  });
 
-  // const data = JSON.stringify({
-  //   product: dataProduct,
-  //   payload,
-  // });
-
-  // tg.sendData(data);
+  tg.sendData(data);
 };
 </script>
 
