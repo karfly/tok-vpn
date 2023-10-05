@@ -139,7 +139,9 @@ const priceFromProduct = computed(() => {
   return value ? value.price : 0;
 });
 
+// todo need to clean this shit
 const currencyOptions = inject(CURRENCY_OPTIONS_TOKEN, defaultCurrencyOptions);
+const translatedPrice = useTranslated(priceFromProduct);
 const formattedPrice = useFormattedMoney(priceFromProduct);
 const translatedCurrency = useTranslated(currencyOptions.currency);
 
@@ -190,7 +192,7 @@ const onSelectOption = (
     payment_method: id,
     id: _product.id,
     currency: translatedCurrency.value || 'USD',
-    price: _product.price ?? -1,
+    price: translatedPrice.value ?? -1,
     title: _product.title ?? 'Payment',
     description: _product.description ?? 'Payment description',
   };
