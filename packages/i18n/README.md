@@ -27,7 +27,7 @@ createApp(App).use(TokI18nPlugin, locales).mount('#app');
 
 ## Usage
 
-##### useTranslated
+### useTranslated
 
 This will track the value in the hello ref and always return the translated value if available.
 
@@ -46,7 +46,7 @@ const hello = ref('hello');
 const translatedHello = i18n.useTranslated(hello);
 ```
 
-##### Fallback value
+### Fallback value
 
 If there is no token in the current or fallback locale, we will return the fallback value.
 
@@ -61,7 +61,7 @@ const unknown = ref('unknown');
 const fallback = i18n.useTranslated(unknown, 'Value from fallback!');
 ```
 
-##### Inside computed
+### Inside computed
 
 ```ts
 import { i18n } from '@tok/i18n';
@@ -76,7 +76,7 @@ const insideComputed = computed(() => {
 });
 ```
 
-##### Change locale on the fly
+### Change locale on the fly
 
 To change the locale on the fly. Keep in mind that you will need to load messages manually.
 
@@ -108,7 +108,7 @@ watch(
 );
 ```
 
-##### Other properties
+### Other properties
 
 ```ts
 import { i18n } from '@tok/i18n';
