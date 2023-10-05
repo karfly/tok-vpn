@@ -13,6 +13,8 @@ defineProps<PrimitiveRadioProps>();
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .radio {
   @include transition(outline-color);
 

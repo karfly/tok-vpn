@@ -27,6 +27,8 @@ withDefaults(
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .button {
   @include clearbutton;
   @include transition(opacity);

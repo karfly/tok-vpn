@@ -27,13 +27,6 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@tok/ui/styles/local.scss";',
-        },
-      },
-    },
     build: {
       assetsInlineLimit: 0,
       minify: true,

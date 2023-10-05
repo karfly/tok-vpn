@@ -52,6 +52,8 @@ const onChange = (event: Event) => {
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .product {
   @include transition(all);
 

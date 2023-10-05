@@ -72,13 +72,13 @@ const computedStyle = computed(() => {
   const width = `calc(${percent}% + ${correctionForAlignLeft}px)`;
 
   const virtualTransformPercent = virtualIndexStartEnd.value.start * 100;
-  const tranform = `translateX(${virtualTransformPercent}%)`;
+  const _transform = `translateX(${virtualTransformPercent}%)`;
 
   return {
     minWidth: width,
     maxWidth: width,
     flexBasis: width,
-    transform: tranform,
+    transform: _transform,
   };
 });
 
@@ -273,6 +273,8 @@ defineExpose<CarouselExpose>({
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .container {
   position: relative;
   display: block;

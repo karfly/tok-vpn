@@ -105,6 +105,8 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .wrapper {
   position: fixed;
   left: 0;

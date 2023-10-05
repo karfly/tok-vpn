@@ -15,6 +15,7 @@
         "*** wondertales ***": "",
         "dev:wondertales": "turbo run dev --scope @tok/wondertales",
         "build:wondertales": "turbo run build --scope @tok/wondertales",
+        "build:all": "turbo run build",
         "*** other *** ": "",
         "compress": "turbo run compress --scope @tok/compress"
     },

@@ -42,6 +42,8 @@ defineExpose({
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .host {
   position: fixed;
   left: 0;

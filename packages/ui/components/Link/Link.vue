@@ -24,6 +24,8 @@ const translatedHref = i18n.useTranslated(href);
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .link {
   @include transition(opacity);
 

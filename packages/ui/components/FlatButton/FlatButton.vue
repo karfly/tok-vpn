@@ -68,6 +68,8 @@ const computedComponent = computed(() => {
 </script>
 
 <style lang="scss" scope>
+@import '@tok/ui/styles/local.scss';
+
 .tok-button {
   @include clearbutton;
   @include transition(background-color);

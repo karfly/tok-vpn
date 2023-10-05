@@ -64,6 +64,8 @@ const context = {
 </script>
 
 <style lang="scss" scoped>
+@import '@tok/ui/styles/local.scss';
+
 .tok-alert {
   position: relative;
 

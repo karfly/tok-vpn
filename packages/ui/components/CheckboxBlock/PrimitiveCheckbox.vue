@@ -16,6 +16,8 @@ defineProps<{ value: boolean | null }>();
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .checkbox {
   @include transition(outline-color);
 

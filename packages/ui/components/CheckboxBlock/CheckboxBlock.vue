@@ -75,6 +75,8 @@ const onChange = (event: Event) => {
 </script>
 
 <style lang="scss" scoped>
+@import '@tok/ui/styles/local.scss';
+
 .tok-checkbox-block {
   @include transition(outline-color);
 

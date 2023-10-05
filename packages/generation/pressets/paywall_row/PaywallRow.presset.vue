@@ -73,6 +73,8 @@ const productWidthStyle = computed(() => {
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .form {
   @include hide-scroll;
 

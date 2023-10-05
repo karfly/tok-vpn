@@ -95,6 +95,8 @@ const onMainButton = () => {
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .footer {
   @include transition(background);
 

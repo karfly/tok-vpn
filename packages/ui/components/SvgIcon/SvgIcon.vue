@@ -58,6 +58,8 @@ const style = computed(() => {
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .icon {
   @include strict-size(
     var(--tok-svg-icon-width, 1rem),

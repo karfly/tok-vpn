@@ -25,10 +25,9 @@
 </template>
 
 <script setup lang="ts">
+import { Alert } from '@tok/ui/components/Alert';
 import { ALERTS_HOST_TOKEN } from '@tok/ui/tokens';
 import { computed, inject } from 'vue';
-
-import { Alert } from './Alert';
 
 defineOptions({
   name: 'AlertsHost',
@@ -46,6 +45,8 @@ const close = (id: string, onClose?: () => void) => {
 </script>
 
 <style lang="scss" scoped>
+@import '@tok/ui/styles/local.scss';
+
 .root {
   @include transition(transform);
 

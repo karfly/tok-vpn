@@ -110,6 +110,8 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
+@import '@tok/ui/styles/local.scss';
+
 .native {
   @include clearinput;
 
