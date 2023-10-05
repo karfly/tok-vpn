@@ -48,6 +48,7 @@ import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
+import { CURRENCY_OPTIONS_TOKEN, defaultCurrencyOptions } from '@tok/ui/tokens';
 import { useAlerts } from '@tok/ui/use/alerts';
 import { useFormattedMoney } from '@tok/ui/use/formattedMoney';
 import { computed, inject, ref, toRefs } from 'vue';
@@ -138,7 +139,9 @@ const priceFromProduct = computed(() => {
   return value ? value.price : 0;
 });
 
+const currencyOptions = inject(CURRENCY_OPTIONS_TOKEN, defaultCurrencyOptions);
 const formattedPrice = useFormattedMoney(priceFromProduct);
+const translatedCurrency = useTranslated(currencyOptions.currency);
 
 const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
@@ -184,9 +187,12 @@ const onSelectOption = (
   const _product = selectedProduct.value || {};
 
   const dataProduct = {
-    description: 'Payment',
-    ..._product,
     payment_method: id,
+    id: _product.id,
+    currency: translatedCurrency.value || 'USD',
+    price: _product.price ?? -1,
+    title: _product.title ?? 'Payment',
+    description: _product.description ?? 'Payment description',
   };
 
   const data = JSON.stringify({
