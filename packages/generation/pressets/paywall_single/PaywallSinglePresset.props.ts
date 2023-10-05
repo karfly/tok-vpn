@@ -1,4 +1,4 @@
-import { _GenerationPaywallSingleConfig } from '@tok/generation/defineConfig';
+import type { _GenerationPaywallSingleConfig } from '@tok/generation/defineConfig';
 
 export type PaywallSinglePressetProps = Omit<
   _GenerationPaywallSingleConfig,

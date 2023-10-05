@@ -14,7 +14,7 @@
         @click="onWrapperClick"
       >
         <div :class="$style.popup">
-          <div v-focustrap ref="contentRef" :class="$style.content">
+          <div ref="contentRef" :class="$style.content">
             <div :class="$style.content__header">
               <h4 v-html="translatedTitle" :class="$style.content__title" />
 
@@ -49,7 +49,6 @@
 import { useI18n } from '@tok/i18n';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 import { Portal } from '@tok/ui/components/Portal';
-import { FocustrapDirective as vFocustrap } from '@tok/ui/directives/focustrap';
 import { getElementId } from '@tok/ui/functions';
 import { POPUPS_HOST_TOKEN } from '@tok/ui/tokens';
 import {

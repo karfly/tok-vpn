@@ -8,7 +8,7 @@
     <draw-presset
       v-bind="item"
       :active="activeSlide === index"
-      :extends="String(item.extends || 'slide')"
+      :extends="item.extends || 'slide'"
     />
   </carousel>
 </template>
@@ -37,7 +37,7 @@ const { slides } = toRefs(props);
 const router = useRouter();
 const tg = useTelegramSdk();
 
-const length = computed(() => {
+const slidesLength = computed(() => {
   return slides.value.length;
 });
 
@@ -46,7 +46,7 @@ const activeIndexQuery = computed(() => {
   const page = route.query.page || 0;
   const num = Number(page);
 
-  return !Number.isNaN(num) ? clamp(num, 0, length.value - 1) : 0;
+  return !Number.isNaN(num) ? clamp(num, 0, slidesLength.value - 1) : 0;
 });
 
 const activeSlide = ref(activeIndexQuery.value);
@@ -79,9 +79,7 @@ watch(
 );
 
 const safeSet = (value: number) => {
-  const length = slides.value.length;
-
-  activeSlide.value = clamp(value, 0, length - 1);
+  activeSlide.value = clamp(value, 0, slidesLength.value - 1);
 
   tg.HapticFeedback.impactOccurred('light');
 };
@@ -99,7 +97,7 @@ const accessor = {
   next,
   back,
   index: activeSlide,
-  length: length,
+  length: slidesLength,
 };
 
 provide(CAROUSEL_ACCESSOR_TOKEN, accessor);

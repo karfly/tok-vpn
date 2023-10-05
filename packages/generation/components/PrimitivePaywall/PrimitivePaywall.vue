@@ -65,11 +65,12 @@ const props = withDefaults(
 const { mainButtonText, popup, selectedProduct, active, features } =
   toRefs(props);
 
+const formState = inject(FORM_STATE_TOKEN, null);
+
 const i18n = useI18n();
 const tg = useTelegramSdk();
 // to detect if we inside carousel or not, to prevent triggering MainButton.show()
-const carousel = useCarousel(false);
-const formState = inject(FORM_STATE_TOKEN, null);
+const carousel = useCarousel();
 const alertsService = useAlerts({ autoCloseOnUnmount: true });
 
 const popupButtons = computed(() => popup.value.buttons);

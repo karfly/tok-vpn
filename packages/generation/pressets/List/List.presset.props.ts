@@ -1,4 +1,4 @@
-import { _GenerationListConfig } from '@tok/generation/defineConfig';
+import type { _GenerationListConfig } from '@tok/generation/defineConfig';
 
 export type ListPressetProps = Omit<_GenerationListConfig, 'extends'>;
 

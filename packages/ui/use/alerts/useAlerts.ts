@@ -10,7 +10,7 @@ export function useAlerts(config?: Config) {
   const instance = inject(ALERTS_HOST_TOKEN, null);
 
   if (instance === null) {
-    console.warn('[useAlerts] Необходимо добавить AlertsPlugin в main.ts');
+    console.warn('[useAlerts] You should add AlertsPlugin into your main.ts');
   }
 
   const showedIds: string[] = [];

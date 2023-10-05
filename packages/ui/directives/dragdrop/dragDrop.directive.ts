@@ -17,6 +17,7 @@ type MapperEvent = (event: MouseEvent | TouchEvent) => {
   clientY: number;
 };
 
+// todo: refactor
 const DRAG_DROP_INSTANCE_KEY = '__tok_dragDrop__';
 const touchEvents = ['touchstart', 'touchmove', 'touchend'] as any as Events;
 const mouseEvents = ['mousedown', 'mousemove', 'mouseup'] as any as Events;

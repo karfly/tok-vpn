@@ -1,6 +1,6 @@
-import { _GenerationCarouselConfig } from '@tok/generation/defineConfig';
+import type { _GenerationCarouselConfig } from '@tok/generation/defineConfig';
 
-export type CarouselPressetProps = _GenerationCarouselConfig<any>;
+export type CarouselPressetProps = _GenerationCarouselConfig<unknown>;
 
 export const CarouselPressetDefaultProps = {
   slides: () => [],

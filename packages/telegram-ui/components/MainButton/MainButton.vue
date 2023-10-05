@@ -1,7 +1,7 @@
-<template><span /></template>
+<template><slot /></template>
 
 <script setup lang="ts">
-import Telegram from '@twa-dev/sdk';
+import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { onBeforeUnmount, onMounted, toRefs, watch } from 'vue';
 
 import { MainButtonEmits, MainButtonProps } from './MainButton.props';
@@ -12,7 +12,9 @@ const emit = defineEmits<MainButtonEmits>();
 
 const { text, color, textColor, disabled, progress, keepAlive } = toRefs(props);
 
-const TgMainButton = Telegram.MainButton;
+const sdk = useTelegramSdk();
+
+const TgMainButton = sdk.MainButton;
 
 const onClick = () => {
   emit('onClick');

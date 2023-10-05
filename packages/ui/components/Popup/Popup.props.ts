@@ -1,6 +1,8 @@
 export type PopupProps = {
   modelValue: boolean;
+
   title: string;
+
   message?: string;
 };
 

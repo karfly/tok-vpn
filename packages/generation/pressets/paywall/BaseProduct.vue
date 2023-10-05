@@ -64,7 +64,7 @@ const onChange = (event: Event) => {
 
   border-radius: 0.75rem;
 
-  padding: 6px 12px 10px 12px;
+  padding: 0.375rem 0.75rem 0.625rem 0.75rem;
 
   border: 2px solid transparent;
 

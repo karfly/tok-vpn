@@ -1,4 +1,4 @@
-import { _GenerationSlideConfig } from 'defineConfig';
+import type { _GenerationSlideConfig } from '@tok/generation/defineConfig';
 
 export type PrimitiveSlideProps = Pick<
   _GenerationSlideConfig,

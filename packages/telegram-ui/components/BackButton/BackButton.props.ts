@@ -1,4 +1,4 @@
-import { FlatButtonProps } from '@tok/ui/components/FlatButton';
+import type { FlatButtonProps } from '@tok/ui/components/FlatButton';
 
 export type BackButtonProps = {
   type?: 'telegram' | 'web';

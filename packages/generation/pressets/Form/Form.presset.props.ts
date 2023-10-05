@@ -1,4 +1,4 @@
-import { _GenerationFormConfig } from '@tok/generation/defineConfig';
+import type { _GenerationFormConfig } from '@tok/generation/defineConfig';
 
 export type FormPressetProps = Omit<_GenerationFormConfig, 'extends'>;
 

@@ -22,6 +22,7 @@ const tokTranslate = <T = string>(
   return undefined;
 };
 
+// todo: Refactor it. I don't like this code :(
 export function useI18n() {
   const instance = inject(TOK_I18N_TOKEN)!;
 

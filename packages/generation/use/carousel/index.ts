@@ -10,10 +10,10 @@ type Accessor = {
 
 export const CAROUSEL_ACCESSOR_TOKEN = Symbol() as InjectionKey<Accessor>;
 
-export function useCarousel(showWarning = true): Accessor | null {
+export function useCarousel(): Accessor | null {
   const accessor = inject(CAROUSEL_ACCESSOR_TOKEN, null);
 
-  if (accessor === null && showWarning) {
+  if (accessor === null) {
     console.warn('You are using carousel methods outside of the component');
   }
 

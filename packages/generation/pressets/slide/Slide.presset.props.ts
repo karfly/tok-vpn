@@ -1,5 +1,5 @@
 import type { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
-import { _GenerationSlideConfig } from '@tok/generation/defineConfig';
+import type { _GenerationSlideConfig } from '@tok/generation/defineConfig';
 
 export type SlidePressetProps = PrimitiveSlideProps &
   Pick<_GenerationSlideConfig, 'title' | 'description' | 'pagination'>;

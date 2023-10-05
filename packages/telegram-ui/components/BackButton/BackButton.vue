@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
+import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { FlatButton } from '@tok/ui/components/FlatButton';
-import Tg from '@twa-dev/sdk';
 import { computed, ref, toRefs, watch } from 'vue';
 
 import {
@@ -32,7 +32,9 @@ const emit = defineEmits<BackButtonEmits>();
 
 const { show, type } = toRefs(props);
 
-const tgBackButton = Tg.BackButton;
+const sdk = useTelegramSdk();
+
+const tgBackButton = sdk.BackButton;
 const trigger = ref(NaN);
 
 const showWebButton = computed(() => {

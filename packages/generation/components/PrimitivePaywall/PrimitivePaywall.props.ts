@@ -1,5 +1,5 @@
-import { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
-import {
+import type { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
+import type {
   _GenerationPrimitivePaywallConfig,
   _GenerationPrimitivePaywallProduct,
 } from '@tok/generation/defineConfig';

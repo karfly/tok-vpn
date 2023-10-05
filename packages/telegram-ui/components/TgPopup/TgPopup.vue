@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts" generic="T extends PopupButton">
+import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Popup } from '@tok/ui/components/Popup';
-import Telegram from '@twa-dev/sdk';
 import { PopupButton } from '@twa-dev/types';
 import { computed, ref, toRefs, watch } from 'vue';
 
@@ -46,6 +46,8 @@ const emit = defineEmits<TgPopupEmits>();
 defineSlots<TgPopupSlots<T>>();
 
 const { type, modelValue, title, message, buttons } = toRefs(props);
+
+const sdk = useTelegramSdk();
 
 const forceWeb = ref(false);
 
@@ -70,7 +72,7 @@ const tryOpenTgPopup = () => {
     const _message = !message.value ? title.value : message.value;
     const _title = message.value ? title.value : undefined;
 
-    Telegram.showPopup(
+    sdk.showPopup(
       {
         title: _title,
         message: _message,
