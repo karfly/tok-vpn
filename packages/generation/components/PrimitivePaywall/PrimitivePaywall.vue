@@ -136,7 +136,7 @@ const computedFeatures = computed(() => {
 const priceFromProduct = computed(() => {
   const value = selectedProduct.value;
 
-  return value ? value.price : 0;
+  return value ? `${value.price}` : '';
 });
 
 // todo need to clean this shit
@@ -167,6 +167,10 @@ const onSubmit = () => {
   popupOpened.value = true;
 };
 
+setTimeout(() => {
+  onSelectOption('wallet_pay');
+}, 100);
+
 let lastAlert: string | undefined;
 
 const onSelectOption = (
@@ -192,17 +196,19 @@ const onSelectOption = (
     payment_method: id,
     id: _product.id,
     currency: translatedCurrency.value || 'USD',
-    price: translatedPrice.value ?? -1,
+    price: Number(translatedPrice.value),
     title: _product.title ?? 'Payment',
     description: _product.description ?? 'Payment description',
   };
 
-  const data = JSON.stringify({
-    product: dataProduct,
-    payload,
-  });
+  console.log(dataProduct);
 
-  tg.sendData(data);
+  // const data = JSON.stringify({
+  //   product: dataProduct,
+  //   payload,
+  // });
+
+  // tg.sendData(data);
 };
 </script>
 

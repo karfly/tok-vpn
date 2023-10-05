@@ -1,5 +1,4 @@
 import { CHAR_NO_BREAK_SPACE } from '@tok/ui/consts';
-import { CurrencyCode } from '@tok/ui/setup/currency/code.enum';
 import { CurrencyVariants } from '@tok/ui/setup/currency/currency';
 import { InjectionKey } from 'vue';
 
@@ -12,7 +11,7 @@ export type CurrencyOptions = {
 
 export const defaultCurrencyOptions = {
   align: 'left',
-  currency: CurrencyCode.Dollar,
+  currency: 'USD',
   decimalSeparator: '.',
   thousandSeparator: CHAR_NO_BREAK_SPACE,
 } as const;
