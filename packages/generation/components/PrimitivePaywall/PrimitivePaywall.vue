@@ -177,8 +177,8 @@ const onSelectOption = (
     id: _product.id,
     currency: formattedMoney.value.options.currency,
     price: formattedMoney.value.value,
-    title: _product.title,
-    description: _product.description,
+    title: _product.title || 'Payment',
+    description: _product.description || 'Payment description',
   };
 
   const data = JSON.stringify({
