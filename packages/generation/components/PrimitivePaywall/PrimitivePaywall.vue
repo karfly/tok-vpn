@@ -206,4 +206,8 @@ const onSelectOption = (
 
   margin-right: 0.75rem;
 }
+
+.feature:not(:first-child) {
+  margin-top: 0.5rem;
+}
 </style>

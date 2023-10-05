@@ -152,7 +152,8 @@ const onClick = () => {
     left: 0;
     min-height: 100vh;
     height: 100%;
-    overflow: auto;
+    width: 100%;
+    overflow-y: auto;
 
     background: var(
       --tok-slide-background,

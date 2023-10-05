@@ -1,6 +1,10 @@
 import { defineConfig } from '@tok/generation';
 
 export default defineConfig({
+  setupCurrency: {
+    currency: 'USD',
+    align: 'right',
+  },
   pages: [
     {
       slides: [

@@ -1,18 +1,16 @@
 <template>
   <primitive-slide v-bind="props" @on-click="onClick">
-    <div :class="$style.content">
-      <p v-if="carousel && pagination === 'count'" :class="$style.count">
-        {{ slideCount }}
-      </p>
+    <p v-if="carousel && pagination === 'count'" :class="$style.count">
+      {{ slideCount }}
+    </p>
 
-      <h2 v-html="i18nTitle" :class="$style.title" />
+    <h2 v-html="i18nTitle" :class="$style.title" />
 
-      <p
-        v-if="i18nDescription"
-        v-html="i18nDescription"
-        :class="$style.description"
-      />
-    </div>
+    <p
+      v-if="i18nDescription"
+      v-html="i18nDescription"
+      :class="$style.description"
+    />
 
     <slot />
   </primitive-slide>
@@ -56,16 +54,8 @@ const onClick = () => {
 <style lang="scss" module>
 .count {
   font: var(--tok-font-s);
+  color: var(--tok-text-color-64);
 
   padding-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.title {
-  margin-bottom: 0.75rem;
-}
-
-.description {
-  margin-top: -0.25rem;
 }
 </style>
