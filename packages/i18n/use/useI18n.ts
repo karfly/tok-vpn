@@ -79,7 +79,9 @@ export function useI18n() {
       return fallback ?? key;
     }
 
-    const _localed = localed.value as Record<string, unknown>;
+    const _locale = instance?.locale?.value;
+    const _localed =
+      (instance?.messages.value?.[_locale] as Record<string, unknown>) || {};
 
     const firstTry = tokTranslate(_localed, `${key}`);
 
@@ -87,18 +89,12 @@ export function useI18n() {
       return firstTry as T;
     }
 
-    const shouldTryOneMore = instance && instance.fallbackLocale !== key;
+    const fallbackLocaled =
+      instance!.messages.value?.[instance!.fallbackLocale] || {};
 
-    if (shouldTryOneMore) {
-      const fallbackLocaled =
-        instance!.messages.value?.[instance!.fallbackLocale] || {};
+    const secondTry = tokTranslate(fallbackLocaled as {}, `${key}`) as T;
 
-      const secondTry = tokTranslate(fallbackLocaled as {}, `${key}`) as T;
-
-      return secondTry ?? fallback ?? key;
-    }
-
-    return fallback ?? key;
+    return secondTry ?? fallback ?? key;
   };
 
   const useTranslated = <T = string>(

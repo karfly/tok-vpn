@@ -26,6 +26,11 @@ export type CarouselSlots<T> = {
   default: (props: { item: T; index: number }) => ReadonlyArray<VNode>;
 };
 
+export type CarouselExpose = {
+  next: () => void;
+  back: () => void;
+};
+
 export const CarouselDefaultProps = {
   draggable: false,
   threshold: 0,

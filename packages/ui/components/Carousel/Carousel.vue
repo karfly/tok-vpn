@@ -41,6 +41,7 @@ import { computed, onBeforeUnmount, onMounted, ref, toRefs, watch } from 'vue';
 import {
   CarouselDefaultProps,
   CarouselEmits,
+  CarouselExpose,
   CarouselProps,
   CarouselSlots,
 } from './Carousel.props';
@@ -265,7 +266,7 @@ onBeforeUnmount(() => {
   }
 });
 
-defineExpose({
+defineExpose<CarouselExpose>({
   next,
   back,
 });

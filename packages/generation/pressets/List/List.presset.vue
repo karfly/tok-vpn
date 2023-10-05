@@ -12,13 +12,13 @@
 </template>
 
 <script setup lang="ts">
+import { ListItem } from '@tok/generation/components/ListItem';
 import { SlidePresset } from '@tok/generation/pressets/slide';
 
 import {
   ListPressetDefaultProps,
   ListPressetProps,
 } from './List.presset.props';
-import ListItem from './ListItem.vue';
 
 const props = withDefaults(
   defineProps<ListPressetProps>(),

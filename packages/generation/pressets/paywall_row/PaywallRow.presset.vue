@@ -39,24 +39,12 @@ const i18n = useI18n();
 const activeId = ref(products.value[0]?.id || null);
 
 const translatedProducts = computed(() => {
-  i18n.messages.value;
-  i18n.locale.value;
-
-  return [...products.value].map((item) => {
-    if (item.bestText) {
-      item.bestText = i18n.translate(item.bestText);
-    }
-
-    if (item.title) {
-      item.title = i18n.translate(item.title);
-    }
-
-    if (item.description) {
-      item.description = i18n.translate(item.description);
-    }
-
-    return item;
-  });
+  return products.value.map((item) => ({
+    ...item,
+    bestText: item.bestText && i18n.translate(item.bestText),
+    title: item.title && i18n.translate(item.title),
+    description: item.description && i18n.translate(item.description),
+  }));
 });
 
 const productToSend = computed(() => {

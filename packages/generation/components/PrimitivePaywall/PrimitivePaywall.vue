@@ -20,12 +20,12 @@
       v-bind="popup"
       :title="translatedPopupTitle"
       :message="translatedPopupMessage"
-      :buttons="translatedPopupButtons"
+      :buttons="(translatedPopupButtons as any)"
       @onSelect="onSelectOption"
     >
       <template #button-icon="{ item }">
         <media-presset
-          v-if="item.media"
+          v-if="'media' in item"
           v-bind="item.media"
           :class="$style.media"
           static
@@ -38,8 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import { ListItem } from '@tok/generation/components/ListItem';
 import { MediaPresset } from '@tok/generation/components/Media';
-import { ListItem } from '@tok/generation/pressets/List';
 import { SlidePresset } from '@tok/generation/pressets/slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { useCarousel } from '@tok/generation/use/carousel';
@@ -86,19 +86,10 @@ const paymentCanceledMessage = i18n.useTranslated(
 );
 
 const translatedPopupButtons = computed(() => {
-  i18n.locale.value;
-  i18n.messages.value;
-
-  return popupButtons.value.map((button) => {
-    if ('text' in button) {
-      return {
-        ...button,
-        text: i18n.translate(button.text),
-      };
-    }
-
-    return button;
-  });
+  return popupButtons.value.map((button) => ({
+    ...button,
+    text: 'text' in button ? i18n.translate(button.text) : undefined,
+  }));
 });
 
 const defaultMedia = {

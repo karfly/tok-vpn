@@ -2,7 +2,7 @@
   <primitive-paywall v-bind="props" :selected-product="productToSend">
     <form @submit.prevent>
       <base-product
-        v-for="product in products"
+        v-for="product in translatedProducts"
         :key="product.id"
         v-bind="product"
         :active="product.id === selectedId"
@@ -35,25 +35,14 @@ const selectedId = ref(products.value[0]?.id || null);
 
 const i18n = useI18n();
 
+// price will be translated inside money component
 const translatedProducts = computed(() => {
-  i18n.locale.value;
-  i18n.messages.value;
-
-  return [...products.value].map((item) => {
-    if (item.title) {
-      item.title = i18n.translate(item.title);
-    }
-
-    if (item.description) {
-      item.description = i18n.translate(item.description);
-    }
-
-    if (item.discount) {
-      item.discount = i18n.translate(item.discount);
-    }
-
-    return item;
-  });
+  return products.value.map((item) => ({
+    ...item,
+    title: item.title && i18n.translate(item.title),
+    description: item.description && i18n.translate(item.description),
+    discount: item.discount && i18n.translate(item.discount),
+  }));
 });
 
 const productToSend = computed(() => {
