@@ -1,5 +1,4 @@
 import { useI18n } from '@tok/i18n';
-import { CurrencyVariants } from '@tok/ui/setup/currency/currency';
 import {
   CURRENCY_OPTIONS_TOKEN,
   CurrencyOptions,
@@ -8,9 +7,10 @@ import {
 import { resolveRef } from '@tok/ui/types';
 import { computed, ComputedRef, inject, MaybeRefOrGetter } from 'vue';
 
+import { CurrencyVariants } from './currency/currency';
 import { formatMoney } from './formatMoney';
 
-export function useFormattedMoney(
+export function useMoney(
   value: MaybeRefOrGetter<number | string>
 ): ComputedRef<{
   formatted: string;

@@ -1,7 +1,8 @@
 import { CHAR_NO_BREAK_SPACE } from '@tok/ui/consts';
 import { formatNumber } from '@tok/ui/number';
-import { getCurrencySymbol } from '@tok/ui/setup/currency/getCurrencySymbol';
 import type { CurrencyOptions } from '@tok/ui/tokens';
+
+import { getCurrencySymbol } from './currency';
 
 export const defaultFormatMoney = {
   align: 'left' as const,

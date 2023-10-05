@@ -49,7 +49,7 @@ import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
 import { useAlerts } from '@tok/ui/use/alerts';
-import { useFormattedMoney } from '@tok/ui/use/formattedMoney';
+import { useMoney } from '@tok/ui/use/money';
 import { computed, inject, ref, toRefs } from 'vue';
 
 import {
@@ -127,12 +127,12 @@ const priceFromProduct = computed(() => {
   return value ? `${value.price}` : '';
 });
 
-const formattedMoney = useFormattedMoney(priceFromProduct);
+const _money = useMoney(priceFromProduct);
 
 const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
   const _text = translatedMainButton.value;
-  const _price = formattedMoney.value.formatted;
+  const _price = _money.value.formatted;
 
   if (carousel && active.value === false) {
     return '';
@@ -175,8 +175,8 @@ const onSelectOption = (
   const dataProduct = {
     payment_method: id,
     id: _product.id,
-    currency: formattedMoney.value.options.currency,
-    price: formattedMoney.value.value,
+    currency: _money.value.options.currency,
+    price: _money.value.value,
     title: _product.title || 'Payment',
     description: _product.description || 'Payment description',
   };
