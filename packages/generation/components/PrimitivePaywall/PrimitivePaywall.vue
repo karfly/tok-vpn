@@ -167,10 +167,6 @@ const onSubmit = () => {
   popupOpened.value = true;
 };
 
-setTimeout(() => {
-  onSelectOption('wallet_pay');
-}, 100);
-
 let lastAlert: string | undefined;
 
 const onSelectOption = (
