@@ -2,10 +2,9 @@
   <div :class="$style.slide">
     <div ref="focusTrapRef" tabindex="0" :class="$style.focustrap" />
 
-    <draw-presset
+    <media-presset
       v-if="media"
       v-bind="media"
-      extends="media"
       :class="[$style.media, $style['media_' + shape]]"
     />
 
@@ -29,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { DrawPresset } from '@tok/generation/components/DrawPresset';
+import { MediaPresset } from '@tok/generation/components/Media';
 import { useTranslated } from '@tok/i18n';
 import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
 import { setNativeFocused } from '@tok/ui/dom/focus';

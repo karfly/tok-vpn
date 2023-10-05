@@ -1,10 +1,6 @@
 import { defineConfig } from '@tok/generation';
 
 export default defineConfig({
-  setupCurrency: {
-    currency: 'USD',
-    align: 'right',
-  },
   pages: [
     {
       slides: [
@@ -58,6 +54,7 @@ export default defineConfig({
         style: 'width: 160px; height: 160px; margin: 0 auto',
       },
       title: 'Unlock PRO Features',
+      mainButtonText: 'Subscribe for {price}',
       features: [
         '100,000 tokens per day (50+ A4 pages)',
         'Access to GPT-4',

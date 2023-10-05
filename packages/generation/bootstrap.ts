@@ -4,6 +4,7 @@ import { DefinePressetsPlugin } from '@tok/generation/plugins/definePressets';
 import { FormStatePlugin } from '@tok/generation/plugins/formState';
 import { ThemePlugin } from '@tok/generation/plugins/theme';
 import { TokI18nPlugin } from '@tok/i18n';
+import { CurrencyPlugin } from '@tok/ui/plugins/currency';
 import { AlertsPlugin } from '@tok/ui/use/alerts';
 import { createApp } from 'vue';
 import {
@@ -72,5 +73,6 @@ export function bootstrap<T extends BootstrapConfig<any>>(
     .use(ThemePlugin, config.theme || 'auto')
     .use(FormStatePlugin)
     .use(DefinePressetsPlugin, config.definePressets || {})
+    .use(CurrencyPlugin, config.currencyConfig || {})
     .mount('#app');
 }

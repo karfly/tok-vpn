@@ -9,5 +9,4 @@ export type CurrencyVariants =
   | CurrencyAsString
   | Currency
   | CurrencyCode
-  | number
   | string;

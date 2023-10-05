@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
+import { MediaPresset } from '@tok/generation/components/Media';
 import { PrimitivePaywall } from '@tok/generation/components/PrimitivePaywall';
-import { MediaPresset } from '@tok/generation/pressets/Media';
 import { useTranslated } from '@tok/i18n';
 import { Money } from '@tok/ui/components/Money';
 import { computed, toRefs } from 'vue';

@@ -12,7 +12,6 @@ export function formatNumber(
 
   let result = sign + integerPartString.charAt(0);
 
-  // todo: add padding
   for (let i = 1; i < integerPartString.length; i++) {
     if (i % 3 === remainder && integerPartString.length > 3) {
       result += thousandSeparator;

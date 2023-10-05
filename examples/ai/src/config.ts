@@ -7,8 +7,7 @@ export default defineConfig({
   definePressets: {
     action_slide: ActionSlide,
   },
-  setupCurrency: {
-    currency: 'USD',
+  currencyConfig: {
     align: 'right',
   },
   pages: [
@@ -24,10 +23,12 @@ export default defineConfig({
             {
               type: 'image',
               src: import('./assets/img/slide1_init.png'),
+              webp: import('./assets/img/slide1_init.webp'),
             },
             {
               type: 'image',
               src: import('./assets/img/slide1_res.png'),
+              webp: import('./assets/img/slide1_res.webp'),
             },
           ],
         },
@@ -41,10 +42,12 @@ export default defineConfig({
             {
               type: 'image',
               src: import('./assets/img/slide2_init.png'),
+              webp: import('./assets/img/slide2_init.webp'),
             },
             {
               type: 'image',
               src: import('./assets/img/slide2_res.png'),
+              webp: import('./assets/img/slide2_res.webp'),
             },
           ],
         },
@@ -61,10 +64,12 @@ export default defineConfig({
             {
               type: 'image',
               src: import('./assets/img/slide1_init.png'),
+              webp: import('./assets/img/slide1_init.webp'),
             },
             {
               type: 'image',
               src: import('./assets/img/slide1_res.png'),
+              webp: import('./assets/img/slide1_res.webp'),
             },
           ],
         },

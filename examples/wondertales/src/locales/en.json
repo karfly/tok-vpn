@@ -1,4 +1,8 @@
 {
+  "_currency": {
+    "value": "USD",
+    "align": "left"
+  },
   "_wtHref": "https://wondertales.io/?utm_source=telegram_onboarding",
   "_wtHrefText": "WonderTales.io",
   "_s1": {
@@ -50,9 +54,11 @@
     "feature2": "Access to fairy tales anytime",
     "feature3": "All fairy tales are saved",
     "product1": "1 month",
+    "product1Price": 8.95,
     "discount": "Discount 34%",
     "pricePrefix": "/month",
     "product2": "1 year",
+    "product2Price": 5.95,
     "popup": {
       "title": "Choose the payment method",
       "telegram_payments": "Bank Card",

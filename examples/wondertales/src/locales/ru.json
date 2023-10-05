@@ -1,4 +1,8 @@
 {
+  "_currency": {
+    "value": "RUB",
+    "align": "right"
+  },
   "_wtHref": "https://wonder-tales.ru/?utm_source=telegram_onboarding",
   "_wtHrefText": "WonderTales.ru",
   "_s1": {
@@ -50,9 +54,11 @@
     "feature2": "Доступ к сказкам в любое время",
     "feature3": "Все сказки сохраняются",
     "product1": "1 месяц",
+    "product1Price": 180,
     "discount": "Скидка 34%",
     "pricePrefix": " в месяц",
     "product2": "1 год",
+    "product2Price": 120,
     "popup": {
       "title": "Выберите метод оплаты",
       "telegram_payments": "Оплата картой",

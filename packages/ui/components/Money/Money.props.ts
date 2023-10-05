@@ -1,1 +1,1 @@
-export type MoneyProps = { value: number };
+export type MoneyProps = { value: number | string };

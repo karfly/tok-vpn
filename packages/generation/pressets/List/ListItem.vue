@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { MediaPresset } from '@tok/generation/pressets/Media';
+import { MediaPresset } from '@tok/generation/components/Media';
 import { useTranslated } from '@tok/i18n';
 import { _GenerationListOptionsConfig } from 'defineConfig';
 import { computed, toRefs } from 'vue';

@@ -12,6 +12,10 @@ export default defineConfig({
   definePressets: {
     story: Story,
   },
+  currencyConfig: {
+    currency: '_currency.value',
+    align: '_currency.align',
+  },
   pages: [
     {
       slides: [
@@ -181,13 +185,13 @@ export default defineConfig({
             {
               id: 'monthly',
               title: '_paywall.product1',
-              price: 8.95,
+              price: '_paywall.product1Price',
               pricePostfix: '_paywall.pricePrefix',
             },
             {
               id: 'yearly',
               title: '_paywall.product2',
-              price: 5.95,
+              price: '_paywall.product2Price',
               discount: '_paywall.discount',
               pricePostfix: '_paywall.pricePrefix',
             },

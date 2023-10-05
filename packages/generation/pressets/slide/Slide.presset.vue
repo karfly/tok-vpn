@@ -34,7 +34,7 @@ const props = withDefaults(
 
 const { title, description } = toRefs(props);
 
-const carousel = useCarousel(true);
+const carousel = useCarousel();
 const i18nTitle = useTranslated(title);
 const i18nDescription = useTranslated(description);
 

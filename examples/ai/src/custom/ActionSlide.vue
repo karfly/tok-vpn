@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { MediaPressetProps } from '@tok/generation/pressets/Media';
+import type { MediaPressetProps } from '@tok/generation/components/Media';
 import {
   SlidePresset,
   SlidePressetProps,
@@ -54,8 +54,8 @@ type Props = Omit<
 const props = defineProps<Props>();
 
 provide(CUSTOM_ICONS_TOKEN, {
-  check: defineAsyncComponent(() => import('./check.svg')),
-  wind: defineAsyncComponent(() => import('./wind.svg')),
+  check: defineAsyncComponent(() => import('../assets/icons/check.svg')),
+  wind: defineAsyncComponent(() => import('../assets/icons/wind.svg')),
 });
 
 const { actionButton, nextButton, media } = toRefs(props);
@@ -92,7 +92,7 @@ const onToggle = () => {
 };
 
 const onNext = () => {
-  carousel.next();
+  carousel?.next();
 };
 </script>
 

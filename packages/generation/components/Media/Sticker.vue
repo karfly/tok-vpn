@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref, toRefs, watch } from 'vue';
 
-import { _MediaLoader, StickerPressetProps } from './Media.presset.props';
+import { StickerPressetProps } from './Media.presset.props';
 
 // We have to do it this way because Lottie-web's bundled size is around 80kb
 const TelegramSticker = defineAsyncComponent(() =>
@@ -27,9 +27,9 @@ const { src } = toRefs(props);
 
 const loaded = ref<TelegramStickerJson | undefined>();
 
-const loadStickerJson = (loader: _MediaLoader<typeof import('*.tgs')>) => {
+const loadStickerJson = (loader: Promise<typeof import('*.tgs')>) => {
   loader.then((m) => {
-    loaded.value = m.default as TelegramStickerJson;
+    loaded.value = (m as { default: TelegramStickerJson }).default;
   });
 };
 

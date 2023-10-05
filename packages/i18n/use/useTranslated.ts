@@ -24,7 +24,7 @@ export const tokTranslate = <T = string>(
 };
 
 export function useTranslated<T = string>(
-  key: MaybeRefOrGetter<string>,
+  key: MaybeRefOrGetter<T>,
   fallback?: T
 ): ComputedRef<T | string> {
   const instance = inject(TOK_I18N_TOKEN, null);

@@ -1,9 +1,9 @@
-import { MediaPressetProps } from '@tok/generation/pressets/Media';
-import { ThemeConfigParam } from '@tok/generation/tokens';
-import { FlatButtonProps } from '@tok/ui/components/FlatButton';
-import { CurrencyVariants } from '@tok/ui/setup/currency/currency';
+import type { MediaPressetProps } from '@tok/generation/components/Media';
+import type { ThemeConfigParam } from '@tok/generation/tokens';
+import type { FlatButtonProps } from '@tok/ui/components/FlatButton';
+import type { CurrencyOptions } from '@tok/ui/tokens';
 import type { PopupButton } from '@twa-dev/types';
-import { CSSProperties } from 'vue';
+import type { CSSProperties } from 'vue';
 
 export type PaywalPopupPressetButtons = (PopupButton & {
   media?: MediaPressetProps;
@@ -79,7 +79,7 @@ export type _GenerationPaywallProduct = {
   id: string;
 
   title: string;
-  price: number;
+  price: number | string;
   discount?: string;
   pricePostfix?: string;
 };
@@ -98,7 +98,7 @@ export type _GenerationPaywallSingleConfig =
       id: string;
       title: string;
       description: string;
-      price: number;
+      price: number | string;
       pricePostfix?: string;
       media?: MediaPressetProps;
     };
@@ -111,7 +111,7 @@ export type _GenerationPaywallRowProductConfig = {
 
   description: string;
 
-  price: number;
+  price: number | string;
 
   bestText?: string;
 };
@@ -168,22 +168,7 @@ export type BootstrapConfig<TDefined extends {}> = {
   locale?: {
     fallback: string;
   } & Record<string, TODO>;
-  setupCurrency?: {
-    // left
-    align?: 'left' | 'right';
-
-    // 2
-    precision?: number;
-
-    // USD
-    currency?: CurrencyVariants;
-
-    // .
-    decimalSeparator?: string;
-
-    // ' '
-    thousandSeparator?: string;
-  };
+  currencyConfig?: CurrencyOptions;
   definePressets?: TDefined;
   pages: BootstrapPage<TDefined>[];
 };

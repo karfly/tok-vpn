@@ -38,8 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import { MediaPresset } from '@tok/generation/components/Media';
 import { ListItem } from '@tok/generation/pressets/List';
-import { MediaPresset } from '@tok/generation/pressets/Media';
 import { SlidePresset } from '@tok/generation/pressets/slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { useCarousel } from '@tok/generation/use/carousel';
@@ -48,8 +48,8 @@ import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
-import { useMoney } from '@tok/ui/setup/setupMoney';
 import { useAlerts } from '@tok/ui/use/alerts';
+import { useFormattedMoney } from '@tok/ui/use/formattedMoney';
 import { computed, inject, ref, toRefs } from 'vue';
 
 import {
@@ -68,7 +68,7 @@ const { mainButtonText, popup, selectedProduct, active, features } =
 const i18n = useI18n();
 const tg = useTelegramSdk();
 // to detect if we inside carousel or not, to prevent triggering MainButton.show()
-const carousel = useCarousel(true);
+const carousel = useCarousel(false);
 const formState = inject(FORM_STATE_TOKEN, null);
 const alertsService = useAlerts({ autoCloseOnUnmount: true });
 
@@ -132,12 +132,18 @@ const computedFeatures = computed(() => {
   });
 });
 
-// todo
-const formattedPrice = useMoney();
+const priceFromProduct = computed(() => {
+  const value = selectedProduct.value;
+
+  return value ? value.price : 0;
+});
+
+const formattedPrice = useFormattedMoney(priceFromProduct);
 
 const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
   const _text = translatedMainButton.value;
+  const _price = formattedPrice.value;
 
   if (carousel && active.value === false) {
     return '';
@@ -147,7 +153,7 @@ const mainButtonComputedText = computed(() => {
     return '';
   }
 
-  return _text.replace(/\{price\}/g, value.price);
+  return _text.replace(/\{price\}/g, _price);
 });
 
 const popupOpened = ref(false);
