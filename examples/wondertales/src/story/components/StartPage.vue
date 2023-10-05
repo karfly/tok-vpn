@@ -7,11 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 
-const title = useTranslated('_story.title');
+const i18n = useI18n();
 
-const name = useTranslated('_story.name');
+const title = i18n.useTranslated('_story.title');
+const name = i18n.useTranslated('_story.name');
 </script>
 
 <style lang="scss" module>

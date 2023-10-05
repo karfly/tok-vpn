@@ -43,12 +43,11 @@ import { ListItem } from '@tok/generation/pressets/List';
 import { SlidePresset } from '@tok/generation/pressets/slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { useCarousel } from '@tok/generation/use/carousel';
-import { tokTranslate, useI18n, useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
-import { CURRENCY_OPTIONS_TOKEN, defaultCurrencyOptions } from '@tok/ui/tokens';
 import { useAlerts } from '@tok/ui/use/alerts';
 import { useFormattedMoney } from '@tok/ui/use/formattedMoney';
 import { computed, inject, ref, toRefs } from 'vue';
@@ -77,34 +76,23 @@ const popupButtons = computed(() => popup.value.buttons);
 const popupTitle = computed(() => popup.value.title);
 const popupMessage = computed(() => popup.value.message || '');
 
-const translatedMainButton = useTranslated(mainButtonText);
-const translatedPopupTitle = useTranslated(popupTitle);
-const translatedPopupMessage = useTranslated(popupMessage);
-const paymentCanceledMessage = useTranslated(
+const translatedMainButton = i18n.useTranslated(mainButtonText);
+const translatedPopupTitle = i18n.useTranslated(popupTitle);
+const translatedPopupMessage = i18n.useTranslated(popupMessage);
+const paymentCanceledMessage = i18n.useTranslated(
   '_alerts.payment.canceled',
   'You have canceled the payment selection'
 );
 
 const translatedPopupButtons = computed(() => {
-  const buttons = popupButtons.value;
-  const locale = i18n.locale.value;
-  // todo type
-  const messages = (i18n.messages.value[locale] || {}) as Record<
-    string,
-    unknown
-  >;
-  // todo type
-  const defaultMessages = (i18n.messages.value[i18n.fallbackLocale] ||
-    {}) as Record<string, unknown>;
+  i18n.locale.value;
+  i18n.messages.value;
 
-  return buttons.map((button) => {
+  return popupButtons.value.map((button) => {
     if ('text' in button) {
       return {
         ...button,
-        text:
-          tokTranslate(messages, button.text) ??
-          tokTranslate(defaultMessages, button.text) ??
-          button.text,
+        text: i18n.translate(button.text),
       };
     }
 
@@ -139,16 +127,12 @@ const priceFromProduct = computed(() => {
   return value ? `${value.price}` : '';
 });
 
-// todo need to clean this shit
-const currencyOptions = inject(CURRENCY_OPTIONS_TOKEN, defaultCurrencyOptions);
-const translatedPrice = useTranslated(priceFromProduct);
-const formattedPrice = useFormattedMoney(priceFromProduct);
-const translatedCurrency = useTranslated(currencyOptions.currency);
+const formattedMoney = useFormattedMoney(priceFromProduct);
 
 const mainButtonComputedText = computed(() => {
   const value = selectedProduct.value;
   const _text = translatedMainButton.value;
-  const _price = formattedPrice.value;
+  const _price = formattedMoney.value.formatted;
 
   if (carousel && active.value === false) {
     return '';
@@ -186,15 +170,15 @@ const onSelectOption = (
 
   const payload = formState ? formState.state.value : {};
 
-  const _product = selectedProduct.value || {};
+  const _product = selectedProduct.value!;
 
   const dataProduct = {
     payment_method: id,
     id: _product.id,
-    currency: translatedCurrency.value || 'USD',
-    price: Number(translatedPrice.value),
-    title: _product.title ?? 'Payment',
-    description: _product.description ?? 'Payment description',
+    currency: formattedMoney.value.options.currency,
+    price: formattedMoney.value.value,
+    title: _product.title,
+    description: _product.description,
   };
 
   const data = JSON.stringify({

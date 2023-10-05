@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { computed, toRefs } from 'vue';
 
 import { storyStub } from '../story.stub';
@@ -37,7 +37,8 @@ const text = computed(() => {
   return page.value.text;
 });
 
-const translatedText = useTranslated(text);
+const i18n = useI18n();
+const translatedText = i18n.useTranslated(text);
 </script>
 
 <style lang="scss" module>

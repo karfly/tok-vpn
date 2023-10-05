@@ -1,10 +1,12 @@
 import { PrimitiveSlideProps } from '@tok/generation/components/PrimitiveSlide';
-import { _GenerationPrimitivePaywallConfig } from '@tok/generation/defineConfig';
+import {
+  _GenerationPrimitivePaywallConfig,
+  _GenerationPrimitivePaywallProduct,
+} from '@tok/generation/defineConfig';
 
 export type PrimitivePaywallProps = Pick<PrimitiveSlideProps, 'active'> &
   _GenerationPrimitivePaywallConfig & {
-    // todo
-    selectedProduct: any;
+    selectedProduct: _GenerationPrimitivePaywallProduct | null;
   };
 
 export const defaultPopup = {

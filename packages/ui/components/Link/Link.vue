@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { toRefs } from 'vue';
 
 import { LinkDefaultProps, LinkProps } from './Link.props';
@@ -17,8 +17,10 @@ const props = withDefaults(defineProps<LinkProps>(), LinkDefaultProps);
 
 const { text, href } = toRefs(props);
 
-const translatedText = useTranslated(text);
-const translatedHref = useTranslated(href);
+const i18n = useI18n();
+
+const translatedText = i18n.useTranslated(text);
+const translatedHref = i18n.useTranslated(href);
 </script>
 
 <style lang="scss" module>

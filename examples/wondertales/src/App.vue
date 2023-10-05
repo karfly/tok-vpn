@@ -31,9 +31,11 @@
 import './styles.scss';
 
 import { Root } from '@tok/generation';
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 
-const button = useTranslated('_wtHrefText');
-const href = useTranslated('_wtHref');
+const i18n = useI18n();
+
+const button = i18n.useTranslated('_wtHrefText');
+const href = i18n.useTranslated('_wtHref');
 </script>

@@ -37,7 +37,7 @@ import {
   SlidePressetProps,
 } from '@tok/generation/pressets/slide';
 import { useCarousel } from '@tok/generation/use/carousel';
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
 import { CUSTOM_ICONS_TOKEN } from '@tok/ui/tokens';
 import { computed, defineAsyncComponent, provide, ref, toRefs } from 'vue';
@@ -62,6 +62,7 @@ const { actionButton, nextButton, media } = toRefs(props);
 
 const applied = ref(false);
 
+const i18n = useI18n();
 const carousel = useCarousel();
 
 const action = computed(() => {
@@ -84,8 +85,8 @@ const computedNext = computed(() => {
   return typeof value === 'string' ? value : value.content;
 });
 
-const translatedButton = useTranslated(action);
-const translatedNext = useTranslated(computedNext);
+const translatedButton = i18n.useTranslated(action);
+const translatedNext = i18n.useTranslated(computedNext);
 
 const onToggle = () => {
   applied.value = !applied.value;

@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/components/Media';
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { _GenerationListOptionsConfig } from 'defineConfig';
 import { computed, toRefs } from 'vue';
 
@@ -18,9 +18,11 @@ const props = defineProps<{ item: _GenerationListOptionsConfig }>();
 
 const { item } = toRefs(props);
 
+const i18n = useI18n();
+
 const text = computed(() => item.value.text);
 
-const translatedText = useTranslated(text);
+const translatedText = i18n.useTranslated(text);
 </script>
 
 <style lang="scss" module>

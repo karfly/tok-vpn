@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { getElementId } from '@tok/ui/functions';
 import { computed, toRefs } from 'vue';
 
@@ -44,7 +44,9 @@ const emit = defineEmits<CheckboxBlockEmits>();
 
 const { invalid, disabled, modelValue, placeholder } = toRefs(props);
 
-const translatedPlaceholder = useTranslated(placeholder);
+const i18n = useI18n();
+
+const translatedPlaceholder = i18n.useTranslated(placeholder);
 
 const id = getElementId();
 

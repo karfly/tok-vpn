@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { PrimitiveSlide } from '@tok/generation/components/PrimitiveSlide';
 import { useCarousel } from '@tok/generation/use/carousel';
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { computed, toRefs } from 'vue';
 
 import {
@@ -34,9 +34,11 @@ const props = withDefaults(
 
 const { title, description } = toRefs(props);
 
+const i18n = useI18n();
 const carousel = useCarousel();
-const i18nTitle = useTranslated(title);
-const i18nDescription = useTranslated(description);
+
+const i18nTitle = i18n.useTranslated(title);
+const i18nDescription = i18n.useTranslated(description);
 
 const slideCount = computed(() => {
   if (!carousel) {

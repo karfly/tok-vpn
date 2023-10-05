@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 import { useAlerts } from '@tok/ui/use/alerts';
@@ -32,10 +32,11 @@ const lastStory = storyStub[storyStub.length - 1];
 const sdk = useTelegramSdk();
 const router = useRouter();
 const alertsService = useAlerts();
+const i18n = useI18n();
 
-const end = useTranslated('_story.end');
-const back = useTranslated('_story.back');
-const text = useTranslated('_story.alert');
+const end = i18n.useTranslated('_story.end');
+const back = i18n.useTranslated('_story.back');
+const text = i18n.useTranslated('_story.alert');
 
 const onClick = () => {
   sdk.HapticFeedback.impactOccurred('light');

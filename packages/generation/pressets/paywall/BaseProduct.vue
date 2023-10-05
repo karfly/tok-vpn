@@ -7,7 +7,9 @@
     </div>
 
     <span :class="$style.money">
-      <money :value="price" /><span v-html="pricePostfix" />
+      <span v-if="priceText" v-html="priceText" />
+
+      <money v-else :value="price" />
     </span>
 
     <input

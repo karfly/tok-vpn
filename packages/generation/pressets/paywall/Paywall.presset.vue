@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { PrimitivePaywall } from '@tok/generation/components/PrimitivePaywall';
-import { tokTranslate, useI18n } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { computed, ref, toRefs } from 'vue';
 
 import BaseProduct from './BaseProduct.vue';
@@ -36,37 +36,20 @@ const selectedId = ref(products.value[0]?.id || null);
 const i18n = useI18n();
 
 const translatedProducts = computed(() => {
+  i18n.locale.value;
+  i18n.messages.value;
+
   return [...products.value].map((item) => {
-    const locale = i18n.locale.value;
-
-    const messages = (i18n.messages.value[locale] || {}) as Record<
-      string,
-      unknown
-    >;
-    // todo type
-    const defaultMessages = (i18n.messages.value[i18n.fallbackLocale] ||
-      {}) as Record<string, unknown>;
-
-    // todo: find the better way
     if (item.title) {
-      item.title =
-        tokTranslate(messages, item.title) ??
-        tokTranslate(defaultMessages, item.title) ??
-        item.title;
+      item.title = i18n.translate(item.title);
     }
 
     if (item.discount) {
-      item.discount =
-        tokTranslate(messages, item.discount) ??
-        tokTranslate(defaultMessages, item.discount) ??
-        item.discount;
+      item.discount = i18n.translate(item.discount);
     }
 
-    if (item.pricePostfix) {
-      item.pricePostfix =
-        tokTranslate(messages, item.pricePostfix) ??
-        tokTranslate(defaultMessages, item.pricePostfix) ??
-        item.pricePostfix;
+    if (item.priceText) {
+      item.priceText = i18n.translate(item.priceText);
     }
 
     return item;
@@ -76,7 +59,7 @@ const translatedProducts = computed(() => {
 const productToSend = computed(() => {
   const active = selectedId.value;
 
-  return translatedProducts.value.find(({ id }) => id === active);
+  return translatedProducts.value.find(({ id }) => id === active) || null;
 });
 
 const onProductSelect = (id: string) => {

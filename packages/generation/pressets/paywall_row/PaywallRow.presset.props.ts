@@ -1,4 +1,4 @@
-import { _GenerationPaywallRowConfig } from 'defineConfig';
+import { _GenerationPaywallRowConfig } from '@tok/generation/defineConfig';
 
 export type PaywallRowPressetProps = Omit<
   _GenerationPaywallRowConfig,

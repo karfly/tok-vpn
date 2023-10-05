@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/components/Media';
 import { PrimitivePaywall } from '@tok/generation/components/PrimitivePaywall';
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { Money } from '@tok/ui/components/Money';
 import { computed, toRefs } from 'vue';
 
@@ -37,11 +37,13 @@ const props = withDefaults(
 
 const { product } = toRefs(props);
 
+const i18n = useI18n();
+
 const title = computed(() => product.value.title);
 const description = computed(() => product.value.description);
 
-const translatedTitle = useTranslated(title);
-const translatedDescription = useTranslated(description);
+const translatedTitle = i18n.useTranslated(title);
+const translatedDescription = i18n.useTranslated(description);
 
 const selectedProduct = computed(() => {
   const value = product.value;

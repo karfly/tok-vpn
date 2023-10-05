@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { FlatButton } from '@tok/ui/components/FlatButton';
 import { Portal } from '@tok/ui/components/Portal';
 import { FocustrapDirective as vFocustrap } from '@tok/ui/directives/focustrap';
@@ -73,8 +73,9 @@ const popupsContainer = inject(POPUPS_HOST_TOKEN, ref(null));
 const contentRef = ref<HTMLElement | null>(null);
 const closeButtonRef = ref<ComponentPublicInstance | null>(null);
 
-const translatedTitle = useTranslated(title);
-const translatedMessage = useTranslated(message);
+const i18n = useI18n();
+const translatedTitle = i18n.useTranslated(title);
+const translatedMessage = i18n.useTranslated(message);
 
 const id = getElementId();
 

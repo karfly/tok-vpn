@@ -1,4 +1,4 @@
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { CurrencyVariants } from '@tok/ui/setup/currency/currency';
 import {
   CURRENCY_OPTIONS_TOKEN,
@@ -12,7 +12,11 @@ import { formatMoney } from './formatMoney';
 
 export function useFormattedMoney(
   value: MaybeRefOrGetter<number | string>
-): ComputedRef<string> {
+): ComputedRef<{
+  formatted: string;
+  value: number;
+  options: Required<CurrencyOptions>;
+}> {
   const options = inject(CURRENCY_OPTIONS_TOKEN, defaultCurrencyOptions);
   const valueRef = resolveRef(value);
   const toTranslateValue = computed(() => {
@@ -21,11 +25,13 @@ export function useFormattedMoney(
     return typeof _value === 'string' ? _value : `${_value}`;
   });
 
-  const translatedValue = useTranslated(toTranslateValue);
-  const align = useTranslated(options.align);
-  const currency = useTranslated<CurrencyVariants>(options.currency);
-  const decimal = useTranslated(options.decimalSeparator);
-  const thousand = useTranslated(options.thousandSeparator);
+  const i18n = useI18n();
+
+  const translatedValue = i18n.useTranslated(toTranslateValue);
+  const align = i18n.useTranslated(options.align);
+  const currency = i18n.useTranslated<CurrencyVariants>(options.currency);
+  const decimal = i18n.useTranslated(options.decimalSeparator);
+  const thousand = i18n.useTranslated(options.thousandSeparator);
 
   return computed(() => {
     const _align = align.value;
@@ -42,6 +48,10 @@ export function useFormattedMoney(
       thousandSeparator: _thousand,
     };
 
-    return formatMoney(clean, options);
+    return {
+      formatted: formatMoney(clean, options),
+      value: clean,
+      options,
+    };
   });
 }

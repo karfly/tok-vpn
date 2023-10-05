@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { computed, defineAsyncComponent, toRefs } from 'vue';
 
@@ -30,7 +30,8 @@ const srcProbablyTranslated = computed(() => {
   return src.value && typeof src.value === 'string' ? src.value : '';
 });
 
-const translatedSrc = useTranslated<
+const i18n = useI18n();
+const translatedSrc = i18n.useTranslated<
   string | _MediaLoader<{ render: () => void }>
 >(srcProbablyTranslated);
 

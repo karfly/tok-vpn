@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Carousel } from '@tok/ui/components/Carousel';
@@ -57,8 +57,9 @@ const router = useRouter();
 const sdk = useTelegramSdk();
 const alertsService = useAlerts();
 
-const translatedText = useTranslated('_story.mainButton');
-const alertText = useTranslated('_story.alert');
+const i18n = useI18n();
+const translatedText = i18n.useTranslated('_story.mainButton');
+const alertText = i18n.useTranslated('_story.alert');
 
 // todo: InstanceType doesn't work, I have no idea why
 // type Carousel = InstanceType<typeof Carousel>;

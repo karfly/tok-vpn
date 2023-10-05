@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/components/Media';
-import { useTranslated } from '@tok/i18n';
+import { useI18n } from '@tok/i18n';
 import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
 import { setNativeFocused } from '@tok/ui/dom/focus';
 import { computed, ref, toRefs, watch } from 'vue';
@@ -67,7 +67,8 @@ const buttonProps = computed<FlatButtonProps>(() => {
   return typeof value === 'string' ? {} : value || {};
 });
 
-const i18nButton = useTranslated(buttonText);
+const i18n = useI18n();
+const i18nButton = i18n.useTranslated(buttonText);
 
 watch(
   [active, focusTrapRef],

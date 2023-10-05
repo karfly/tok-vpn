@@ -75,13 +75,16 @@ export type _GenerationPrimitivePaywallConfig = Omit<
   };
 };
 
-export type _GenerationPaywallProduct = {
+export type _GenerationPrimitivePaywallProduct = {
   id: string;
-
-  title: string;
   price: number | string;
+  title: string;
+  description: string;
+};
+
+export type _GenerationPaywallProduct = _GenerationPrimitivePaywallProduct & {
   discount?: string;
-  pricePostfix?: string;
+  priceText?: string;
 };
 
 export type _GenerationPaywallConfig = _GenerationPrimitivePaywallConfig & {
@@ -94,27 +97,15 @@ export type _GenerationPaywallSingleConfig =
   _GenerationPrimitivePaywallConfig & {
     extends: 'paywall_single';
 
-    product: {
-      id: string;
-      title: string;
-      description: string;
-      price: number | string;
-      pricePostfix?: string;
+    product: _GenerationPrimitivePaywallProduct & {
       media?: MediaPressetProps;
     };
   };
 
-export type _GenerationPaywallRowProductConfig = {
-  id: string;
-
-  title: string;
-
-  description: string;
-
-  price: number | string;
-
-  bestText?: string;
-};
+export type _GenerationPaywallRowProductConfig =
+  _GenerationPrimitivePaywallProduct & {
+    bestText?: string;
+  };
 
 export type _GenerationPaywallRowConfig = _GenerationPrimitivePaywallConfig & {
   extends: 'paywall_row';
@@ -131,10 +122,10 @@ export type _GenerationCarouselConfig<T> = {
     | _GenerationSlideConfig
     | _GenerationFormConfig
     | _GenerationListConfig
-    | {
-        [key in keyof T]: { extends: keyof T; [key: string]: any };
-      }[keyof T]
   )[];
+  // | {
+  //     [key in keyof T]: { extends: keyof T; [key: string]: any };
+  //   }[keyof T]
 };
 
 type BootstrapPage<TCustom> = {
@@ -147,13 +138,13 @@ type BootstrapPage<TCustom> = {
   | _GenerationSlideConfig
   | _GenerationFormConfig
   | _GenerationListConfig
-  | {
-      [key in keyof TCustom]: {
-        extends: keyof TCustom;
-        [key: string]: any;
-      };
-    }[keyof TCustom]
 );
+// | {
+//     [key in keyof TCustom]: {
+//       extends: keyof TCustom;
+//       [key: string]: any;
+//     };
+//   }[keyof TCustom]
 
 export type DefinedPressetsKeys<T = BootstrapPage<{}>> = T extends {
   extends: infer E;
