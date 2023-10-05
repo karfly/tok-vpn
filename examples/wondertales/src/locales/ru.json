@@ -49,7 +49,7 @@
     "policy_href": "https://google.com",
     "terms": "Соглашение о подписке",
     "terms_href": "https://google.com",
-    "main": "Продолжить",
+    "main": "Подписаться за {price} в месяц",
     "feature1": "Бесконечное количество сказок",
     "feature2": "Доступ к сказкам в любое время",
     "feature3": "Все сказки сохраняются",
