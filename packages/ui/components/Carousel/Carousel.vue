@@ -303,8 +303,8 @@ defineExpose<CarouselExpose>({
   will-change: transform;
   touch-action: pan-x;
 
-  // padding-bottom: 2rem;
-  // margin-bottom: -2rem;
+  padding-bottom: 2rem;
+  margin-bottom: -2rem;
 
   &:before,
   &:after {
