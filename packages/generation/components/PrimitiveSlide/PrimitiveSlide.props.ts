@@ -5,8 +5,6 @@ export type PrimitiveSlideProps = Pick<
   'media' | 'textAlign' | 'shape' | 'background' | 'button' | 'extends'
 > & {
   active?: boolean;
-
-  buttonAfterContent?: boolean;
 };
 
 export type PrimitiveSlideEmits = {

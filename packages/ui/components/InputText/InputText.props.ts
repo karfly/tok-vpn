@@ -22,7 +22,6 @@ export type InputTextProps<T = string | null> = {
 
 export type InputTextEmits = {
   (e: 'update:modelValue', value: string | null): void;
-  (e: 'focused', value: boolean): void;
 };
 
 export const InputTextDefaultProps = {

@@ -14,25 +14,24 @@
     >
       <slot />
 
-      <flat-button
-        v-if="buttonText"
-        v-bind="buttonProps"
-        :class="[$style.button, buttonAfterContent && $style.button_after]"
-        @click="onClick"
-        @mousedown.prevent
-      >
-        {{ i18nButton }}
-      </flat-button>
+      <main-button
+        v-if="active && buttonText"
+        :keep-alive="!!carousel"
+        :text="i18nButton"
+        @on-click="onClick"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/components/Media';
+import { useCarousel } from '@tok/generation/use/carousel';
 import { useI18n } from '@tok/i18n';
-import { FlatButton, FlatButtonProps } from '@tok/ui/components/FlatButton';
+import { MainButton } from '@tok/telegram-ui/components/MainButton';
 import { setNativeFocused } from '@tok/ui/dom/focus';
 import { computed, ref, toRefs, watch } from 'vue';
+import { RouteRecordRaw, useRouter } from 'vue-router';
 
 import {
   PrimitiveSlideDefaultProps,
@@ -53,6 +52,9 @@ const emit = defineEmits<PrimitiveSlideEmits>();
 
 const { button, active } = toRefs(props);
 
+const carousel = useCarousel();
+const router = useRouter();
+
 const focusTrapRef = ref<HTMLElement | null>(null);
 
 const buttonText = computed(() => {
@@ -61,7 +63,7 @@ const buttonText = computed(() => {
   return typeof value === 'string' ? value : value ? value.content : '';
 });
 
-const buttonProps = computed<FlatButtonProps>(() => {
+const buttonProps = computed<{ to?: RouteRecordRaw }>(() => {
   const value = button.value;
 
   return typeof value === 'string' ? {} : value || {};
@@ -83,7 +85,9 @@ watch(
 const onClick = () => {
   const _props = buttonProps.value;
 
-  if ('to' in _props || 'href' in _props) {
+  if ('to' in _props && _props.to) {
+    router.push(_props.to);
+
     return;
   }
 
@@ -114,12 +118,9 @@ const onClick = () => {
 
   &_stacked {
     position: absolute;
-    top: 50%;
-    left: 50%;
     height: 100vh;
     width: auto;
     z-index: -1;
-    transform: translate(-50%, -50%);
   }
 }
 
@@ -167,15 +168,6 @@ const onClick = () => {
     & > *:first-child {
       margin-top: auto;
     }
-  }
-}
-
-.button {
-  margin-top: auto;
-  width: 100%;
-
-  &_after {
-    margin-top: initial;
   }
 }
 </style>

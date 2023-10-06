@@ -39,7 +39,7 @@ import { useI18n } from '@tok/i18n';
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { getElementId } from '@tok/ui/functions';
 import { useFocused } from '@tok/ui/use/focused';
-import { computed, ref, toRefs, watch } from 'vue';
+import { computed, ref, toRefs } from 'vue';
 
 import {
   InputTextDefaultProps,
@@ -94,15 +94,9 @@ const onClear = () => {
   focus();
 };
 
-const onFocused = (value: boolean) => {
-  emit('focused', value);
-};
-
 const focus = () => {
   nativeRef.value?.focus();
 };
-
-watch(focused, onFocused, { immediate: true });
 
 defineExpose({
   focus,

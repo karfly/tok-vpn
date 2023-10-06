@@ -28,7 +28,7 @@ export type _GenerationSlideConfig = {
 
   background?: string;
 
-  button: string | (FlatButtonProps & { content: string }) | null;
+  button: string | (Pick<FlatButtonProps, 'to'> & { content: string }) | null;
 };
 
 export type _GenerationFormControlConfig = {

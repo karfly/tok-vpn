@@ -9,7 +9,9 @@ Telegram Onboarding Kit is a versatile tool that allows developers to easily cre
 1. Fork this repository
 2. Clone your forked repository
 
-!!!$ Make sure that you have installed `pip` and `node` on your machine
+```
+Make sure that you have installed `pip` and `node` on your machine
+```
 
 2. Run command `npm ci` to install packages
    1. The Python dependencies will be automatically installed as part of the process. You don't need to run any additional commands for this
