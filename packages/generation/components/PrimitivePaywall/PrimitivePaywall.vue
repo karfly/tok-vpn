@@ -34,7 +34,7 @@
     </tg-popup>
 
     <main-button
-      v-if="active"
+      v-if="carousel ? active : !!mainButtonComputedText"
       :keep-alive="!!carousel"
       :text="mainButtonComputedText"
       @on-click="onSubmit"
