@@ -72,11 +72,7 @@ const onUpdate = (id: string, value: unknown) => {
 </script>
 
 <style lang="scss" module>
-.control {
-  padding-bottom: 1.25rem;
-
-  &:last-child {
-    padding-bottom: 2.5rem;
-  }
+.control:not(:first-child) {
+  margin-top: 1.25rem;
 }
 </style>
