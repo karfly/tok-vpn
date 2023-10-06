@@ -72,7 +72,7 @@ const onUpdate = (id: string, value: unknown) => {
 </script>
 
 <style lang="scss" module>
-.control:not(:first-child) {
-  margin-top: 1.25rem;
+.control {
+  margin-bottom: 1.25rem;
 }
 </style>
