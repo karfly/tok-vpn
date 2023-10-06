@@ -12,8 +12,7 @@ export default defineConfig({
         {
           media: {
             type: 'image',
-            src: import('./assets/img/first.png'),
-            webp: import('./assets/img/first.webp'),
+            src: import('./assets/img/1.webp'),
             style: 'aspect-ratio: 420/465',
           },
           textAlign: 'center',
@@ -25,8 +24,7 @@ export default defineConfig({
           extends: 'form',
           media: {
             type: 'image',
-            src: import('./assets/img/second.png'),
-            webp: import('./assets/img/second.webp'),
+            src: import('./assets/img/2.webp'),
             style: 'aspect-ratio: 2.625/1',
           },
           textAlign: 'center',
@@ -52,8 +50,7 @@ export default defineConfig({
           extends: 'form',
           media: {
             type: 'image',
-            src: import('./assets/img/third.png'),
-            webp: import('./assets/img/third.webp'),
+            src: import('./assets/img/3.webp'),
             style: 'aspect-ratio: 2.625/1',
           },
           textAlign: 'center',
@@ -91,8 +88,7 @@ export default defineConfig({
           extends: 'list',
           media: {
             type: 'image',
-            src: import('./assets/img/fourth.png'),
-            webp: import('./assets/img/fourth.webp'),
+            src: import('./assets/img/4.webp'),
             style: 'aspect-ratio: 2.625/1',
           },
           textAlign: 'center',
@@ -151,8 +147,7 @@ export default defineConfig({
       path: '/paywall',
       media: {
         type: 'image',
-        src: import('./assets/img/fifth.png'),
-        webp: import('./assets/img/fifth.webp'),
+        src: import('./assets/img/5.webp'),
         style: 'aspect-ratio: 420/340',
       },
       textAlign: 'center',
