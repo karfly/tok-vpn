@@ -141,10 +141,13 @@ const onClick = () => {
   );
 
   &_rounded {
+    background: var(--tok-slide-background, var(--tok-background-color));
+  }
+
+  .media + &_rounded {
+    margin-top: -2rem;
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
-    margin-top: -2rem;
-    background: var(--tok-slide-background, var(--tok-background-color));
   }
 
   &_stacked {

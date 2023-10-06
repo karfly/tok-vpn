@@ -14,7 +14,7 @@ type TODO = any;
 export type _GenerationSlideConfig = {
   extends?: 'slide';
 
-  media: MediaPressetProps;
+  media?: MediaPressetProps;
 
   title: string;
 
