@@ -33,9 +33,13 @@
 
   &::-webkit-scrollbar,
   &::-webkit-scrollbar-thumb {
+    display: none;
+
     background: transparent;
     width: 0;
     height: 0;
+
+    -webkit-appearance: none;
   }
 }
 
