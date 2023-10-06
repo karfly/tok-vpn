@@ -2,6 +2,8 @@ import { defineConfig } from '@tok/generation';
 
 import ActionSlide from './custom/ActionSlide.vue';
 
+const imageStyle = 'left: 50%; top: 50%; transform: translate(-50%, -50%)';
+
 export default defineConfig({
   theme: 'dark',
   definePressets: {
@@ -24,11 +26,13 @@ export default defineConfig({
               type: 'image',
               src: import('./assets/img/slide1_init.png'),
               webp: import('./assets/img/slide1_init.webp'),
+              style: imageStyle,
             },
             {
               type: 'image',
               src: import('./assets/img/slide1_res.png'),
               webp: import('./assets/img/slide1_res.webp'),
+              style: imageStyle,
             },
           ],
         },
@@ -43,11 +47,13 @@ export default defineConfig({
               type: 'image',
               src: import('./assets/img/slide2_init.png'),
               webp: import('./assets/img/slide2_init.webp'),
+              style: imageStyle,
             },
             {
               type: 'image',
               src: import('./assets/img/slide2_res.png'),
               webp: import('./assets/img/slide2_res.webp'),
+              style: imageStyle,
             },
           ],
         },
@@ -65,11 +71,13 @@ export default defineConfig({
               type: 'image',
               src: import('./assets/img/slide1_init.png'),
               webp: import('./assets/img/slide1_init.webp'),
+              style: imageStyle,
             },
             {
               type: 'image',
               src: import('./assets/img/slide1_res.png'),
               webp: import('./assets/img/slide1_res.webp'),
+              style: imageStyle,
             },
           ],
         },

@@ -114,12 +114,9 @@ const onClick = () => {
 
   &_stacked {
     position: absolute;
-    top: 50%;
-    left: 50%;
     height: 100vh;
     width: auto;
     z-index: -1;
-    transform: translate(-50%, -50%);
   }
 }
 
