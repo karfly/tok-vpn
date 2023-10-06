@@ -38,7 +38,7 @@
     "policy_href": "https://ya.ru",
     "terms": "Условия использования",
     "terms_href": "https://ya.ru",
-    "main": "Продолжить",
+    "main": "Купить за {price}",
     "popup": {
       "title": "Выберите метод оплаты",
       "telegram_payments": "Оплата картой",

@@ -29,7 +29,7 @@
   },
   "_paywall": {
     "title": "Unlock the <span style=\"color: #7546FB\">Full Experience!</span>",
-    "description": "Gain unlimited access to all our premium features and meditations",
+    "description": "Get unlimited access to all our premium features and meditations",
     "product": {
       "title": "Lifetime Access",
       "description": "<b>One-time payment for unlimited access.</b><br />Dive deep into a world of relaxation and mindfulness"
@@ -38,7 +38,7 @@
     "policy_href": "https://google.com",
     "terms": "Terms of use",
     "terms_href": "https://google.com",
-    "main": "Continue",
+    "main": "Buy for {price}",
     "popup": {
       "title": "Choose the payment method",
       "telegram_payments": "Bank Card",
