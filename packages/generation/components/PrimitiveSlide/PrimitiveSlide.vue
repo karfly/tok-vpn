@@ -130,7 +130,6 @@ const onClick = () => {
   flex: 1;
   padding: 1rem;
   gap: 0.75rem;
-  border-bottom: 10px solid yellow;
 
   background: var(
     --tok-slide-background,

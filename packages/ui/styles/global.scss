@@ -76,9 +76,7 @@
 }
 
 html {
-  height: var(--tg-viewport-stable-height, 100vh);
-
-  border-bottom: 10px solid green;
+  height: auto;
 }
 
 html[data-theme='dark'] {
@@ -110,7 +108,6 @@ body {
   font: var(--tok-font-m);
   color: var(--tok-text-color);
   background-color: var(--tok-background-color);
-  border-bottom: 10px solid red;
 
   overflow-x: hidden;
 }
