@@ -108,6 +108,7 @@ body {
   font: var(--tok-font-m);
   color: var(--tok-text-color);
   background-color: var(--tok-background-color);
+  border-bottom: 10px solid red;
 
   overflow-x: hidden;
 }
