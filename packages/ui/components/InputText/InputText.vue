@@ -38,6 +38,7 @@
 import { useI18n } from '@tok/i18n';
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { getElementId } from '@tok/ui/functions';
+import { useFocused } from '@tok/ui/use/focused';
 import { computed, ref, toRefs } from 'vue';
 
 import {
@@ -61,8 +62,7 @@ const i18n = useI18n();
 
 const translatedPlaceholder = i18n.useTranslated(placeholder);
 
-const focused = ref(false);
-// const focused = useFocused(nativeRef);
+const focused = useFocused(nativeRef);
 const id = getElementId();
 
 const state = computed(() => {

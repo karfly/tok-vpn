@@ -100,7 +100,7 @@ const onNext = () => {
 <style lang="scss" module>
 .slide {
   position: relative;
-  min-height: 100vh;
+  min-height: var(--tg-viewport-stable-height, 100vh);
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
