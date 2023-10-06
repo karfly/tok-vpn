@@ -37,8 +37,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_love.tgs'),
-            style:
-              'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
           },
           title: '_s2.title',
           list: [
@@ -78,8 +76,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_easy.tgs'),
-            style:
-              'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
           },
           title: '_s3.title',
           description: '_s3.description',
@@ -113,8 +109,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_speed.tgs'),
-            style:
-              'height: 160px; width: 160px; margin: 0 auto; margin-top: 1rem',
           },
           title: '_s4.title',
           description: '_s4.description',
@@ -168,8 +162,6 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_party.tgs'),
-            style:
-              'width: 160px; height: 160px; margin: 0 auto; margin-top: 1rem',
           },
           title: '_paywall.title',
           mainButtonText: '_paywall.main',
