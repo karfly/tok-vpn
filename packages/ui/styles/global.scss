@@ -100,7 +100,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 100vh;
+  min-height: var(--tg-viewport-stable-height, 100vh);
 
   max-width: 420px;
   margin: 0 auto;

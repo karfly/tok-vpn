@@ -1,10 +1,11 @@
 <template>
-  <div v-bind="props">
+  <div v-bind="props" :class="$style.container">
     <component
       v-if="loaded"
       v-bind="props"
       :is="TelegramSticker"
       :json="loaded"
+      :class="$style.container"
     />
   </div>
 </template>
@@ -51,3 +52,12 @@ watch(
   { immediate: true }
 );
 </script>
+
+<style lang="scss" module>
+.container {
+  width: 100%;
+  height: 100%;
+  max-height: 40vw;
+  aspect-ratio: 1/1;
+}
+</style>

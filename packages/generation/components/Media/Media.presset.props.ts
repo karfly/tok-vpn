@@ -30,7 +30,15 @@ export type ImagePressetProps = {
   static?: boolean;
 };
 
+export type VideoPressetProps = {
+  type: 'video';
+  src: Promise<any>;
+
+  style?: string | CSSProperties;
+};
+
 export type MediaPressetProps =
   | IconPressetProps
   | StickerPressetProps
-  | ImagePressetProps;
+  | ImagePressetProps
+  | VideoPressetProps;

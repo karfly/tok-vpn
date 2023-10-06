@@ -20,7 +20,6 @@ export default defineConfig({
           media: {
             type: 'image',
             src: import('./assets/img/base.png'),
-            style: 'aspect-ratio: 420/465',
           },
           pagination: 'count',
           shape: 'rounded',
@@ -32,7 +31,6 @@ export default defineConfig({
           media: {
             type: 'image',
             src: import('./assets/img/base.png'),
-            style: 'aspect-ratio: 420/465',
           },
           pagination: 'count',
           shape: 'rounded',
@@ -51,7 +49,6 @@ export default defineConfig({
       media: {
         type: 'sticker',
         src: import('./assets/stickers/lama_clown.tgs'),
-        style: 'width: 160px; height: 160px; margin: 0 auto',
       },
       title: 'Unlock PRO Features',
       mainButtonText: 'Subscribe for {price}',

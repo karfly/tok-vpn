@@ -39,7 +39,7 @@ import { useI18n } from '@tok/i18n';
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { getElementId } from '@tok/ui/functions';
 import { useFocused } from '@tok/ui/use/focused';
-import { computed, ref, toRefs } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 
 import {
   InputTextDefaultProps,
@@ -97,6 +97,27 @@ const onClear = () => {
 const focus = () => {
   nativeRef.value?.focus();
 };
+
+let timeout: ReturnType<typeof setTimeout>;
+
+// The default scroll behavior in the browser isn't enough.
+// We must maintain scrolling to this element because
+// there seems to be an issue with the layout inside Telegram,
+// particularly when the MainButton is visible.
+// TODO: Find a layout style that will stabilize the native scroll behavior
+watch([focused, nativeRef], ([_focused, _native], _, onCleanup) => {
+  onCleanup(() => {
+    timeout && clearTimeout(timeout);
+  });
+
+  if (_focused && _native) {
+    timeout = setTimeout(() => {
+      _native?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }, 200);
+  }
+});
 
 defineExpose({
   focus,

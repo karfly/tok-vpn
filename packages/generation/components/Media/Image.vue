@@ -1,5 +1,5 @@
 <template>
-  <picture v-if="type === 'image'" v-bind="props">
+  <picture v-if="type === 'image'" v-bind="props" :class="$style.container">
     <source v-if="webp" type="image/webp" :srcset="loadedWebp" />
 
     <img
@@ -25,6 +25,10 @@ const loadedWebp = useLoadedImage(webp);
 </script>
 
 <style lang="scss" module>
+.container {
+  aspect-ratio: 1/1;
+}
+
 .img {
   width: inherit;
   height: inherit;

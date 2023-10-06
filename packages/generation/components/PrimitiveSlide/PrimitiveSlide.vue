@@ -103,9 +103,9 @@ const onClick = () => {
 
 .slide {
   position: relative;
-  min-height: 100vh;
+  min-height: var(--tg-viewport-stable-height, 100vh);
   height: 100%;
-  max-height: 100vh;
+  max-height: var(--tg-viewport-stable-height, 100vh);
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -141,17 +141,20 @@ const onClick = () => {
   );
 
   &_rounded {
+    background: var(--tok-slide-background, var(--tok-background-color));
+  }
+
+  .media + &_rounded {
+    margin-top: -2rem;
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
-    margin-top: -2rem;
-    background: var(--tok-slide-background, var(--tok-background-color));
   }
 
   &_stacked {
     position: absolute;
     bottom: 0;
     left: 0;
-    min-height: 100vh;
+    min-height: var(--tg-viewport-stable-height, 100vh);
     height: 100%;
     width: 100%;
     overflow-y: auto;
