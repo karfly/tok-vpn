@@ -76,7 +76,7 @@
 }
 
 html {
-  height: auto;
+  height: var(--tg-viewport-stable-height, 100vh);
 
   border-bottom: 10px solid green;
 }
