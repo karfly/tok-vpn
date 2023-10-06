@@ -33,7 +33,12 @@
       </template>
     </tg-popup>
 
-    <main-button :text="mainButtonComputedText" @on-click="onSubmit" />
+    <main-button
+      v-if="active"
+      :keep-alive="!!carousel"
+      :text="mainButtonComputedText"
+      @on-click="onSubmit"
+    />
   </slide-presset>
 </template>
 

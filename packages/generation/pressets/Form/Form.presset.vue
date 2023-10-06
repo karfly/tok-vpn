@@ -1,5 +1,5 @@
 <template>
-  <slide-presset v-bind="props" :button-after-content="debouncedFocused">
+  <slide-presset v-bind="props">
     <form @submit.prevent>
       <div v-for="control in form" :key="control.id" :class="$style.control">
         <checkbox-block
@@ -13,7 +13,6 @@
           v-else
           v-bind="control"
           :model-value="generatedForm[control.id]"
-          @focused="onFocused(control.id, $event)"
           @update:model-value="onUpdate(control.id, $event)"
         />
       </div>
@@ -27,8 +26,7 @@ import { SlidePresset } from '@tok/generation/pressets/slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { CheckboxBlock } from '@tok/ui/components/CheckboxBlock';
 import { InputText } from '@tok/ui/components/InputText';
-import { useDebounceFn } from '@tok/ui/use/debounce';
-import { computed, inject, reactive, ref, toRefs, watch } from 'vue';
+import { inject, reactive, toRefs } from 'vue';
 
 import {
   FormPressetDefaultProps,
@@ -43,23 +41,6 @@ const props = withDefaults(
 const { form } = toRefs(props);
 
 const formState = inject(FORM_STATE_TOKEN, null);
-
-const focusedElement = ref<string[]>([]);
-const debouncedFocused = ref(false);
-
-const debounced = useDebounceFn((value) => {
-  debouncedFocused.value = value;
-}, 200);
-
-const focused = computed(() => focusedElement.value.length > 0);
-
-watch(
-  focused,
-  (value) => {
-    debounced(value);
-  },
-  { immediate: true }
-);
 
 const stateValue = formState?.state;
 
@@ -87,14 +68,6 @@ const onUpdate = (id: string, value: unknown) => {
   generatedForm[id] = value;
 
   formState?.update({ [id]: value });
-};
-
-const onFocused = (id: string, value: boolean) => {
-  if (value) {
-    focusedElement.value = [...focusedElement.value, id];
-  } else {
-    focusedElement.value = focusedElement.value.filter((el) => el !== id);
-  }
 };
 </script>
 
