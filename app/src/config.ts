@@ -14,7 +14,7 @@ export default defineConfig({
           },
           pagination: 'count',
           title: 'Welcome to Telegram Onboarding Kit',
-          description: "Create stunning onboardings and paywalls for Telegram Bots using full power of Mini Apps<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com'>open-source</a>!",  // TODO: add link to GitHub
+          description: "Create stunning onboarding and paywall for your Telegram Bot using the full power of Mini Apps<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com'>open-source</a>!",  // TODO: add link to GitHub
           button: 'Next',
         },
 
@@ -146,8 +146,42 @@ export default defineConfig({
           pagination: 'count',
           shape: 'square',
           title: 'Everything is customizable',
-          description: "Text alignment, button title (look below), CSS styles, TODO WHAT ELSE KOSTIK?",
+          description: '',
           textAlign: 'center',
+          list: [  // TODO: go to default media in list
+            {
+              media: {
+                type: 'icon',
+                src: import('./assets/icons/checkmark-fill.svg'),
+                size: 20,
+              },
+              text: '<b>CSS styles</b>: extend primary colors from Telegram or set yours',
+            },
+            {
+              media: {
+                type: 'icon',
+                src: import('./assets/icons/checkmark-fill.svg'),
+                size: 20,
+              },
+              text: 'Button text and actions (look down)',
+            },
+            {
+              media: {
+                type: 'icon',
+                src: import('./assets/icons/checkmark-fill.svg'),
+                size: 20,
+              },
+              text: 'Use our carefully crafted <b>presets</b> or easily create your own',
+            },
+            {
+              media: {
+                type: 'icon',
+                src: import('./assets/icons/checkmark-fill.svg'),
+                size: 20,
+              },
+              text: 'Easy switch between Telegram and web popups',
+            },
+          ],
           button: 'Super-Duper Next',
         },
 
@@ -179,15 +213,7 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'Language localization',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: "Auto adaptation to Telegram's <b>color scheme</b>",
+              text: 'Language and currency localization',
             },
             {
               media: {
@@ -205,21 +231,21 @@ export default defineConfig({
               },
               text: 'Many examples/templates of onboardings',
             },
-            // {
-            //   media: {
-            //     type: 'icon',
-            //     src: import('./assets/icons/checkmark-fill.svg'),
-            //     size: 20,
-            //   },
-            //   text: 'Content prefetching for fast loading',
-            // },
             {
               media: {
                 type: 'icon',
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'Low-code approach to building onboardings',
+              text: 'Content pre-loading for high speed',
+            },
+            {
+              media: {
+                type: 'icon',
+                src: import('./assets/icons/checkmark-fill.svg'),
+                size: 20,
+              },
+              text: '<b>Low-code</b> approach to building onboardings',
             },
             {
               media: {
