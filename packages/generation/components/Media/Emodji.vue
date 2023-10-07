@@ -18,8 +18,8 @@ const computedSize = computed(() => {
 
   if (!_size) {
     return {
-      width: '1.5em',
-      height: '1.5em',
+      width: '1.625em',
+      height: '1.625em',
     };
   }
 
@@ -51,7 +51,8 @@ const height = computed(() => computedSize.value.height);
   justify-content: center;
   border-radius: 100%;
 
-  padding: 4px;
+  font: var(--tok-font-h4);
+
   background: var(--tok-background-color);
 }
 
