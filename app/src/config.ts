@@ -42,7 +42,7 @@ export default defineConfig({
           pagination: 'count',
           shape: 'rounded',
           title: 'Videos',
-          description: 'We recommend using <b>.mp4</b> format',
+          description: 'TODO',
           button: 'Next',
         },
 
@@ -94,7 +94,6 @@ export default defineConfig({
 
         // list
         {
-          extends: 'list',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_juggling.tgs'),
@@ -136,7 +135,6 @@ export default defineConfig({
 
         // "everything is customizable" slide
         {
-          extends: 'list',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_xray.tgs'),
@@ -147,7 +145,7 @@ export default defineConfig({
           title: 'Everything is customizable',
           description: '',
           textAlign: 'center',
-          list: [  // TODO: go to default media in list
+          list: [
             {
               media: {
                 type: 'icon',
@@ -186,7 +184,6 @@ export default defineConfig({
 
         // slide with other features
         {
-          extends: 'list',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_cool.tgs'),
@@ -197,63 +194,14 @@ export default defineConfig({
           title: 'Some other features:',
           description: '',
           textAlign: 'left',
-          list: [  // TODO: go to default media in list
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'One click free <b>deployment</b> with GitHub Actions on GitHub Pages',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Language and currency localization',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Buttons with <b>haptic</b> feedback',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Many examples/presets',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Content pre-loading for high speed',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: '<b>Low-code</b> approach to building onboardings',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: "And many more... (see <a href='https://www.google.com'>GitHub</a>)",  // TODO: add link to GitHub
-            },
+          list: [
+            'One-click free <b>deploy</b> on GitHub Pages',
+            'Language and currency localization',
+            'Buttons with <b>haptic</b> feedback',
+            'Many examples/presets',
+            'Content pre-loading for high speed',
+            '<b>Low-code</b> approach to building onboardings',
+            "And many more... (see <a href='https://www.google.com'>GitHub</a>)"
           ],
           button: 'Next',
         },
@@ -297,31 +245,31 @@ export default defineConfig({
       title: 'Your beautiful Paywall',
       mainButtonText: 'Buy for {price}',
       list: [
-        'Ajustable product cards',
-        '<b>Telegram Payments</b> and 👛 <b>Wallet Pay</b> TODO other methods',
+        'Adjustable product cards',
+        '<b>👛 Wallet Pay</b> and <b>Telegram Payments</b> ready. Add custom methods easily',
         'Subscriptions or One-time payments',
       ],
       products: [
         {
           id: '1_month_subscription',
           title: '1 month subscription',
-          description: '12$/month',
+          description: '2$/month',
           discount: '',
-          price: 12,
+          price: 2,
         },
         {
           id: '1_year_subscription',
           title: '1 year subscription',
-          description: '6$/month',
+          description: '1$/month',
           discount: 'Discount 50%',
-          price: 72,
+          price: 12,
         },
         {
           id: 'lifetime_access',
           title: 'Lifetime access',
-          description: '100$ once',
+          description: '20$ once',
           discount: 'Best offer',
-          price: 100,
+          price: 20,
         },
       ],
       links: [
