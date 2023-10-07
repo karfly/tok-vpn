@@ -106,8 +106,6 @@ watch(
   text-align: center;
   font: var(--tok-body-xs);
   color: var(--tok-text-color-64);
-
-  border: 1px solid black;
 }
 
 .tapAnimation {
