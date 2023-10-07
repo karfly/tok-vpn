@@ -1,8 +1,8 @@
 <template>
   <div v-bind="props" :class="$style.container">
-    <div v-if="loaded" :class="$style.fallback">
+    <button v-if="loaded" :class="$style.fallback" @click="forceRefresh">
       Video not playing?<br />Tap here
-    </div>
+    </button>
 
     <video
       v-if="loaded"
@@ -35,11 +35,21 @@ const loaded = useLoadedImage(src);
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 
+// Required for iOS devices to initiate the first interaction with the page;
+// otherwise, the video will not play automatically
+const forceRefreshEvents = ref(NaN);
+
+const forceRefresh = () => {
+  forceRefreshEvents.value = Date.now();
+};
+
 watch(
-  [videoRef, wasInteraction],
-  ([_video, _]) => {
+  [videoRef, wasInteraction, forceRefreshEvents],
+  ([_video]) => {
     if (_video) {
-      _video.play();
+      setTimeout(() => {
+        _video.play();
+      }, 1000);
     }
   },
   { immediate: true }
@@ -47,6 +57,8 @@ watch(
 </script>
 
 <style lang="scss" module>
+@import '@tok/ui/styles/local.scss';
+
 .container {
   position: relative;
 
@@ -64,6 +76,8 @@ watch(
 }
 
 .fallback {
+  @include clearbutton;
+
   position: absolute;
   left: 50%;
   top: 50%;
