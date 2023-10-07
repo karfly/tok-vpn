@@ -16,6 +16,7 @@
 
       <main-button
         v-if="active && buttonText"
+        haptic="light"
         :keep-alive="!!carousel"
         :text="i18nButton"
         @on-click="onClick"

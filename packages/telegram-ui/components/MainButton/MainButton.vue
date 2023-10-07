@@ -10,14 +10,19 @@ const props = defineProps<MainButtonProps>();
 
 const emit = defineEmits<MainButtonEmits>();
 
-const { text, color, textColor, disabled, progress, keepAlive } = toRefs(props);
+const { text, color, textColor, disabled, progress, keepAlive, haptic } =
+  toRefs(props);
 
 const sdk = useTelegramSdk();
 
 const TgMainButton = sdk.MainButton;
 
 const onClick = () => {
-  sdk.HapticFeedback.impactOccurred('light');
+  const _haptic = haptic?.value;
+
+  if (_haptic) {
+    sdk.HapticFeedback.impactOccurred(_haptic);
+  }
 
   emit('onClick');
 };

@@ -34,7 +34,11 @@
       />
     </footer>
 
-    <main-button :text="translatedText" @on-click="onMainButton" />
+    <main-button
+      haptic="light"
+      :text="translatedText"
+      @on-click="onMainButton"
+    />
   </div>
 </template>
 

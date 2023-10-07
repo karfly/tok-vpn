@@ -1,3 +1,7 @@
+import type { HapticFeedback } from '@twa-dev/types';
+
+type HapticStyle = Parameters<HapticFeedback['impactOccurred']>[0];
+
 export type MainButtonProps = {
   text: string;
 
@@ -10,6 +14,8 @@ export type MainButtonProps = {
   textColor?: string;
 
   keepAlive?: boolean;
+
+  haptic?: HapticStyle;
 };
 
 export type MainButtonEmits = {

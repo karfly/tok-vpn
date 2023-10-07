@@ -14,6 +14,7 @@
 
     <main-button
       v-if="carousel ? active : !!mainButtonComputedText"
+      haptic="light"
       :keep-alive="!!carousel"
       :text="mainButtonComputedText"
       @on-click="onSubmit"
