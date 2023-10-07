@@ -15,6 +15,8 @@ export type StickerPressetProps = {
   type: 'sticker';
   src: Promise<typeof import('*.tgs')> | null;
 
+  size?: number | [number, number];
+
   style?: string | CSSProperties;
 } & Pick<StickerProps, 'speed'>;
 
