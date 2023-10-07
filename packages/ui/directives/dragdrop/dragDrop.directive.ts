@@ -108,7 +108,7 @@ const beforeUnmount = (element: HTMLElement) => {
 
   if (listener) {
     element.removeEventListener('touchstart', listener);
-    element.removeEventListener('touchend', listener);
+    element.removeEventListener('mousedown', listener);
 
     elListeners.delete(element);
   }
