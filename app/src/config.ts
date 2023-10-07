@@ -150,7 +150,6 @@ export default defineConfig({
             '<b>CSS styles</b>: extend primary colors from Telegram or set yours',
             'Button text and actions (look down)',
             'Use our carefully crafted <b>presets</b> or easily create your own',
-            'Easy switch between Telegram and web popups',
           ],
           button: 'Super-Duper Next',
         },
