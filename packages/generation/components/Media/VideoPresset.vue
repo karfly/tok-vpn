@@ -51,6 +51,8 @@ const forceRefresh = () => {
 const onVideoPlay = (event: Event) => {
   const _video = event.currentTarget;
 
+  alertsService.show('on play');
+
   if (_video instanceof HTMLVideoElement) {
     videoPlaying.value =
       _video.currentTime > 0 &&
