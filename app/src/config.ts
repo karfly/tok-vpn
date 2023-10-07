@@ -28,8 +28,8 @@ export default defineConfig({
         },
         {
           media: {
-            type: 'image',
-            src: import('./assets/img/base.png'),
+            type: 'video',
+            src: import('./assets/spongebob.mp4'),
           },
           pagination: 'count',
           shape: 'rounded',
