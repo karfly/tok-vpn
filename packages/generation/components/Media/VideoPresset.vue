@@ -46,6 +46,9 @@ const forceRefreshEvents = ref(NaN);
 const videoPlaying = computed(() => {
   const _video = videoRef.value;
 
+  forceRefreshEvents.value;
+  wasInteraction.value;
+
   return (
     !!_video &&
     _video.currentTime > 0 &&
