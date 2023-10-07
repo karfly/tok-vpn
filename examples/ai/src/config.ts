@@ -26,10 +26,12 @@ export default defineConfig({
             {
               type: 'image',
               src: import('./assets/img/1_init.webp'),
+              style: imageStyle,
             },
             {
               type: 'image',
               src: import('./assets/img/1_res.webp'),
+              style: imageStyle,
             },
           ],
         },
@@ -43,10 +45,12 @@ export default defineConfig({
             {
               type: 'image',
               src: import('./assets/img/2_init.webp'),
+              style: imageStyle,
             },
             {
               type: 'image',
               src: import('./assets/img/2_res.webp'),
+              style: imageStyle,
             },
           ],
         },
@@ -63,10 +67,12 @@ export default defineConfig({
             {
               type: 'image',
               src: import('./assets/img/3_init.webp'),
+              style: imageStyle,
             },
             {
               type: 'image',
               src: import('./assets/img/3_res.webp'),
+              style: imageStyle,
             },
           ],
         },

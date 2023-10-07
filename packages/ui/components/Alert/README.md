@@ -21,9 +21,18 @@ import { Alert } from '@tok/ui/components/Alert';
 
 ## Customization
 
+```vue
+<template>
+  <alert type="custom" content="Hello" />
+</template>
+
+<script setup lang="ts">
+import { Alert } from '@tok/ui/components/Alert';
+</script>
+```
+
 ```scss
 /* global.styles.scss */
-
 .tok-alert {
   &[data-type='custom'] {
     background: red;
@@ -42,4 +51,28 @@ import { Alert } from '@tok/ui/components/Alert';
     }
   }
 }
+```
+
+or inside other component with style in scope mode
+
+```vue
+<template>
+  <div class="container">
+    <alert type="custom" content="Hello" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { Alert } from '@tok/ui/components/Alert';
+</script>
+
+<style lang="scss" scope>
+.container {
+  .tok-alert {
+    &[data-type='custom'] {
+      ...
+    }
+  }
+}
+</style>
 ```
