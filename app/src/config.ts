@@ -238,12 +238,12 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_knife.tgs'),
-            style: 'width: 200px; height: 200px; margin: 0 auto',
+            style: 'width: 250px; height: 250px; margin: 0 auto',
           },
           pagination: 'count',
-          shape: 'rounded',
+          shape: 'square',
           title: "But onboarding slides are not enough...",
-          description: "Let's go to Paywall...",
+          description: "Let's go to Paywall",
           textAlign: 'center',
           button: {
             content: 'Go to Paywall',
@@ -255,16 +255,17 @@ export default defineConfig({
     {
       extends: 'paywall',
       path: '/paywall',
+      shape: 'square',
       media: {
         type: 'sticker',
         src: import('./assets/stickers/duck_money.tgs'),
-        style: 'width: 200px; height: 200px; margin: 0 auto',
+        style: 'width: 150px; height: 150px; margin: 0 auto',
       },
       title: 'Your beautiful Paywall',
       mainButtonText: 'Buy for {price}',
       features: [
-        'Custom product list',
-        '<b>Telegram Payments</b> and 👛 <b>Wallet Pay</b> support',
+        'Ajustable product cards',
+        '<b>Telegram Payments</b> and 👛 <b>Wallet Pay</b>',
         'Subscriptions or One-time payments',
       ],
       products: [
