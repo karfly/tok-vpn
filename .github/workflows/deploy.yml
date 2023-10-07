@@ -36,9 +36,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: |
-          echo ${{ github.event.repository.name }}
-          npm run build
+        run: npm run build -- -- --base /${{ github.event.repository.name }}
       - name: Create 404.html
         run: cp ./app/dist/index.html ./app/dist/404.html
       - name: Setup Pages
