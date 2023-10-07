@@ -1,11 +1,11 @@
 import { defineConfig } from '@tok/generation';
 
 export default defineConfig({
+  // TODO locales: see meditaion app example
   pages: [
     {
       slides: [
-        // intro slide
-        // TODO
+        // intro
         {
           media: {
             type: 'sticker',
@@ -18,12 +18,12 @@ export default defineConfig({
           button: 'Next',
         },
 
-        // slide with image
+        // image
         {
           media: {
             type: 'image',
             src: import('./assets/img/durov.webp'),
-            style: 'aspect-ratio: 1/1',
+            // style: 'aspect-ratio: 1/1',
           },
           pagination: 'count',
           shape: 'rounded',
@@ -32,12 +32,12 @@ export default defineConfig({
           button: 'Next',
         },
 
-        // slide with video
+        // video
         {
           media: {
             type: 'video',
             src: import('./assets/videos/spongebob.mp4'),
-            style: 'aspect-ratio: 400/287',
+            style: 'aspect-ratio: 400/287',  // TODO: (16:9 by default) docs
           },
           pagination: 'count',
           shape: 'rounded',
@@ -46,7 +46,7 @@ export default defineConfig({
           button: 'Next',
         },
 
-        // slide with sticker
+        // sticker
         {
           media: {
             type: 'sticker',
@@ -60,7 +60,7 @@ export default defineConfig({
           button: 'Next',
         },
 
-        // slide with form
+        // form
         {
           extends: 'form',
           media: {
@@ -73,19 +73,16 @@ export default defineConfig({
               id: 'text_from_form',
               placeholder: 'Text input',
               type: 'text',
-              // style: '--tok-radius-m: 12px',
             },
             {
               id: 'number_from_form',
               placeholder: 'Number input',
               type: 'number',
-              // style: '--tok-radius-m: 12px',
             },
             {
               id: 'checkbox_from_form',
               placeholder: 'Checkbox',
               type: 'checkbox',
-              // style: '--tok-radius-m: 12px',
             },
           ],
           pagination: 'count',
@@ -95,6 +92,7 @@ export default defineConfig({
           button: 'Next',
         },
 
+        // list
         {
           extends: 'list',
           media: {
@@ -105,6 +103,7 @@ export default defineConfig({
           textAlign: 'left',
           shape: 'square',
           title: 'Lists',
+          pagination: 'count',
           description: "Lists can be used to showcase <b>features</b> of your product. Items support customizable icons",
           list: [
             {
@@ -135,7 +134,7 @@ export default defineConfig({
           button: 'Next',
         },
 
-        // slide with cutomizable text alignment and button
+        // "everything is customizable" slide
         {
           extends: 'list',
           media: {
@@ -229,7 +228,7 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'Many examples/templates of onboardings',
+              text: 'Many examples/presets',
             },
             {
               media: {
@@ -259,7 +258,7 @@ export default defineConfig({
           button: 'Next',
         },
 
-        // slide with go to paywall
+        // go to paywall slide
         {
           media: {
             type: 'sticker',
@@ -278,10 +277,18 @@ export default defineConfig({
         },
       ],
     },
+
+    // paywall
     {
       extends: 'paywall',
       path: '/paywall',
       shape: 'square',
+      popup: {
+        type: 'web',
+        title: 'Choose payment method',
+        message: '',
+        buttons: [],  // TODO
+      },
       media: {
         type: 'sticker',
         src: import('./assets/stickers/duck_money.tgs'),
@@ -291,7 +298,7 @@ export default defineConfig({
       mainButtonText: 'Buy for {price}',
       features: [
         'Ajustable product cards',
-        '<b>Telegram Payments</b> and 👛 <b>Wallet Pay</b>',
+        '<b>Telegram Payments</b> and 👛 <b>Wallet Pay</b> TODO other methods',
         'Subscriptions or One-time payments',
       ],
       products: [
