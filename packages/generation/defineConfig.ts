@@ -28,6 +28,8 @@ export type _GenerationSlideConfig = {
 
   background?: string;
 
+  list?: _GenerationListOptionsConfig;
+
   button: string | (Pick<FlatButtonProps, 'to'> & { content: string }) | null;
 };
 
@@ -44,23 +46,18 @@ export type _GenerationFormConfig = Omit<_GenerationSlideConfig, 'extends'> & {
   form: _GenerationFormControlConfig[];
 };
 
-export type _GenerationListOptionsConfig = {
-  media?: MediaPressetProps;
-  text: string;
-};
-
-export type _GenerationListConfig = Omit<_GenerationSlideConfig, 'extends'> & {
-  extends: 'list';
-
-  list: _GenerationListOptionsConfig[];
-};
+export type _GenerationListOptionsConfig = (
+  | {
+      media?: MediaPressetProps;
+      text: string;
+    }
+  | string
+)[];
 
 export type _GenerationPrimitivePaywallConfig = Omit<
   _GenerationSlideConfig,
   'button' | 'extends'
 > & {
-  features?: { text: string; media?: MediaPressetProps }[] | string[];
-
   // can be shown with price Something {price} subscribe
   mainButtonText?: string;
 
@@ -120,7 +117,6 @@ export type _GenerationCarouselConfig<T extends Record<string, unknown>> = {
     | _GenerationPaywallRowConfig
     | _GenerationSlideConfig
     | _GenerationFormConfig
-    | _GenerationListConfig
     | { extends: keyof T; [key: string]: any }
   )[];
   // | {
@@ -137,7 +133,6 @@ type BootstrapPage<TCustom extends Record<string, unknown>> = {
   | _GenerationPaywallRowConfig
   | _GenerationSlideConfig
   | _GenerationFormConfig
-  | _GenerationListConfig
   | { extends: keyof TCustom }
 );
 // | {

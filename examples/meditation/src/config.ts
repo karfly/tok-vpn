@@ -86,7 +86,6 @@ export default defineConfig({
           button: '_s1.button',
         },
         {
-          extends: 'list',
           media: {
             type: 'image',
             src: import('./assets/img/fourth.png'),

@@ -51,7 +51,7 @@ export default defineConfig({
       },
       title: 'Unlock PRO Features',
       mainButtonText: 'Subscribe for {price}',
-      features: [
+      list: [
         '100,000 tokens per day (50+ A4 pages)',
         'Access to GPT-4',
         'Voice messages',
