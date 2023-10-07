@@ -8,7 +8,6 @@ export default defineConfig({
           media: {
             type: 'image',
             src: import('./assets/img/base.png'),
-            style: 'aspect-ratio: 420/465',
           },
           pagination: 'count',
           shape: 'rounded',
