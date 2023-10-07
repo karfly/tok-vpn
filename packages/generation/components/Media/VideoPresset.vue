@@ -8,16 +8,17 @@
       loop
       :controls="false"
       :class="$style.video"
+      :poster="loadedPoster"
     >
       <source :src="loaded" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
 
+    <div v-if="!videoPlaying" :class="$style.tapAnimation" />
+
     <button v-if="!videoPlaying" :class="$style.fallback" @click="forceRefresh">
       Video not playing?<br />Tap here
     </button>
-
-    <div v-if="!videoPlaying" :class="$style.tapAnimation" />
   </div>
 </template>
 
@@ -52,7 +53,7 @@ const forceRefresh = () => {
 };
 
 const onVideoPlay = () => {
-  videoPlaying.value = true;
+  videoPlaying.value = false;
 };
 
 watch(
@@ -102,10 +103,11 @@ watch(
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: -1;
   text-align: center;
   font: var(--tok-body-xs);
   color: var(--tok-text-color-64);
+
+  border: 1px solid black;
 }
 
 .tapAnimation {
