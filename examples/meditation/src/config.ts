@@ -168,7 +168,6 @@ export default defineConfig({
         description: '_paywall.product.description',
       },
       popup: {
-        type: 'telegram',
         title: '_paywall.popup.title',
         buttons: [
           {

@@ -1,5 +1,12 @@
 <template>
-  <button v-ripple :class="[$style.button, border && $style.button_border]">
+  <button
+    v-ripple
+    :class="[
+      $style.button,
+      border && $style.button_border,
+      $style['button_' + type],
+    ]"
+  >
     <slot name="icon" />
 
     <div :class="$style.content">
@@ -13,15 +20,20 @@
 <script setup lang="ts">
 import { SvgIcon } from '@tok/ui/components/SvgIcon';
 import { RippleDirective as vRipple } from '@tok/ui/directives/ripple';
+import type { PopupButton } from '@twa-dev/types';
+
+type ButtonType = PopupButton['type'];
 
 withDefaults(
   defineProps<{
     id?: string;
     text?: string;
     border?: boolean;
+    type?: ButtonType;
   }>(),
   {
     text: '',
+    type: 'default',
   }
 );
 </script>
@@ -47,6 +59,7 @@ withDefaults(
 
   font: var(--tok-font-l);
   cursor: pointer;
+  border-radius: inherit;
 
   &_border {
     &:after {
@@ -58,6 +71,11 @@ withDefaults(
       height: 1px;
       background: var(--tok-text-color-08);
     }
+  }
+
+  &_descructive {
+    color: var(--tok-error-fill);
+    background: var(--tok-error-bg);
   }
 
   &:hover {
