@@ -10,6 +10,15 @@
         />
 
         <input-text
+          v-else-if="control.type === 'number'"
+          v-bind="control"
+          type="number"
+          inputmode="decimal"
+          :model-value="generatedForm[control.id]"
+          @update:model-value="onUpdate(control.id, $event)"
+        />
+
+        <input-text
           v-else
           v-bind="control"
           :model-value="generatedForm[control.id]"
