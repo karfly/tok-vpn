@@ -22,7 +22,8 @@
 
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
-import { inject, ref, toRefs, watch } from 'vue';
+import { useAlerts } from '@tok/ui/use/alerts';
+import { computed, inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
 import { useLoadedImage } from './useLoadedImage';
@@ -32,6 +33,8 @@ const props = defineProps<VideoPressetProps>();
 const { src } = toRefs(props);
 
 const loaded = useLoadedImage(src);
+const alertsService = useAlerts();
+
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 
@@ -39,6 +42,18 @@ const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 // otherwise, the video will not play automatically
 // Note: MainButton is located outside of the miniapp, so the browser doesn't register the first interaction event
 const forceRefreshEvents = ref(NaN);
+
+const videoPlaying = computed(() => {
+  const _video = videoRef.value;
+
+  return (
+    !!_video &&
+    _video.currentTime > 0 &&
+    !_video.paused &&
+    !_video.ended &&
+    _video.readyState > 2
+  );
+});
 
 const forceRefresh = () => {
   forceRefreshEvents.value = Date.now();
@@ -50,6 +65,14 @@ watch(
     if (_video) {
       _video.play();
     }
+  },
+  { immediate: true }
+);
+
+watch(
+  videoPlaying,
+  (val) => {
+    alertsService.show(`isPlaying: ${val}`);
   },
   { immediate: true }
 );
