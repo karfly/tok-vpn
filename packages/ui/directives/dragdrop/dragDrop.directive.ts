@@ -4,12 +4,6 @@ type Binding = {
   onEvent: (element: HTMLElement | null, offset: [number, number]) => void;
 };
 
-type Events = [
-  'touchstart' | 'mousedown',
-  'touchmove' | 'mousemove',
-  'touchend' | 'mouseup'
-];
-
 type FilterEvent = (event: MouseEvent | TouchEvent) => boolean;
 
 type MapperEvent = (event: MouseEvent | TouchEvent) => {
@@ -17,105 +11,122 @@ type MapperEvent = (event: MouseEvent | TouchEvent) => {
   clientY: number;
 };
 
-// todo: refactor
-const DRAG_DROP_INSTANCE_KEY = '__tok_dragDrop__';
-const touchEvents = ['touchstart', 'touchmove', 'touchend'] as any as Events;
-const mouseEvents = ['mousedown', 'mousemove', 'mouseup'] as any as Events;
+const docListeners = new Map<
+  HTMLElement,
+  [(event: TouchEvent | MouseEvent) => void, () => void]
+>();
+const elListeners = new Map<
+  HTMLElement,
+  (event: TouchEvent | MouseEvent) => void
+>();
+
+const eventFilter: FilterEvent = (event: MouseEvent | TouchEvent) => {
+  return event instanceof MouseEvent ? true : event.touches.length < 2;
+};
+
+const eventMapper: MapperEvent = (event: MouseEvent | TouchEvent) => {
+  return event instanceof MouseEvent
+    ? {
+        clientX: event.clientX,
+        clientY: event.clientY,
+      }
+    : {
+        clientX: event.touches[0].clientX,
+        clientY: event.touches[0].clientX,
+      };
+};
+
+const beforeMount = (
+  element: HTMLElement,
+  { value }: DirectiveBinding<Binding>
+) => {
+  const _callback = (event: TouchEvent | MouseEvent) => {
+    if (!eventFilter(event)) {
+      return;
+    }
+
+    const mappedEvent = eventMapper(event);
+
+    let currentPosition = {
+      x: mappedEvent.clientX,
+      y: mappedEvent.clientY,
+    };
+
+    const move = (moveEvent: TouchEvent | MouseEvent) => {
+      if (!eventFilter(moveEvent)) {
+        return;
+      }
+
+      const mappedMoveEvent = eventMapper(moveEvent);
+
+      value.onEvent(element, [
+        mappedMoveEvent.clientX - currentPosition.x,
+        mappedMoveEvent.clientY - currentPosition.y,
+      ]);
+
+      currentPosition = {
+        x: mappedMoveEvent.clientX,
+        y: mappedMoveEvent.clientY,
+      };
+    };
+
+    const end = () => {
+      document.removeEventListener('touchmove', move);
+      document.removeEventListener('mousemove', move);
+
+      document.removeEventListener('touchend', end);
+      document.removeEventListener('mouseup', end);
+
+      docListeners.delete(element);
+    };
+
+    document.removeEventListener('touchmove', move);
+    document.removeEventListener('mousemove', move);
+
+    document.removeEventListener('mouseup', end);
+    document.removeEventListener('touchend', end);
+
+    docListeners.delete(element);
+
+    document.addEventListener('touchmove', move, { passive: true });
+    document.addEventListener('mousemove', move, { passive: true });
+
+    document.addEventListener('touchend', end, { passive: true });
+    document.addEventListener('mouseup', end, { passive: true });
+
+    docListeners.set(element, [move, end]);
+  };
+
+  element.addEventListener('touchstart', _callback, { passive: true });
+  element.addEventListener('mousedown', _callback, { passive: true });
+
+  elListeners.set(element, _callback);
+};
+
+const beforeUnmount = (element: HTMLElement) => {
+  const listener = elListeners.get(element);
+
+  if (listener) {
+    element.removeEventListener('touchstart', listener);
+    element.removeEventListener('touchend', listener);
+
+    elListeners.delete(element);
+  }
+
+  const docListener = docListeners.get(element);
+
+  if (docListener) {
+    document.removeEventListener('touchmove', docListener[0]);
+    document.removeEventListener('mousemove', docListener[0]);
+
+    document.removeEventListener('mouseup', docListener[1]);
+    document.removeEventListener('touchend', docListener[1]);
+
+    docListeners.delete(element);
+  }
+};
 
 export const DragDropDirective: ObjectDirective<HTMLElement, Binding> = {
-  beforeMount: (element: HTMLElement, { value }: DirectiveBinding<Binding>) => {
-    const eventFilter: FilterEvent = (event: MouseEvent | TouchEvent) => {
-      return event instanceof MouseEvent ? true : event.touches.length < 2;
-    };
-
-    const eventMapper: MapperEvent = (event: MouseEvent | TouchEvent) => {
-      return event instanceof MouseEvent
-        ? {
-            clientX: event.clientX,
-            clientY: event.clientY,
-          }
-        : {
-            clientX: event.touches[0].clientX,
-            clientY: event.touches[0].clientX,
-          };
-    };
-
-    const setup = (
-      [startKey, moveKey, endKey]: Events,
-      filter: FilterEvent,
-      mapper: MapperEvent
-    ) => {
-      const callback = (event: TouchEvent | MouseEvent) => {
-        if (!filter(event)) {
-          return;
-        }
-
-        const mappedEvent = mapper(event);
-
-        let currentPosition = {
-          x: mappedEvent.clientX,
-          y: mappedEvent.clientY,
-        };
-
-        const move = (moveEvent: MouseEvent | TouchEvent) => {
-          if (!filter(moveEvent)) {
-            return;
-          }
-
-          const mappedMoveEvent = mapper(moveEvent);
-
-          value.onEvent(element, [
-            mappedMoveEvent.clientX - currentPosition.x,
-            mappedMoveEvent.clientY - currentPosition.y,
-          ]);
-
-          currentPosition = {
-            x: mappedMoveEvent.clientX,
-            y: mappedMoveEvent.clientY,
-          };
-        };
-
-        const end = () => {
-          document.removeEventListener(moveKey, move);
-          document.removeEventListener(endKey, end);
-
-          (document as any)[DRAG_DROP_INSTANCE_KEY + endKey] = null;
-          (document as any)[DRAG_DROP_INSTANCE_KEY + moveKey] = null;
-        };
-
-        document.removeEventListener(endKey, end);
-
-        document.addEventListener(moveKey, move, { passive: true });
-
-        document.addEventListener(endKey, end, { passive: true });
-
-        (document as any)[DRAG_DROP_INSTANCE_KEY + endKey] = end;
-        (document as any)[DRAG_DROP_INSTANCE_KEY + moveKey] = move;
-      };
-
-      element.addEventListener(startKey, callback, { passive: true });
-      (element as any)[`${DRAG_DROP_INSTANCE_KEY}${startKey}`] = callback;
-    };
-
-    setup(touchEvents, eventFilter, eventMapper);
-    setup(mouseEvents, eventFilter, eventMapper);
-  },
-  beforeUnmount: (element: HTMLElement) => {
-    [...touchEvents, ...mouseEvents].forEach((key) => {
-      const documentCallback = (document as any)[
-        `${DRAG_DROP_INSTANCE_KEY}${key}`
-      ];
-      const elementCallback = (element as any)[
-        `${DRAG_DROP_INSTANCE_KEY}${key}`
-      ];
-
-      if (documentCallback) {
-        document.removeEventListener(key, documentCallback);
-      }
-
-      if (elementCallback) {
-        element.removeEventListener(key, elementCallback);
-      }
-    });
-  },
+  beforeMount,
+  beforeUnmount,
 };

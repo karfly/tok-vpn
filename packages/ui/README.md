@@ -111,22 +111,22 @@ Use this guide to manually install the UI package in your project.
    createApp(App).use(CurrencyPlugin, currencyOptions).mount('#app');
    ```
 
-6. Or you can specify currency config in place:
+Or you can specify currency config in place:
 
-   ```vue
-   <template>
-     <money :value="10" />
-   </template>
+```vue
+<template>
+  <money :value="10" />
+</template>
 
-   <script setup lang="ts">
-   import { Money } from '@tok/ui/components/Money';
-   import { CURRENCY_OPTIONS_TOKEN } from '@tok/ui/tokens';
-   import { provide } from 'vue';
+<script setup lang="ts">
+import { Money } from '@tok/ui/components/Money';
+import { CURRENCY_OPTIONS_TOKEN } from '@tok/ui/tokens';
+import { provide } from 'vue';
 
-   // same options as below
-   provide(CURRENCY_OPTIONS_TOKEN, {});
-   </script>
-   ```
+// same options as below
+provide(CURRENCY_OPTIONS_TOKEN, {});
+</script>
+```
 
 7. If you want to use our mixins, import them in your component:
 

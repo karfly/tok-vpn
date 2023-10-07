@@ -189,7 +189,7 @@ const memoIntersection = new Map<
   }
 >();
 
-// todo: find a way to improve this behavior instead memo solution
+// find a way to improve this behavior instead memo solution
 const getIntersectionProps = (correctIndex: number) => {
   if (memoIntersection.has(correctIndex)) {
     return memoIntersection.get(correctIndex)!;
@@ -302,16 +302,6 @@ defineExpose<CarouselExpose>({
   transform: translateZ(0);
   will-change: transform;
   touch-action: pan-x;
-
-  /*
-    It's better to retain these parameters.
-    However, since we are utilizing our custom scroll inside InputText,
-    we need to remove them until
-    I find a way to use the native browser scrollinstead of ours
-  */
-  // Todo: fix when scroll inside InputText will be fixed
-  // padding-bottom: 2rem;
-  // margin-bottom: -2rem;
 
   &:before,
   &:after {

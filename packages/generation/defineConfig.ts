@@ -9,8 +9,6 @@ export type PaywalPopupPressetButtons = (PopupButton & {
   media?: MediaPressetProps;
 })[];
 
-type TODO = any;
-
 export type _GenerationSlideConfig = {
   extends?: 'slide';
 
@@ -156,7 +154,7 @@ export type BootstrapConfig<TDefined extends Record<string, unknown>> = {
   theme?: ThemeConfigParam;
   locale?: {
     fallback: string;
-  } & Record<string, TODO>;
+  } & Record<string, any>;
   currencyConfig?: CurrencyOptions;
   definePressets?: TDefined;
   pages: BootstrapPage<TDefined>[];

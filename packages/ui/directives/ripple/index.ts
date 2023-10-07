@@ -109,7 +109,6 @@ function beforeUnmount(el: HTMLElement) {
   removeListeners(el);
 }
 
-// todo: refactor this directive or use outsource solution
 export const RippleDirective: Directive<HTMLElement> = {
   mounted,
   beforeUnmount,

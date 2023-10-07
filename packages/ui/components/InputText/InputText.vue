@@ -104,7 +104,6 @@ let timeout: ReturnType<typeof setTimeout>;
 // We must maintain scrolling to this element because
 // there seems to be an issue with the layout inside Telegram,
 // particularly when the MainButton is visible.
-// TODO: Find a layout style that will stabilize the native scroll behavior
 watch([focused, nativeRef], ([_focused, _native], _, onCleanup) => {
   onCleanup(() => {
     timeout && clearTimeout(timeout);

@@ -1,18 +1,37 @@
 import { isMobile } from '@tok/ui/dom/platform';
-import { useThrottleFn } from '@tok/ui/use/debounce';
 import { DirectiveBinding, ObjectDirective } from 'vue';
 
 type Binding = {
   onEvent: (value: 1 | -1) => void;
 };
 
+type FunctionArgs<Args extends any[] = any[], Return = void> = (
+  ...args: Args
+) => Return;
+
 const wheelListeners = new Map<HTMLElement, (event: WheelEvent) => void>();
+
+const throttle = <T extends FunctionArgs>(_invoke: T, ms: number): T => {
+  let prev = 0;
+
+  const filter = (...args: any[]) => {
+    const now = Date.now();
+
+    if (now - prev > ms) {
+      prev = now;
+
+      return _invoke(...args);
+    }
+  };
+
+  return filter as T;
+};
 
 const beforeMount = (
   element: HTMLElement,
   { value }: DirectiveBinding<Binding>
 ) => {
-  const callback = useThrottleFn((num: 1 | -1) => {
+  const callback = throttle((num: 1 | -1) => {
     value.onEvent(num);
   }, 500);
 
