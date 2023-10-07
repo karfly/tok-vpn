@@ -29,7 +29,6 @@ import { MediaPresset } from '@tok/generation/components/Media';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useI18n } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
-import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { setNativeFocused } from '@tok/ui/dom/focus';
 import { computed, ref, toRefs, watch } from 'vue';
 import { RouteRecordRaw, useRouter } from 'vue-router';
@@ -55,7 +54,6 @@ const { button, active } = toRefs(props);
 
 const carousel = useCarousel();
 const router = useRouter();
-const sdk = useTelegramSdk();
 
 const focusTrapRef = ref<HTMLElement | null>(null);
 
@@ -86,8 +84,6 @@ watch(
 
 const onClick = () => {
   const _props = buttonProps.value;
-
-  sdk.HapticFeedback.impactOccurred('light');
 
   if (_props.to) {
     router.push(_props.to);

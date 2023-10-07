@@ -17,6 +17,8 @@ const sdk = useTelegramSdk();
 const TgMainButton = sdk.MainButton;
 
 const onClick = () => {
+  sdk.HapticFeedback.impactOccurred('light');
+
   emit('onClick');
 };
 
