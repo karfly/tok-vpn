@@ -100,17 +100,17 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_juggling.tgs'),
-            style: 'width: 200px; height: 200px; margin: 0 auto',
+            style: 'width: 150px; height: 150px; margin: 0 auto',
           },
           textAlign: 'left',
           title: 'Lists',
-          description: 'Items support customizable icons',
+          description: 'List items support customizable icons',
           list: [
             {
               media: {
                 type: 'icon',
                 src: import('./assets/icons/guide.svg'),
-                size: 40,
+                size: 30,
               },
               text: 'Some cool feature',
             },
@@ -118,7 +118,7 @@ export default defineConfig({
               media: {
                 type: 'icon',
                 src: import('./assets/icons/track.svg'),
-                size: 40,
+                size: 30,
               },
               text: 'Some very cool feature',
             },
@@ -126,28 +126,26 @@ export default defineConfig({
               media: {
                 type: 'icon',
                 src: import('./assets/icons/time.svg'),
-                size: 40,
+                size: 30,
               },
               text: 'Some extremely cool feature',
             },
           ],
-          button: {
-            content: '_s4.button',
-            to: '/paywall',
-          },
+          button: 'Next',
         },
 
         // slide with cutomizable text alignment and button
         {
+          extends: 'list',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_xray.tgs'),
-            style: 'width: 200px; height: 200px; margin: 0 auto',
+            style: 'width: 250px; height: 250px; margin: 0 auto',
           },
           pagination: 'count',
-          shape: 'rounded',
-          title: 'Everything is very customizable!',
-          description: "Text alignment, button text (look below), CSS styles",
+          // shape: 'rounded',
+          title: 'Everything is customizable!',
+          description: "Text alignment, button text (look below), CSS styles, TODO WHAT ELSEKOSTIK",
           textAlign: 'center',
           button: 'Super-Duper Next',
         },
