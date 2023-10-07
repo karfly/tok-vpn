@@ -27,7 +27,7 @@ export default defineConfig({
           },
           pagination: 'count',
           shape: 'rounded',
-          title: "Onboardings supports many types of content",
+          title: "Onboarding supports many types of content",
           description: "Here you can see <b>Image</b>. But it's just the beginning...",
           button: 'Next',
         },
@@ -146,38 +146,10 @@ export default defineConfig({
           description: '',
           textAlign: 'center',
           list: [
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: '<b>CSS styles</b>: extend primary colors from Telegram or set yours',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Button text and actions (look down)',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Use our carefully crafted <b>presets</b> or easily create your own',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Easy switch between Telegram and web popups',
-            },
+            '<b>CSS styles</b>: extend primary colors from Telegram or set yours',
+            'Button text and actions (look down)',
+            'Use our carefully crafted <b>presets</b> or easily create your own',
+            'Easy switch between Telegram and web popups',
           ],
           button: 'Super-Duper Next',
         },
