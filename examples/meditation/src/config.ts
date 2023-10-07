@@ -37,13 +37,11 @@ export default defineConfig({
               id: 'name',
               placeholder: '_s2.namePlaceholder',
               type: 'text',
-              style: '--tok-radius-m: 12px',
             },
             {
               id: 'age',
               placeholder: '_s2.agePlaceholder',
               type: 'number',
-              style: '--tok-radius-m: 12px',
             },
           ],
           button: '_s1.button',
