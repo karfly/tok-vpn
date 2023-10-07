@@ -85,23 +85,23 @@ export default defineConfig({
       mainButtonText: 'Buy credits for {price}',
       products: [
         {
-          id: 'id1',
+          id: '4_credits',
           price: 4.99,
           title: '4<br />credits',
           description: 'Perfect to<br />start with',
         },
         {
-          id: 'id2',
+          id: '20_credits',
           price: 8.99,
           title: '20<br />credits',
           description: 'Best value<br />offer',
           bestText: 'Best&nbsp;Choice',
         },
         {
-          id: 'id3',
+          id: '100 credits',
           price: 19.99,
           title: '100<br />credits',
-          description: 'For the true<br />enthusiasts',
+          description: 'For true<br />enthusiasts',
         },
       ],
       links: [
