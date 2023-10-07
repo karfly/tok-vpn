@@ -1,7 +1,7 @@
 <template>
   <div v-bind="props" :class="$style.container">
     <video
-      v-if="loaded"
+      v-if="loaded || loadedPoster"
       ref="videoRef"
       playsinline
       muted
@@ -53,16 +53,24 @@ const onVideoPlay = () => {
   videoPlaying.value = true;
 };
 
+let timeout: ReturnType<typeof setTimeout>;
+
 watch(
   [videoRef, wasInteraction, forceRefreshEvents],
   ([_video], _, onCleanup) => {
     onCleanup(() => {
       _video?.removeEventListener('play', onVideoPlay);
+
+      timeout && clearTimeout(timeout);
     });
 
     if (_video) {
       _video.addEventListener('play', onVideoPlay);
       _video.play();
+
+      timeout = setTimeout(() => {
+        _video?.play();
+      }, 100);
     }
   },
   { immediate: true }
