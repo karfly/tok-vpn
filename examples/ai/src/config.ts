@@ -2,7 +2,8 @@ import { defineConfig } from '@tok/generation';
 
 import ActionSlide from './custom/ActionSlide.vue';
 
-const imageStyle = 'left: 50%; top: 50%; transform: translate(-50%, -50%)';
+const imageStyle =
+  'left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: initial';
 
 export default defineConfig({
   theme: 'dark',

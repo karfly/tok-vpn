@@ -142,6 +142,7 @@ const onChange = (event: Event) => {
 
 .tok-checkbox-block-check {
   margin-left: 1rem;
+  border-radius: 100%;
 }
 
 .tok-checkbox-block-native {

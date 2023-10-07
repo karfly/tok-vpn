@@ -127,7 +127,6 @@ export default defineConfig({
           button: '_s4.button',
         },
         {
-          extends: 'slide',
           media: {
             type: 'image',
             src: import('./assets/img/colorful.png'),
@@ -139,7 +138,6 @@ export default defineConfig({
           button: '_s5.button',
         },
         {
-          extends: 'slide',
           media: {
             type: 'image',
             src: import('./assets/img/unicorn.png'),
@@ -180,26 +178,6 @@ export default defineConfig({
           popup: {
             type: 'web',
             title: '_paywall.popup.title',
-            buttons: [
-              {
-                id: 'telegram_payments',
-                text: '_paywall.popup.telegram_payments',
-                type: 'default',
-                media: {
-                  type: 'icon',
-                  src: 'bank-card',
-                },
-              },
-              {
-                id: 'wallet_pay',
-                text: '_paywall.popup.wallet_pay',
-                type: 'default',
-                media: {
-                  type: 'icon',
-                  src: 'wallet-pay',
-                },
-              },
-            ],
           },
           links: [
             {

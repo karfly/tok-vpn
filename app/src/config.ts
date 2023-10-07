@@ -11,8 +11,9 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_hello.tgs'),
-            style: 'width: 250px; height: 250px; margin: 0 auto',
+            size: 250,
           },
+          shape: 'square',
           pagination: 'count',
           title: 'Welcome to Telegram Onboarding Kit',
           description: "Create stunning onboarding and paywall for your Telegram Bot using the full power of Mini Apps<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com'>open-source</a>!",  // TODO: add link to GitHub
@@ -25,8 +26,8 @@ export default defineConfig({
             type: 'image',
             src: import('./assets/img/durov.webp'),
           },
-          pagination: 'count',
           shape: 'rounded',
+          pagination: 'count',
           title: "Onboarding supports many types of content",
           description: "Here you can see <b>Image</b>. But it's just the beginning...",
           button: 'Next',
@@ -37,10 +38,10 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_love.tgs'),
-            style: 'width: 300px; height: 300px; margin: 0 auto',
+            size: 250,
           },
-          pagination: 'count',
           shape: 'square',
+          pagination: 'count',
           title: 'Telegram stickers',
           description: 'Just download any <b>.tgs</b> sticker from Telegram and use it in your onboardings',
           button: 'Next',
@@ -48,12 +49,16 @@ export default defineConfig({
 
         // form
         {
-          extends: 'form',
+          extends: 'form',  // note, it's important to extend from 'form' here
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_spy.tgs'),
-            style: 'width: 150px; height: 150px; margin: 0 auto',
+            size: 150,
           },
+          shape: 'square',
+          pagination: 'count',
+          title: 'Forms',
+          description: 'User fills in the form – the bot receives the data',
           form: [
             {
               id: 'text_from_form',
@@ -71,10 +76,6 @@ export default defineConfig({
               type: 'checkbox',
             },
           ],
-          pagination: 'count',
-          shape: 'square',
-          title: 'Forms',
-          description: 'User fills in the form – the bot receives the data',
           button: 'Next',
         },
 
@@ -82,11 +83,13 @@ export default defineConfig({
         {
           media: {
             type: 'video',
-            src: import('./assets/videos/spongebob.mp4'),  // TODO add preview
+            src: import('./assets/videos/spongebob.mp4'),
+            poster: import('./assets/img/spongebob_poster.webp'),
             style: 'aspect-ratio: 400/287',  // here we manually set video aspect-ratio (default is 16:9)
+
           },
-          pagination: 'count',
           shape: 'rounded',
+          pagination: 'count',
           title: 'Videos',
           description: "Typically, video starts <b>automatically</b><br><br>However, on iOS, it will only autoplay upon any prior tap on the page ('Next' button doesn't count). If video doesn't autoplay, user will see preview and pretty animation, inviting them to tap to play the video",
           button: 'Next',
@@ -97,12 +100,11 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_juggling.tgs'),
-            style: 'width: 150px; height: 150px; margin: 0 auto',
+            size: 150,
           },
-          textAlign: 'left',
           shape: 'square',
-          title: 'Lists',
           pagination: 'count',
+          title: 'Lists',
           description: "Lists can be used to showcase <b>features</b> of your product. Items support customizable icons",
           list: [
             {
@@ -138,10 +140,10 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_xray.tgs'),
-            style: 'width: 250px; height: 250px; margin: 0 auto',
+            size: 250,
           },
-          pagination: 'count',
           shape: 'square',
+          pagination: 'count',
           title: 'Everything is customizable',
           description: '',
           textAlign: 'center',
@@ -159,13 +161,12 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_cool.tgs'),
-            style: 'width: 150px; height: 150px; margin: 0 auto',
+            size: 150,
           },
-          pagination: 'count',
           shape: 'square',
+          pagination: 'count',
           title: 'Some other features:',
           description: '',
-          textAlign: 'left',
           list: [
             'One-click 0$ <b>deploy</b> on GitHub Pages',
             'Language and currency localization',
@@ -183,13 +184,13 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_knife.tgs'),
-            style: 'width: 250px; height: 250px; margin: 0 auto',
+            size: 250,
           },
-          pagination: 'count',
           shape: 'square',
+          pagination: 'count',
+          textAlign: 'center',
           title: "But onboarding slides are not enough...",
           description: "Let's go to Paywall",
-          textAlign: 'center',
           button: {
             content: 'Go to Paywall',
             to: '/paywall',
@@ -202,20 +203,13 @@ export default defineConfig({
     {
       extends: 'paywall',
       path: '/paywall',
-      shape: 'square',
-      popup: {
-        type: 'web',
-        title: 'Choose payment method',
-        message: '',
-        buttons: [],  // TODO
-      },
       media: {
         type: 'sticker',
         src: import('./assets/stickers/duck_money.tgs'),
-        style: 'width: 150px; height: 150px; margin: 0 auto',
+        size: 150,
       },
+      shape: 'square',
       title: 'Your beautiful Paywall',
-      mainButtonText: 'Buy for {price}',
       list: [
         'Adjustable product cards',
         '<b>👛 Wallet Pay</b> and <b>Telegram Payments</b> ready. Add custom methods easily',
@@ -244,6 +238,10 @@ export default defineConfig({
           price: 20,
         },
       ],
+      mainButtonText: 'Buy for {price}',
+      popup: {  // popup for payment methods choice
+        type: 'web',
+      },
       links: [
         {
           text: 'Privacy policy',
