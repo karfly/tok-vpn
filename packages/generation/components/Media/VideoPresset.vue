@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
+import { useAlerts } from '@tok/ui/use/alerts';
 import { inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
@@ -35,6 +36,16 @@ const { src, poster } = toRefs(props);
 
 const loaded = useLoadedImage(src);
 const loadedPoster = useLoadedImage(poster);
+
+const alerts = useAlerts();
+
+watch(
+  loaded,
+  (value) => {
+    alerts.show(value);
+  },
+  { immediate: true }
+);
 
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
@@ -53,24 +64,16 @@ const onVideoPlay = () => {
   videoPlaying.value = true;
 };
 
-let timeout: ReturnType<typeof setTimeout>;
-
 watch(
   [videoRef, loaded, wasInteraction, forceRefreshEvents],
   ([_video], _, onCleanup) => {
     onCleanup(() => {
       _video?.removeEventListener('play', onVideoPlay);
-
-      timeout && clearTimeout(timeout);
     });
 
     if (_video) {
       _video.addEventListener('play', onVideoPlay);
       _video.play();
-
-      timeout = setTimeout(() => {
-        _video?.play();
-      }, 100);
     }
   },
   { immediate: true }
