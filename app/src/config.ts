@@ -42,7 +42,7 @@ export default defineConfig({
           pagination: 'count',
           shape: 'rounded',
           title: 'Videos',
-          description: '<b>.webp</b>, <b>.mp4</b> formats are supported',
+          description: 'We recommend using <b>.mp4</b> format',
           button: 'Next',
         },
 
