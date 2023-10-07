@@ -37,6 +37,16 @@ export type ImagePressetProps = {
   static?: boolean;
 };
 
+export type EmodjiPressetProps = {
+  type: 'emodji';
+
+  src: string;
+
+  size?: number | [number, number];
+
+  style?: string | CSSProperties;
+};
+
 export type VideoPressetProps = {
   type: 'video';
 
@@ -56,4 +66,5 @@ export type MediaPressetProps =
   | IconPressetProps
   | StickerPressetProps
   | ImagePressetProps
-  | VideoPressetProps;
+  | VideoPressetProps
+  | EmodjiPressetProps;

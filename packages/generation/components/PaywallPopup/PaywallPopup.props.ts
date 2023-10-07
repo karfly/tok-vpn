@@ -13,9 +13,8 @@ const defaultButtons = [
   {
     id: 'telegram_payments',
     media: {
-      type: 'icon' as const,
-      src: 'bank-card',
-      size: 32,
+      type: 'emodji' as const,
+      src: '💳',
     },
     type: 'default' as const,
     text: 'Bank card',
@@ -23,9 +22,8 @@ const defaultButtons = [
   {
     id: 'wallet_pay',
     media: {
-      type: 'icon' as const,
-      src: 'wallet-pay',
-      size: 32,
+      type: 'emodji' as const,
+      src: '👛',
     },
     type: 'default' as const,
     text: 'Wallet pay',
