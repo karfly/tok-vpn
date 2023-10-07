@@ -22,7 +22,12 @@ export type StickerPressetProps = {
 // src: '_i18n.imageSrc' -> /locales/en.ts: import('../assets/*.png');
 export type ImagePressetProps = {
   type: 'image';
-  src: Promise<typeof import('*.png') | typeof import('*.jpg') | any>;
+  src: Promise<
+    | typeof import('*.png')
+    | typeof import('*.jpg')
+    | typeof import('*.webp')
+    | any
+  >;
   webp?: Promise<typeof import('*.webp')>;
 
   style?: string | CSSProperties;
@@ -32,7 +37,8 @@ export type ImagePressetProps = {
 
 export type VideoPressetProps = {
   type: 'video';
-  src: Promise<any>;
+
+  src: Promise<typeof import('*.mp4')>;
 
   style?: string | CSSProperties;
 };

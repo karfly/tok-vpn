@@ -2,7 +2,7 @@
   <div v-bind="props" :class="$style.container">
     <video
       v-if="loaded"
-      v-autoplay
+      ref="videoRef"
       autoplay
       playsinline
       muted
@@ -10,15 +10,15 @@
       :controls="false"
       :class="$style.video"
     >
-      <source :src="loaded" />
+      <source :src="loaded" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   </div>
 </template>
 
 <script setup lang="ts">
-import { AutoplayDirective as vAutoplay } from '@tok/ui/directives/autoplay';
-import { toRefs } from 'vue';
+import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
+import { inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
 import { useLoadedImage } from './useLoadedImage';
@@ -28,6 +28,18 @@ const props = defineProps<VideoPressetProps>();
 const { src } = toRefs(props);
 
 const loaded = useLoadedImage(src);
+const videoRef = ref<HTMLVideoElement | null>(null);
+const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
+
+watch(
+  [videoRef, wasInteraction],
+  ([_video, allow]) => {
+    if (_video && allow) {
+      _video.play();
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss" module>
