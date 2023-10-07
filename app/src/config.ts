@@ -14,7 +14,7 @@ export default defineConfig({
           },
           pagination: 'count',
           title: 'Welcome to Telegram Onboarding Kit',
-          description: "Create stunning onboardings and paywalls for Telegram Bots using full power of Mini Apps.<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com'>open-sourced</a>!",  // TODO: add link to GitHub
+          description: "Create stunning onboardings and paywalls for Telegram Bots using full power of Mini Apps.<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com'>open-source</a>!",  // TODO: add link to GitHub
           button: 'Next',
         },
 
@@ -51,10 +51,10 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_love.tgs'),
-            style: 'width: 250px; height: 250px; margin: 0 auto',
+            style: 'width: 300px; height: 300px; margin: 0 auto',
           },
           pagination: 'count',
-          // shape: 'rounded',
+          shape: 'square',
           title: 'Telegram stickers',
           description: 'Just download any <b>.tgs</b> sticker from Telegram and use it in your onboardings',
           button: 'Next',
@@ -89,9 +89,9 @@ export default defineConfig({
             },
           ],
           pagination: 'count',
-          // shape: 'rounded',
+          shape: 'square',
           title: 'Forms',
-          description: 'User fills in the form and then data is sent to the bot',
+          description: 'User fills in the form – the bot receives the data',
           button: 'Next',
         },
 
@@ -103,8 +103,9 @@ export default defineConfig({
             style: 'width: 150px; height: 150px; margin: 0 auto',
           },
           textAlign: 'left',
+          shape: 'square',
           title: 'Lists',
-          description: 'List items support customizable icons',
+          description: "Lists can be used to showcase <b>features</b> of your product. Items support customizable icons",
           list: [
             {
               media: {
@@ -143,9 +144,9 @@ export default defineConfig({
             style: 'width: 250px; height: 250px; margin: 0 auto',
           },
           pagination: 'count',
-          // shape: 'rounded',
-          title: 'Everything is customizable!',
-          description: "Text alignment, button text (look below), CSS styles, TODO WHAT ELSEKOSTIK",
+          shape: 'square',
+          title: 'Everything is customizable',
+          description: "Text alignment, button text (look below), CSS styles, TODO WHAT ELSE KOSTIK?",
           textAlign: 'center',
           button: 'Super-Duper Next',
         },
@@ -156,10 +157,10 @@ export default defineConfig({
           media: {
             type: 'sticker',
             src: import('./assets/stickers/duck_cool.tgs'),
-            style: 'width: 200px; height: 200px; margin: 0 auto',
+            style: 'width: 150px; height: 150px; margin: 0 auto',
           },
           pagination: 'count',
-          shape: 'rounded',
+          shape: 'square',
           title: 'We carefully worked out all the details',
           description: "Here're some other features:",
           textAlign: 'left',
@@ -170,7 +171,7 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'One click <b>deployment</b> with GitHub Actions on GitHub Pages',
+              text: 'One click free <b>deployment</b> with GitHub Actions on GitHub Pages',
             },
             {
               media: {
@@ -178,7 +179,7 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'Language localization support',
+              text: 'Language localization',
             },
             {
               media: {
@@ -186,7 +187,7 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: "Automatic adaptation to Telegram's <b>color scheme</b>",
+              text: "Auto adaptation to Telegram's <b>color scheme</b>",
             },
             {
               media: {
@@ -194,7 +195,7 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'Haptic feedback for "Next" button',
+              text: 'Buttons with <b>haptic</b> feedback',
             },
             {
               media: {
@@ -202,16 +203,16 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'Many examples of implemented custom onboardings',
+              text: 'Many examples/templates of onboardings',
             },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'Content prefetching for fast loading',
-            },
+            // {
+            //   media: {
+            //     type: 'icon',
+            //     src: import('./assets/icons/checkmark-fill.svg'),
+            //     size: 20,
+            //   },
+            //   text: 'Content prefetching for fast loading',
+            // },
             {
               media: {
                 type: 'icon',
@@ -226,15 +227,7 @@ export default defineConfig({
                 src: import('./assets/icons/checkmark-fill.svg'),
                 size: 20,
               },
-              text: 'Adaptive layout for different screen sizes',
-            },
-            {
-              media: {
-                type: 'icon',
-                src: import('./assets/icons/checkmark-fill.svg'),
-                size: 20,
-              },
-              text: 'And much more... (see GitHub)',  // TODO: add link to GitHub
+              text: "And many more... (see <a href='https://www.google.com'>GitHub</a>)",  // TODO: add link to GitHub
             },
           ],
           button: 'Next',
