@@ -33,8 +33,8 @@ export default defineConfig({
         },
         {
           media: {
-            type: 'sticker',
-            src: import('./assets/stickers/shpooky_love.tgs'),
+            type: 'video',
+            src: import('./assets/spongebob.mp4'),
           },
           title: '_s2.title',
           list: [
