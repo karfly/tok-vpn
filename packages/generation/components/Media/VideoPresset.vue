@@ -1,22 +1,24 @@
 <template>
   <div v-bind="props" :class="$style.container">
-    <button v-if="loaded" :class="$style.fallback" @click="forceRefresh">
-      Video not playing?<br />Tap here
-    </button>
-
     <video
       v-if="loaded"
       ref="videoRef"
-      autoplay
       playsinline
       muted
       loop
       :controls="false"
       :class="$style.video"
+      :poster="loadedPoster"
     >
       <source :src="loaded" />
       Your browser does not support the video tag.
     </video>
+
+    <button v-if="!videoPlaying" :class="$style.fallback" @click="forceRefresh">
+      Video not playing?<br />Tap here
+    </button>
+
+    <div v-if="!videoPlaying" :class="$style.tapAnimation" />
   </div>
 </template>
 
@@ -29,9 +31,11 @@ import { useLoadedImage } from './useLoadedImage';
 
 const props = defineProps<VideoPressetProps>();
 
-const { src } = toRefs(props);
+const { src, poster } = toRefs(props);
 
 const loaded = useLoadedImage(src);
+const loadedPoster = useLoadedImage(poster);
+
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 
@@ -39,15 +43,25 @@ const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 // otherwise, the video will not play automatically
 // Note: MainButton is located outside of the miniapp, so the browser doesn't register the first interaction event
 const forceRefreshEvents = ref(NaN);
+const videoPlaying = ref(false);
 
 const forceRefresh = () => {
   forceRefreshEvents.value = Date.now();
 };
 
+const onVideoPlay = () => {
+  videoPlaying.value = true;
+};
+
 watch(
   [videoRef, wasInteraction, forceRefreshEvents],
-  ([_video]) => {
+  ([_video], _, onCleanup) => {
+    onCleanup(() => {
+      _video?.removeEventListener('play', onVideoPlay);
+    });
+
     if (_video) {
+      _video.addEventListener('play', onVideoPlay);
       _video.play();
     }
   },
@@ -85,5 +99,40 @@ watch(
   text-align: center;
   font: var(--tok-body-xs);
   color: var(--tok-text-color-64);
+}
+
+.tapAnimation {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+
+  pointer-events: none;
+  user-select: none;
+
+  background: var(--tok-text-color-16);
+  transform: translate(-50%, -50%);
+  margin-left: -1rem;
+  margin-top: -1rem;
+
+  animation: _tapAnimation 1s infinite ease-in-out;
+}
+
+@keyframes _tapAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  60% {
+    opacity: 0.82;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
 }
 </style>

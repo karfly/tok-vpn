@@ -5,13 +5,13 @@
       v-bind="props"
       :is="TelegramSticker"
       :json="loaded"
-      :class="$style.container"
+      :class="$style.sticker"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref, toRefs, watch } from 'vue';
+import { computed, defineAsyncComponent, ref, toRefs, watch } from 'vue';
 
 import { StickerPressetProps } from './Media.presset.props';
 
@@ -24,9 +24,35 @@ const props = withDefaults(defineProps<StickerPressetProps>(), {
   src: null,
 });
 
-const { src } = toRefs(props);
+const { src, size } = toRefs(props);
 
 const loaded = ref<TelegramStickerJson | undefined>();
+
+const computedSize = computed(() => {
+  const _size = size?.value;
+
+  if (!_size) {
+    return {
+      width: '100%',
+      height: '100%',
+    };
+  }
+
+  if (typeof _size === 'number') {
+    return {
+      width: `${_size}px`,
+      height: `${_size}px`,
+    };
+  }
+
+  return {
+    width: `${_size[0]}px`,
+    height: `${_size[1]}px`,
+  };
+});
+
+const width = computed(() => computedSize.value.width);
+const height = computed(() => computedSize.value.height);
 
 const loadStickerJson = (loader: Promise<typeof import('*.tgs')>) => {
   loader.then((m) => {
@@ -55,9 +81,15 @@ watch(
 
 <style lang="scss" module>
 .container {
-  width: 100%;
-  height: 100%;
-  max-height: 40vw;
+  height: v-bind(height);
   aspect-ratio: 1/1;
+  max-height: 40vw;
+}
+
+.sticker {
+  width: v-bind(width);
+  height: v-bind(height);
+  max-height: inherit;
+  margin: 0 auto;
 }
 </style>

@@ -13,7 +13,7 @@ export default defineConfig({
           media: {
             type: 'image',
             src: import('./assets/img/1.webp'),
-            style: 'aspect-ratio: 420/465',
+            style: 'max-height: min(650px, 70vh);',
           },
           textAlign: 'center',
           title: '_s1.title',
@@ -145,7 +145,7 @@ export default defineConfig({
       media: {
         type: 'image',
         src: import('./assets/img/5.webp'),
-        style: 'aspect-ratio: 420/340',
+        style: 'max-height: min(340px, 50vh);',
       },
       textAlign: 'center',
       title: '_paywall.title',
@@ -163,7 +163,6 @@ export default defineConfig({
         description: '_paywall.product.description',
       },
       popup: {
-        type: 'telegram',
         title: '_paywall.popup.title',
         buttons: [
           {

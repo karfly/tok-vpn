@@ -54,22 +54,24 @@ export type _GenerationListOptionsConfig = (
   | string
 )[];
 
+export type _GenerationPaywallPopup = {
+  // telegram by default
+  type?: 'web' | 'telegram';
+  title?: string;
+  message?: string;
+  buttons?: PaywalPopupPressetButtons;
+};
+
 export type _GenerationPrimitivePaywallConfig = Omit<
   _GenerationSlideConfig,
   'button' | 'extends'
 > & {
-  // can be shown with price Something {price} subscribe
+  // can be shown with price "Something {price} subscribe"
   mainButtonText?: string;
 
   links: { text: string; href: string }[];
 
-  // todo: fix type
-  popup?: {
-    type?: 'web' | 'telegram';
-    title: string;
-    message?: string;
-    buttons: PaywalPopupPressetButtons;
-  };
+  popup?: _GenerationPaywallPopup;
 };
 
 export type _GenerationPrimitivePaywallProduct = {

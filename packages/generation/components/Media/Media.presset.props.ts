@@ -15,6 +15,8 @@ export type StickerPressetProps = {
   type: 'sticker';
   src: Promise<typeof import('*.tgs')> | null;
 
+  size?: number | [number, number];
+
   style?: string | CSSProperties;
 } & Pick<StickerProps, 'speed'>;
 
@@ -39,6 +41,13 @@ export type VideoPressetProps = {
   type: 'video';
 
   src: Promise<typeof import('*.mp4') | any>;
+
+  poster?: Promise<
+    | typeof import('*.png')
+    | typeof import('*.jpg')
+    | typeof import('*.webp')
+    | any
+  >;
 
   style?: string | CSSProperties;
 };

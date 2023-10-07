@@ -85,7 +85,7 @@ watch(
 const onClick = () => {
   const _props = buttonProps.value;
 
-  if ('to' in _props && _props.to) {
+  if (_props.to) {
     router.push(_props.to);
 
     return;
@@ -120,6 +120,7 @@ const onClick = () => {
     position: absolute;
     height: 100vh;
     width: auto;
+    max-width: 100%;
     z-index: -1;
   }
 }

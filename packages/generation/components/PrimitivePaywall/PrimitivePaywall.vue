@@ -2,27 +2,15 @@
   <slide-presset v-bind="props" :button="null">
     <slot />
 
-    <div :class="$style.links">
+    <div :class="[$style.links, $style['links_' + props.shape]]">
       <Link v-for="link in links" v-bind="link" :key="link.text" />
     </div>
 
-    <tg-popup
-      v-model="popupOpened"
+    <paywall-popup
+      v-model:opened="popupOpened"
       v-bind="popup"
-      :title="translatedPopupTitle"
-      :message="translatedPopupMessage"
-      :buttons="(translatedPopupButtons as any)"
-      @onSelect="onSelectOption"
-    >
-      <template #button-icon="{ item }">
-        <media-presset
-          v-if="'media' in item"
-          v-bind="item.media"
-          :class="$style.media"
-          static
-        />
-      </template>
-    </tg-popup>
+      @on-select="onSelectOption"
+    />
 
     <main-button
       v-if="carousel ? active : !!mainButtonComputedText"
@@ -34,13 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { MediaPresset } from '@tok/generation/components/Media';
+import { PaywallPopup } from '@tok/generation/components/PaywallPopup';
 import { SlidePresset } from '@tok/generation/pressets/slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useI18n } from '@tok/i18n';
 import { MainButton } from '@tok/telegram-ui/components/MainButton';
-import { TgPopup } from '@tok/telegram-ui/components/TgPopup';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
 import { useAlerts } from '@tok/ui/use/alerts';
@@ -67,24 +54,11 @@ const tg = useTelegramSdk();
 const carousel = useCarousel();
 const alertsService = useAlerts({ autoCloseOnUnmount: true });
 
-const popupButtons = computed(() => popup.value.buttons);
-const popupTitle = computed(() => popup.value.title);
-const popupMessage = computed(() => popup.value.message || '');
-
 const translatedMainButton = i18n.useTranslated(mainButtonText);
-const translatedPopupTitle = i18n.useTranslated(popupTitle);
-const translatedPopupMessage = i18n.useTranslated(popupMessage);
 const paymentCanceledMessage = i18n.useTranslated(
   '_alerts.payment.canceled',
   'You have canceled the payment selection'
 );
-
-const translatedPopupButtons = computed(() => {
-  return popupButtons.value.map((button) => ({
-    ...button,
-    text: 'text' in button ? i18n.translate(button.text) : undefined,
-  }));
-});
 
 const priceFromProduct = computed(() => {
   const value = selectedProduct.value;
@@ -162,12 +136,8 @@ const onSelectOption = (
   justify-content: center;
   gap: 1rem;
 
-  margin-top: auto;
-}
-
-.media {
-  color: var(--tok-background-color);
-
-  margin-right: 0.75rem;
+  &:not(&_stacked) {
+    margin-top: auto;
+  }
 }
 </style>

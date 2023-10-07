@@ -2,7 +2,7 @@
     "name": "@tok/wondertales",
     "version": "0.0.0",
     "scripts": {
-        "dev": "vite --port 3000 --open",
+        "dev": "vite --port 3003 --open",
         "build": "vite build"
     },
     "dependencies": {
