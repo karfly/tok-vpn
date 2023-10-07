@@ -124,6 +124,7 @@ const onClick = () => {
     position: absolute;
     height: 100vh;
     width: auto;
+    max-width: 100%;
     z-index: -1;
   }
 }

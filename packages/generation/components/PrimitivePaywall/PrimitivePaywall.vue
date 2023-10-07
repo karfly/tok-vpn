@@ -2,7 +2,7 @@
   <slide-presset v-bind="props" :button="null">
     <slot />
 
-    <div :class="$style.links">
+    <div :class="[$style.links, $style['links_' + props.shape]]">
       <Link v-for="link in links" v-bind="link" :key="link.text" />
     </div>
 
@@ -136,6 +136,8 @@ const onSelectOption = (
   justify-content: center;
   gap: 1rem;
 
-  margin-top: auto;
+  &:not(&_stacked) {
+    margin-top: auto;
+  }
 }
 </style>
