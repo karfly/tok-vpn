@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
 import { useAlerts } from '@tok/ui/use/alerts';
-import { computed, inject, ref, toRefs, watch } from 'vue';
+import { inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
 import { useLoadedImage } from './useLoadedImage';
@@ -42,31 +42,35 @@ const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 // otherwise, the video will not play automatically
 // Note: MainButton is located outside of the miniapp, so the browser doesn't register the first interaction event
 const forceRefreshEvents = ref(NaN);
-
-const videoPlaying = computed(() => {
-  const _video = videoRef.value;
-
-  forceRefreshEvents.value;
-  wasInteraction.value;
-
-  return (
-    !!_video &&
-    _video.currentTime > 0 &&
-    !_video.paused &&
-    !_video.ended &&
-    _video.readyState > 2
-  );
-});
+const videoPlaying = ref(false);
 
 const forceRefresh = () => {
   forceRefreshEvents.value = Date.now();
 };
 
+const onVideoPlay = (event: Event) => {
+  const _video = event.currentTarget;
+
+  if (_video instanceof HTMLVideoElement) {
+    videoPlaying.value =
+      _video.currentTime > 0 &&
+      !_video.paused &&
+      !_video.ended &&
+      _video.readyState > 2;
+  }
+};
+
 watch(
   [videoRef, wasInteraction, forceRefreshEvents],
-  ([_video]) => {
+  ([_video], _, onCleanup) => {
+    onCleanup(() => {
+      _video?.removeEventListener('play', onVideoPlay);
+    });
+
     if (_video) {
       _video.play();
+
+      _video.addEventListener('play', onVideoPlay);
     }
   },
   { immediate: true }
