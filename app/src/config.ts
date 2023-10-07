@@ -8,14 +8,13 @@ export default defineConfig({
         // TODO
         {
           media: {
-            type: 'image',
-            src: import('./assets/img/base.png'),
-            style: 'aspect-ratio: 420/465',
+            type: 'sticker',
+            src: import('./assets/stickers/duck_hello.tgs'),
+            style: 'width: 250px; height: 250px; margin: 0 auto',
           },
           pagination: 'count',
-          shape: 'rounded',
-          title: 'Telegram Onboarding Kit',
-          description: 'Easily create stunning onboardings and paywalls for Telegram Bots',
+          title: 'Welcome to Telegram Onboarding Kit',
+          description: "Create stunning onboardings and paywalls for Telegram Bots using full power of Mini Apps.<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com'>open-sourced</a>!",  // TODO: add link to GitHub
           button: 'Next',
         },
 
