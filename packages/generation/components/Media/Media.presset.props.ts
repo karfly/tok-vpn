@@ -38,7 +38,7 @@ export type ImagePressetProps = {
 export type VideoPressetProps = {
   type: 'video';
 
-  src: Promise<typeof import('*.mp4')>;
+  src: Promise<typeof import('*.mp4') | any>;
 
   style?: string | CSSProperties;
 };

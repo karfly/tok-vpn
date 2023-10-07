@@ -1,5 +1,9 @@
 <template>
   <div v-bind="props" :class="$style.container">
+    <div v-if="loaded" :class="$style.fallback">
+      Video not playing?<br />Tap here
+    </div>
+
     <video
       v-if="loaded"
       ref="videoRef"
@@ -10,7 +14,7 @@
       :controls="false"
       :class="$style.video"
     >
-      <source :src="loaded" type="video/mp4" />
+      <source :src="loaded" />
       Your browser does not support the video tag.
     </video>
   </div>
@@ -18,7 +22,6 @@
 
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
-import { useAlerts } from '@tok/ui/use/alerts';
 import { inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
@@ -28,7 +31,6 @@ const props = defineProps<VideoPressetProps>();
 
 const { src } = toRefs(props);
 
-const alertsService = useAlerts();
 const loaded = useLoadedImage(src);
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
@@ -37,8 +39,6 @@ watch(
   [videoRef, wasInteraction],
   ([_video, _]) => {
     if (_video) {
-      alertsService.show(`has video and ${_}`);
-
       _video.play();
     }
   },
@@ -60,5 +60,15 @@ watch(
   width: 100%;
   height: 100%;
   z-index: -1;
+  background: transparent;
+}
+
+.fallback {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  text-align: center;
 }
 </style>
