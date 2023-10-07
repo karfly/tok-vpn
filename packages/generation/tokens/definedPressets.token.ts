@@ -17,9 +17,6 @@ export const predefinedPressets: DefinePressets = {
   form: defineAsyncComponent(() =>
     import('@tok/generation/pressets/Form').then((m) => m.FormPresset)
   ),
-  list: defineAsyncComponent(() =>
-    import('@tok/generation/pressets/List').then((m) => m.ListPresset)
-  ),
   paywall_single: defineAsyncComponent(() =>
     import('@tok/generation/pressets/paywall_single').then(
       (m) => m.PaywallSinglePresset

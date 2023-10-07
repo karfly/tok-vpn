@@ -12,17 +12,28 @@
       :class="$style.description"
     />
 
+    <ul v-if="computedList.length > 0">
+      <list-item
+        v-for="(item, index) in computedList"
+        :key="index"
+        v-bind="item"
+        :class="$style.listItem"
+      />
+    </ul>
+
     <slot />
   </primitive-slide>
 </template>
 
 <script setup lang="ts">
+import { ListItem } from '@tok/generation/components/ListItem';
 import { PrimitiveSlide } from '@tok/generation/components/PrimitiveSlide';
 import { useCarousel } from '@tok/generation/use/carousel';
 import { useI18n } from '@tok/i18n';
 import { computed, toRefs } from 'vue';
 
 import {
+  defaultSlideListMedia,
   SlidePressetDefaultProps,
   SlidePressetProps,
 } from './Slide.presset.props';
@@ -32,7 +43,7 @@ const props = withDefaults(
   SlidePressetDefaultProps
 );
 
-const { title, description } = toRefs(props);
+const { title, description, list } = toRefs(props);
 
 const i18n = useI18n();
 const carousel = useCarousel();
@@ -48,6 +59,19 @@ const slideCount = computed(() => {
   return `${carousel.index.value + 1} / ${carousel.length.value}`;
 });
 
+const computedList = computed(() => {
+  return (list?.value || []).map((item) => {
+    if (typeof item === 'string') {
+      return {
+        media: defaultSlideListMedia,
+        text: item,
+      };
+    }
+
+    return item;
+  });
+});
+
 const onClick = () => {
   carousel?.next();
 };
@@ -59,5 +83,9 @@ const onClick = () => {
   color: var(--tok-text-color-64);
 
   padding-top: 0.5rem;
+}
+
+.listItem:not(:first-child) {
+  margin-top: 0.75rem;
 }
 </style>

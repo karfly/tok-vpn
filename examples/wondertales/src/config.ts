@@ -20,7 +20,6 @@ export default defineConfig({
     {
       slides: [
         {
-          extends: 'slide',
           media: {
             type: 'image',
             src: import('./assets/img/main.png'),
@@ -33,7 +32,6 @@ export default defineConfig({
           button: '_s1.button',
         },
         {
-          extends: 'list',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_love.tgs'),
@@ -72,7 +70,6 @@ export default defineConfig({
           button: '_s2.button',
         },
         {
-          extends: 'list',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_easy.tgs'),
@@ -105,7 +102,6 @@ export default defineConfig({
           button: '_s3.button',
         },
         {
-          extends: 'list',
           media: {
             type: 'sticker',
             src: import('./assets/stickers/shpooky_speed.tgs'),
@@ -165,11 +161,7 @@ export default defineConfig({
           },
           title: '_paywall.title',
           mainButtonText: '_paywall.main',
-          features: [
-            '_paywall.feature1',
-            '_paywall.feature2',
-            '_paywall.feature3',
-          ],
+          list: ['_paywall.feature1', '_paywall.feature2', '_paywall.feature3'],
           products: [
             {
               id: 'monthly',

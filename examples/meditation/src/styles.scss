@@ -1,10 +1,4 @@
-:root {
-  --tok-radius-m: 100px;
-
-  --tok-primary: #5734bc;
-  --tok-primary-text: var(--tok-white);
-}
-
+:root,
 html[data-theme='dark'] {
   --tok-primary: #5734bc;
   --tok-primary-text: var(--tok-white);

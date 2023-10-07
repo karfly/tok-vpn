@@ -1,14 +1,5 @@
 <template>
   <slide-presset v-bind="props" :button="null">
-    <ul v-if="computedFeatures.length > 0">
-      <list-item
-        v-for="(feature, index) in computedFeatures"
-        :key="index"
-        :item="feature"
-        :class="$style.feature"
-      />
-    </ul>
-
     <slot />
 
     <div :class="$style.links">
@@ -43,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { ListItem } from '@tok/generation/components/ListItem';
 import { MediaPresset } from '@tok/generation/components/Media';
 import { SlidePresset } from '@tok/generation/pressets/slide';
 import { FORM_STATE_TOKEN } from '@tok/generation/tokens';
@@ -67,8 +57,7 @@ const props = withDefaults(
   PrimitivePaywallDefaultProps
 );
 
-const { mainButtonText, popup, selectedProduct, active, features } =
-  toRefs(props);
+const { mainButtonText, popup, selectedProduct, active } = toRefs(props);
 
 const formState = inject(FORM_STATE_TOKEN, null);
 
@@ -95,27 +84,6 @@ const translatedPopupButtons = computed(() => {
     ...button,
     text: 'text' in button ? i18n.translate(button.text) : undefined,
   }));
-});
-
-const defaultMedia = {
-  type: 'icon' as const,
-  src: 'checkmark-fill',
-} as const;
-
-const computedFeatures = computed(() => {
-  return (features?.value || []).map((item) => {
-    if (typeof item === 'string') {
-      return {
-        media: defaultMedia,
-        text: item,
-      };
-    }
-
-    return {
-      ...item,
-      media: item.media ?? defaultMedia,
-    };
-  });
 });
 
 const priceFromProduct = computed(() => {
@@ -201,9 +169,5 @@ const onSelectOption = (
   color: var(--tok-background-color);
 
   margin-right: 0.75rem;
-}
-
-.feature:not(:first-child) {
-  margin-top: 0.5rem;
 }
 </style>

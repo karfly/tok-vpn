@@ -1,3 +1,10 @@
-import type { _GenerationListOptionsConfig } from '@tok/generation/defineConfig';
+import { MediaPressetProps } from '@tok/generation/components/Media';
 
-export type ListItemProps = { item: _GenerationListOptionsConfig };
+export type ListItemProps = {
+  text: string;
+  media?: MediaPressetProps;
+};
+
+export const ListItemDefaultProps = {
+  text: '',
+} as const;

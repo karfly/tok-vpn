@@ -1,27 +1,23 @@
 <template>
   <li :class="$style.li">
-    <span v-if="item.media" :class="$style.media">
-      <media-presset v-bind="item.media" static />
-    </span>
+    <media-presset v-if="media" v-bind="media" static :class="$style.media" />
 
-    <span v-html="translatedText" :class="$style.text" />
+    <span v-html="translatedText" />
   </li>
 </template>
 
 <script setup lang="ts">
 import { MediaPresset } from '@tok/generation/components/Media';
 import { useI18n } from '@tok/i18n';
-import { computed, toRefs } from 'vue';
+import { toRefs } from 'vue';
 
-import { ListItemProps } from './ListItem.props';
+import { ListItemDefaultProps, ListItemProps } from './ListItem.props';
 
-const props = defineProps<ListItemProps>();
+const props = withDefaults(defineProps<ListItemProps>(), ListItemDefaultProps);
 
-const { item } = toRefs(props);
+const { text } = toRefs(props);
 
 const i18n = useI18n();
-
-const text = computed(() => item.value.text);
 
 const translatedText = i18n.useTranslated(text);
 </script>
@@ -34,6 +30,8 @@ const translatedText = i18n.useTranslated(text);
 }
 
 .media {
+  align-self: flex-start;
+
   margin-right: 0.75rem;
   color: var(--tok-primary);
 }

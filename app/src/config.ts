@@ -296,7 +296,7 @@ export default defineConfig({
       },
       title: 'Your beautiful Paywall',
       mainButtonText: 'Buy for {price}',
-      features: [
+      list: [
         'Ajustable product cards',
         '<b>Telegram Payments</b> and 👛 <b>Wallet Pay</b> TODO other methods',
         'Subscriptions or One-time payments',

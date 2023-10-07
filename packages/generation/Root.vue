@@ -11,13 +11,21 @@
 </template>
 
 <script setup lang="ts">
-import { THEME_TOKEN } from '@tok/generation/tokens';
+import { THEME_TOKEN, WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
 import { useI18n } from '@tok/i18n';
 import { BackButton } from '@tok/telegram-ui/components/BackButton';
 import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { useTheme } from '@tok/telegram-ui/use/theme';
 import { Root } from '@tok/ui/components/Root';
-import { computed, inject, onMounted, watch } from 'vue';
+import {
+  computed,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  watch,
+} from 'vue';
 import { useRouter } from 'vue-router';
 
 const themeParam = inject(THEME_TOKEN, 'auto');
@@ -26,6 +34,10 @@ const theme = useTheme(themeParam);
 const tg = useTelegramSdk();
 const router = useRouter();
 const i18n = useI18n();
+
+const wasInteraction = ref(false);
+
+provide(WAS_INTERACTION_TOKEN, wasInteraction);
 
 const isSupportedLocale = (locale: string) => {
   return i18n.available.includes(locale);
@@ -48,8 +60,22 @@ watch(router.currentRoute, (value) => {
   }
 });
 
+const onSetInteraction = () => {
+  wasInteraction.value = true;
+};
+
 onMounted(() => {
   tg.expand();
+
+  window.addEventListener('mousedown', onSetInteraction);
+  window.addEventListener('touchstart', onSetInteraction);
+  window.addEventListener('touchend', onSetInteraction);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('mousedown', onSetInteraction);
+  window.removeEventListener('touchstart', onSetInteraction);
+  window.removeEventListener('touchend', onSetInteraction);
 });
 
 let ready = false;
