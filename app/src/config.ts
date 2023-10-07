@@ -18,8 +18,8 @@ export default defineConfig({
         },
         {
           media: {
-            type: 'image',
-            src: import('./assets/img/base.png'),
+            type: 'video',
+            src: import('./assets/videos/spongebob.webm'),
           },
           pagination: 'count',
           shape: 'rounded',
