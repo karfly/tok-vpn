@@ -17,10 +17,7 @@
             v-intersection="getIntersectionProps(index + itemIndexCorrection)"
             :key="index + itemIndexCorrection"
             :style="computedStyle"
-            :class="[
-              $style.item,
-              shouldPreventClick && $style.item_notClickable,
-            ]"
+            :class="$style.item"
           >
             <slot :item="item" :index="index + itemIndexCorrection" />
           </div>
@@ -61,8 +58,6 @@ const { itemsCount, modelValue, items, draggable, threshold, paddingPx } =
 const transitioned = ref(true);
 const translate = ref(0);
 const host = ref<HTMLElement | null>(null);
-
-const shouldPreventClick = ref(false);
 
 const computedStyle = computed(() => {
   const _itemsCount = itemsCount.value;
@@ -176,8 +171,6 @@ const startTouch = () => {
 };
 
 const endTouch = () => {
-  shouldPreventClick.value = false;
-
   transitioned.value = true;
 };
 
@@ -330,9 +323,5 @@ defineExpose<CarouselExpose>({
 
 .item {
   padding: 0 v-bind(paddingComputed);
-
-  &_notClickable {
-    pointer-events: none;
-  }
 }
 </style>
