@@ -16,7 +16,7 @@ export default defineConfig({
           shape: 'square',
           pagination: 'count',
           title: 'Welcome to Telegram Onboarding Kit',
-          description: "Create stunning onboarding and paywall for your Telegram Bot using the full power of Mini Apps<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com'>open-source</a>!",  // TODO: add link to GitHub
+          description: "Create stunning onboarding and paywall for your Telegram Bot using the full power of Mini Apps<br><br>It's <b>simple</b>, <b>fast</b>, highly <b>customizable</b> and <a href='https://www.google.com' target='_blank'>open-source</a>!",  // TODO: add link to GitHub
           button: 'Next',
         },
 
@@ -173,7 +173,7 @@ export default defineConfig({
             'Content pre-loading for high speed',
             '<b>Low-code</b> approach to building onboardings',
             'Many examples/presets',
-            "And many more... (see <a href='https://www.google.com'>GitHub</a>)"
+            "And many more... (see <a href='https://www.google.com' target='_blank'>GitHub</a>)"
           ],
           button: 'Next',
         },
