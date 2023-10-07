@@ -1,28 +1,29 @@
 <template>
   <div v-bind="props" :class="$style.container">
-    <button v-if="loaded" :class="$style.fallback" @click="forceRefresh">
-      Video not playing?<br />Tap here
-    </button>
-
     <video
       v-if="loaded"
       ref="videoRef"
-      autoplay
       playsinline
       muted
       loop
       :controls="false"
       :class="$style.video"
+      :poster="loadedPoster"
     >
       <source :src="loaded" />
       Your browser does not support the video tag.
     </video>
+
+    <button v-if="!videoPlaying" :class="$style.fallback" @click="forceRefresh">
+      Video not playing?<br />Tap here
+    </button>
+
+    <div v-if="!videoPlaying" :class="$style.tapAnimation" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
-import { useAlerts } from '@tok/ui/use/alerts';
 import { inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
@@ -30,10 +31,10 @@ import { useLoadedImage } from './useLoadedImage';
 
 const props = defineProps<VideoPressetProps>();
 
-const { src } = toRefs(props);
+const { src, poster } = toRefs(props);
 
 const loaded = useLoadedImage(src);
-const alertsService = useAlerts();
+const loadedPoster = useLoadedImage(poster);
 
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
@@ -48,18 +49,8 @@ const forceRefresh = () => {
   forceRefreshEvents.value = Date.now();
 };
 
-const onVideoPlay = (event: Event) => {
-  const _video = event.currentTarget;
-
-  alertsService.show('on play');
-
-  if (_video instanceof HTMLVideoElement) {
-    videoPlaying.value =
-      _video.currentTime > 0 &&
-      !_video.paused &&
-      !_video.ended &&
-      _video.readyState > 2;
-  }
+const onVideoPlay = () => {
+  videoPlaying.value = true;
 };
 
 watch(
@@ -70,18 +61,9 @@ watch(
     });
 
     if (_video) {
-      _video.play();
-
       _video.addEventListener('play', onVideoPlay);
+      _video.play();
     }
-  },
-  { immediate: true }
-);
-
-watch(
-  videoPlaying,
-  (val) => {
-    alertsService.show(`isPlaying: ${val}`);
   },
   { immediate: true }
 );
@@ -117,5 +99,40 @@ watch(
   text-align: center;
   font: var(--tok-body-xs);
   color: var(--tok-text-color-64);
+}
+
+.tapAnimation {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+
+  pointer-events: none;
+  user-select: none;
+
+  background: var(--tok-text-color-16);
+  transform: translate(-50%, -50%);
+  margin-left: -1rem;
+  margin-top: -1rem;
+
+  animation: _tapAnimation 1s infinite ease-in-out;
+}
+
+@keyframes _tapAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  60% {
+    opacity: 0.82;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
 }
 </style>

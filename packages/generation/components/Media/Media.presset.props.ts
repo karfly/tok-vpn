@@ -42,6 +42,13 @@ export type VideoPressetProps = {
 
   src: Promise<typeof import('*.mp4') | any>;
 
+  poster?: Promise<
+    | typeof import('*.png')
+    | typeof import('*.jpg')
+    | typeof import('*.webp')
+    | any
+  >;
+
   style?: string | CSSProperties;
 };
 
