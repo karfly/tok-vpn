@@ -1,15 +1,16 @@
 <template>
   <div v-bind="props" :class="$style.container">
     <video
+      v-if="loaded"
       v-autoplay
       autoplay
       playsinline
       muted
       loop
-      controls="false"
+      :controls="false"
       :class="$style.video"
     >
-      <source :src="loaded" type="video/webm" />
+      <source :src="loaded" />
       Your browser does not support the video tag.
     </video>
   </div>
