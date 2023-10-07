@@ -39,14 +39,6 @@ const loadedPoster = useLoadedImage(poster);
 
 const alerts = useAlerts();
 
-watch(
-  loaded,
-  (value) => {
-    alerts.show(value);
-  },
-  { immediate: true }
-);
-
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 
