@@ -36,7 +36,7 @@ export default defineConfig({
         {
           media: {
             type: 'video',
-            src: import('./assets/videos/spongebob.webm'),
+            src: import('./assets/videos/spongebob.mp4'),
             style: 'aspect-ratio: 400/287',
           },
           pagination: 'count',
