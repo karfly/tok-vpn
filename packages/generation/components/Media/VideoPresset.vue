@@ -37,6 +37,7 @@ const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 
 // Required for iOS devices to initiate the first interaction with the page;
 // otherwise, the video will not play automatically
+// Note: MainButton is located outside of the miniapp, so the browser doesn't register the first interaction event
 const forceRefreshEvents = ref(NaN);
 
 const forceRefresh = () => {
@@ -47,9 +48,7 @@ watch(
   [videoRef, wasInteraction, forceRefreshEvents],
   ([_video]) => {
     if (_video) {
-      setTimeout(() => {
-        _video.play();
-      }, 1000);
+      _video.play();
     }
   },
   { immediate: true }
