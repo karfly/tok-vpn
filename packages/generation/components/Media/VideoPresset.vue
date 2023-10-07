@@ -1,14 +1,13 @@
 <template>
   <div v-bind="props" :class="$style.container">
     <video
-      v-if="loaded || loadedPoster"
+      v-if="loaded"
       ref="videoRef"
       playsinline
       muted
       loop
       :controls="false"
       :class="$style.video"
-      :poster="loadedPoster"
     >
       <source :src="loaded" />
       Your browser does not support the video tag.
