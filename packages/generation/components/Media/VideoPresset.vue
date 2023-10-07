@@ -56,7 +56,7 @@ const onVideoPlay = () => {
 let timeout: ReturnType<typeof setTimeout>;
 
 watch(
-  [videoRef, wasInteraction, forceRefreshEvents],
+  [videoRef, loaded, wasInteraction, forceRefreshEvents],
   ([_video], _, onCleanup) => {
     onCleanup(() => {
       _video?.removeEventListener('play', onVideoPlay);
