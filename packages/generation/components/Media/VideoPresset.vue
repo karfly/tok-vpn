@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
+import { noop } from '@tok/ui/functions';
 import { useAlerts } from '@tok/ui/use/alerts';
 import { inject, ref, toRefs, watch } from 'vue';
 
@@ -53,7 +54,7 @@ const forceRefresh = () => {
 };
 
 const onVideoPlay = () => {
-  videoPlaying.value = false;
+  videoPlaying.value = true;
 };
 
 watch(
@@ -66,11 +67,7 @@ watch(
     if (_video) {
       _video.addEventListener('play', onVideoPlay);
 
-      alerts.show('try to play');
-
-      _video.play().catch((e) => {
-        alerts.show(`${e}`, { type: 'error' });
-      });
+      _video.play().catch(noop);
     }
   },
   { immediate: true }
