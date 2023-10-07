@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
 import { noop } from '@tok/ui/functions';
-import { useAlerts } from '@tok/ui/use/alerts';
 import { inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
@@ -37,8 +36,6 @@ const { src, poster } = toRefs(props);
 
 const loaded = useLoadedImage(src);
 const loadedPoster = useLoadedImage(poster);
-
-const alerts = useAlerts();
 
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
