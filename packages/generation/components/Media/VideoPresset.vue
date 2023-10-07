@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import { WAS_INTERACTION_TOKEN } from '@tok/generation/tokens';
+import { useAlerts } from '@tok/ui/use/alerts';
 import { inject, ref, toRefs, watch } from 'vue';
 
 import { VideoPressetProps } from './Media.presset.props';
@@ -27,14 +28,17 @@ const props = defineProps<VideoPressetProps>();
 
 const { src } = toRefs(props);
 
+const alertsService = useAlerts();
 const loaded = useLoadedImage(src);
 const videoRef = ref<HTMLVideoElement | null>(null);
 const wasInteraction = inject(WAS_INTERACTION_TOKEN, ref(false));
 
 watch(
   [videoRef, wasInteraction],
-  ([_video, allow]) => {
-    if (_video && allow) {
+  ([_video, _]) => {
+    if (_video) {
+      alertsService.show(`has video and ${_}`);
+
       _video.play();
     }
   },
