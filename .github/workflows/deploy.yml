@@ -36,6 +36,10 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
+        # We need to pass the repository name directly to the Vite build command
+        # as the "base" parameter. 
+        # This is necessary because it aligns with how GitHub Pages functions. 
+        # Here's how you can achieve this:
         run: npm run build -- -- --base /${{ github.event.repository.name }}
       - name: Create 404.html
         run: cp ./app/dist/index.html ./app/dist/404.html
