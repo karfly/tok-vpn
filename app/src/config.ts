@@ -1,7 +1,8 @@
 import { defineConfig } from '@tok/generation';
 
 export default defineConfig({
-  // TODO locales: see meditaion app example
+  // If you want to add language/currency localization – see ./examples/meditation as reference
+
   pages: [
     {
       slides: [
@@ -23,26 +24,11 @@ export default defineConfig({
           media: {
             type: 'image',
             src: import('./assets/img/durov.webp'),
-            // style: 'aspect-ratio: 1/1',
           },
           pagination: 'count',
           shape: 'rounded',
           title: "Onboarding supports many types of content",
           description: "Here you can see <b>Image</b>. But it's just the beginning...",
-          button: 'Next',
-        },
-
-        // video
-        {
-          media: {
-            type: 'video',
-            src: import('./assets/videos/spongebob.mp4'),
-            style: 'aspect-ratio: 400/287',  // TODO: (16:9 by default) docs
-          },
-          pagination: 'count',
-          shape: 'rounded',
-          title: 'Videos',
-          description: 'TODO',
           button: 'Next',
         },
 
@@ -89,6 +75,20 @@ export default defineConfig({
           shape: 'square',
           title: 'Forms',
           description: 'User fills in the form – the bot receives the data',
+          button: 'Next',
+        },
+
+        // video
+        {
+          media: {
+            type: 'video',
+            src: import('./assets/videos/spongebob.mp4'),  // TODO add preview
+            style: 'aspect-ratio: 400/287',  // here we manually set video aspect-ratio (default is 16:9)
+          },
+          pagination: 'count',
+          shape: 'rounded',
+          title: 'Videos',
+          description: "Typically, video starts <b>automatically</b><br><br>However, on iOS, it will only autoplay upon any prior tap on the page ('Next' button doesn't count). If video doesn't autoplay, user will see preview and pretty animation, inviting them to tap to play the video",
           button: 'Next',
         },
 
@@ -167,12 +167,12 @@ export default defineConfig({
           description: '',
           textAlign: 'left',
           list: [
-            'One-click free <b>deploy</b> on GitHub Pages',
+            'One-click 0$ <b>deploy</b> on GitHub Pages',
             'Language and currency localization',
             'Buttons with <b>haptic</b> feedback',
-            'Many examples/presets',
             'Content pre-loading for high speed',
             '<b>Low-code</b> approach to building onboardings',
+            'Many examples/presets',
             "And many more... (see <a href='https://www.google.com'>GitHub</a>)"
           ],
           button: 'Next',
