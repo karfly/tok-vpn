@@ -9,8 +9,8 @@
       :controls="false"
       :class="$style.video"
       :poster="loadedPoster"
-      :src="loaded"
     >
+      <source :src="loaded" />
       Your browser does not support the video tag.
     </video>
 
