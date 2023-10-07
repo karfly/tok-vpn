@@ -70,5 +70,7 @@ watch(
   transform: translate(-50%, -50%);
   z-index: -1;
   text-align: center;
+  font: var(--tok-body-xs);
+  color: var(--tok-text-color-64);
 }
 </style>
