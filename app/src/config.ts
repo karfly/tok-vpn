@@ -17,8 +17,8 @@ export default defineConfig({
         },
         {
           media: {
-            type: 'video',
-            src: import('./assets/videos/spongebob.mp4'),
+            type: 'image',
+            src: import('./assets/img/base.png'),
           },
           pagination: 'count',
           shape: 'rounded',
