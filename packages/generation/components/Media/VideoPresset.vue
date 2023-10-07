@@ -9,8 +9,8 @@
       :controls="false"
       :class="$style.video"
       :poster="loadedPoster"
+      :src="loaded"
     >
-      <source :src="loaded" />
       Your browser does not support the video tag.
     </video>
 
@@ -73,7 +73,12 @@ watch(
 
     if (_video) {
       _video.addEventListener('play', onVideoPlay);
-      _video.play();
+
+      try {
+        _video.play();
+      } catch (e) {
+        alerts.show(`${e}`, { type: 'error' });
+      }
     }
   },
   { immediate: true }
