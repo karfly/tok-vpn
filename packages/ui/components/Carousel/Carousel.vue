@@ -331,8 +331,8 @@ defineExpose<CarouselExpose>({
 .item {
   padding: 0 v-bind(paddingComputed);
 
-  // &_notClickable {
-  //   pointer-events: none;
-  // }
+  &_notClickable {
+    pointer-events: none;
+  }
 }
 </style>

@@ -9,7 +9,7 @@
       :controls="false"
       :class="$style.video"
     >
-      <source :src="loaded" />
+      <source :src="loaded" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
 
@@ -65,11 +65,11 @@ watch(
     if (_video) {
       _video.addEventListener('play', onVideoPlay);
 
-      try {
-        _video.play();
-      } catch (e) {
+      alerts.show('try to play');
+
+      _video.play().catch((e) => {
         alerts.show(`${e}`, { type: 'error' });
-      }
+      });
     }
   },
   { immediate: true }
