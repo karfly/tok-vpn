@@ -5,7 +5,7 @@ type Component = any;
 
 export type AlertHostParams<T = unknown> = {
   // default: success
-  type?: 'success' | 'error' | string;
+  type?: 'success' | 'error' | 'telegram' | string;
 
   // default: true
   autoClose?: boolean | number;

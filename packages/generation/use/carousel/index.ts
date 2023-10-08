@@ -14,7 +14,9 @@ export function useCarousel(): Accessor | null {
   const accessor = inject(CAROUSEL_ACCESSOR_TOKEN, null);
 
   if (accessor === null) {
-    console.warn('You are using carousel methods outside of the component');
+    console.warn(
+      'You are using carousel methods outside of the carousel component'
+    );
   }
 
   return accessor;

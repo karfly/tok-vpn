@@ -33,7 +33,7 @@ import { useTelegramSdk } from '@tok/telegram-ui/use/sdk';
 import { Link } from '@tok/ui/components/Link';
 import { useAlerts } from '@tok/ui/use/alerts';
 import { useMoney } from '@tok/ui/use/money';
-import { computed, inject, ref, toRefs } from 'vue';
+import { computed, inject, onBeforeUnmount, ref, toRefs } from 'vue';
 
 import {
   PrimitivePaywallDefaultProps,
@@ -50,7 +50,8 @@ const { mainButtonText, popup, selectedProduct, active } = toRefs(props);
 const formState = inject(FORM_STATE_TOKEN, null);
 
 const i18n = useI18n();
-const tg = useTelegramSdk();
+const sdk = useTelegramSdk();
+
 // to detect if we inside carousel or not, to prevent triggering MainButton.show()
 const carousel = useCarousel();
 const alertsService = useAlerts({ autoCloseOnUnmount: true });
@@ -91,17 +92,19 @@ const onSubmit = () => {
   popupOpened.value = true;
 };
 
-let lastAlert: string | undefined;
+let alertTimeout: ReturnType<typeof setTimeout> | undefined;
 
 const onSelectOption = (
   id: 'telegram_payments' | 'wallet_pay' | string | undefined
 ) => {
-  if (!id) {
-    if (lastAlert) {
-      alertsService.close(lastAlert);
-    }
+  alertsService.closeLast();
 
-    lastAlert = alertsService.show(paymentCanceledMessage.value, {
+  if (alertTimeout) {
+    clearTimeout(alertTimeout);
+  }
+
+  if (!id) {
+    alertsService.show(paymentCanceledMessage.value, {
       type: 'error',
     });
 
@@ -126,8 +129,21 @@ const onSelectOption = (
     payload,
   });
 
-  tg.sendData(data);
+  sdk.sendData(data);
+
+  alertTimeout = setTimeout(() => {
+    alertsService.show(
+      'This method is only available for Mini Apps launched via a Keyboard button',
+      {
+        type: 'telegram',
+      }
+    );
+  }, 500);
 };
+
+onBeforeUnmount(() => {
+  alertTimeout && clearTimeout(alertTimeout);
+});
 </script>
 
 <style lang="scss" module>
