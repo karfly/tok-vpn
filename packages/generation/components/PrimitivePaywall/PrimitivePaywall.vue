@@ -133,7 +133,7 @@ const onSelectOption = (
 
   alertTimeout = setTimeout(() => {
     alertsService.show(
-      'Method "sendData" to the bot is only available for Mini Apps launched via a Keyboard button',
+      'The "sendData" method is only available for Mini Apps launched via a Keyboard button',
       {
         type: 'telegram',
       }
