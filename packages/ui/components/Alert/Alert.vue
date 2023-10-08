@@ -93,8 +93,8 @@ const context = {
   }
 
   &[data-type='telegram'] {
-    color: var(--tok-background-color);
-    background: var(--tok-text-color-64);
+    color: var(--tok-text-color);
+    background: var(--tok-stinger);
   }
 }
 
@@ -128,10 +128,6 @@ const context = {
   cursor: pointer;
 
   color: var(--tok-text-color-32);
-
-  .tok-alert[data-type='telegram'] & {
-    color: var(--tok-background-color-32);
-  }
 
   &:hover {
     opacity: 0.8;
